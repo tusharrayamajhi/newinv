@@ -1,0 +1,21 @@
+{
+    "cSpell.words": [
+        "admindocument"
+    ],
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3307,
+            "driver": "MySQL",
+            "name": "vscodecon",
+            "database": "inv",
+            "username": "root",
+            "password": "tushar"
+        }
+    ]
+}
