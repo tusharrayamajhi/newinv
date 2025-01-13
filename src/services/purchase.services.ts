@@ -153,7 +153,6 @@ export class purchaseService {
             await queryRunner.commitTransaction()
             return returnObj(HttpStatus.OK, "success", savedData)
         } catch (err) {
-            console.log(err)
             await queryRunner.rollbackTransaction()
             if (err instanceof HttpException) {
                 throw err
@@ -269,7 +268,6 @@ export class purchaseService {
             }
             return returnObj(HttpStatus.OK, "success", purchase)
         } catch (err) {
-            console.log(err)
             if (err instanceof HttpException) {
                 throw err
             }
@@ -290,7 +288,6 @@ export class purchaseService {
             }
             return returnObj(HttpStatus.OK, "success", purchase)
         } catch (err) {
-            console.log(err)
             if (err instanceof HttpException) {
                 throw err
             }

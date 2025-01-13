@@ -116,7 +116,6 @@ export class ProductService {
                 return returnObj(HttpStatus.OK, "success", result);
             }
         } catch (err) {
-            console.log(err)
             if (err instanceof HttpException) {
                 throw err;
             }

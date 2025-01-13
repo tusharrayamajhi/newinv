@@ -31,7 +31,6 @@ export class PermissionService{
             }
             return returnObj(HttpStatus.OK,"save successfully",result)
         }catch(err){
-            console.log(err)
             if(err instanceof HttpException){
                 throw err
             }
@@ -75,7 +74,6 @@ export class PermissionService{
                 return returnObj(HttpStatus.OK,"success",permission.permission)
             }
         }catch(err){
-            console.log(err)
             if(err instanceof HttpException){
                 throw err
             }

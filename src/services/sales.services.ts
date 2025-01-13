@@ -149,7 +149,6 @@ export class salesService{
             await queryRunner.commitTransaction();
             return returnObj(HttpStatus.OK,"Sales created successfully",sales);
         }catch(err){
-            console.log(err)
             await queryRunner.rollbackTransaction();
             if(err instanceof HttpException){
                 throw err;

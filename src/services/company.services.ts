@@ -91,7 +91,6 @@ export class CompanyService {
             return returnObj(HttpStatus.OK, "company register successfully", final)
             } catch (err) {
             await queryRunner.rollbackTransaction()
-            console.log(err)
             if (err instanceof HttpException) {
                 throw err
             }
@@ -100,7 +99,6 @@ export class CompanyService {
             await queryRunner.release()
             }
         } catch (err) {
-            console.log(err)
             throw new HttpException("internal server error", HttpStatus.INTERNAL_SERVER_ERROR)
         }
     }
@@ -134,7 +132,6 @@ export class CompanyService {
             // const data = await this.companyRepo.findOne({ where: { id: Equal(company_id) } })
             return returnObj(HttpStatus.OK, 'success', result)
         } catch (err) {
-            console.log(err)
             if (err instanceof HttpException) {
                 throw err
             }

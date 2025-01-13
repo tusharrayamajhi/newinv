@@ -76,7 +76,6 @@ export class RolesService {
             }
             return returnObj(HttpStatus.OK,"success",result);
         } catch (err) {
-            console.log(err)
             if (err instanceof HttpException) {
                 throw err
             }
@@ -101,7 +100,6 @@ export class RolesService {
                 throw new HttpException("you are not authorize", HttpStatus.FORBIDDEN)
             }
         } catch (err) {
-            console.log(err)
             if (err instanceof HttpException) {
                 throw err
             }
@@ -117,7 +115,6 @@ export class RolesService {
                 }
                 return returnObj(HttpStatus.OK, "success", roles)
         } catch (err) {
-            console.log(err)
             if (err instanceof HttpException) {
                 throw err
             }
@@ -196,7 +193,6 @@ export class RolesService {
                 return returnObj(HttpStatus.OK, "update successfully", result)
             
         } catch (err) {
-            console.log(err)
             if (err instanceof HttpException) {
                 throw err
             }
@@ -258,7 +254,6 @@ export class RolesService {
             }
             return returnObj(HttpStatus.OK, "success", role);
         } catch (err) {
-            console.log(err);
             if (err instanceof HttpException) {
                 throw err;
             }
@@ -280,7 +275,6 @@ export class RolesService {
             return true
 
         }catch(err){
-            console.log(err)
             if(err instanceof HttpException){
                 throw err
             }
@@ -299,7 +293,6 @@ export class RolesService {
                 return returnObj(HttpStatus.OK,"success",permission)
             }
         }catch(err){
-            console.log(err)
             if(err instanceof HttpException){
                 throw err
             }

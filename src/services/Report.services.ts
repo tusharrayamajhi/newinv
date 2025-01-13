@@ -85,7 +85,6 @@ export class ReportService {
       }
       return returnObj(HttpStatus.OK, "success", results)
     } catch (err) {
-      console.log(err)
       if (err instanceof HttpException) {
         throw err
       }
@@ -135,7 +134,6 @@ export class ReportService {
       }
       return returnObj(HttpStatus.OK, "success", results)
     } catch (err) {
-      console.log(err)
       if (err instanceof HttpException) {
         throw err
       }
@@ -189,7 +187,6 @@ export class ReportService {
       return returnObj(HttpStatus.OK, "success", result)
 
     } catch (err) {
-      console.log(err)
       if (err instanceof HttpException) {
         throw err
       }
@@ -236,7 +233,6 @@ export class ReportService {
       }
       return returnObj(HttpStatus.OK, "success", results)
     } catch (err) {
-      console.log(err)
       if (err instanceof HttpException) {
         throw err
       }
@@ -277,7 +273,6 @@ export class ReportService {
 
       return returnObj(HttpStatus.OK, "success", { totalSales, totalPurchases, profitOrLoss })
     } catch (err) {
-      console.log(err)
       if (err instanceof HttpException) {
         throw err
       }
@@ -321,7 +316,6 @@ export class ReportService {
       }
       return returnObj(HttpStatus.OK, "success", results)
     } catch (err) {
-      console.log(err)
       if (err instanceof HttpException) {
         throw err
       }
@@ -369,7 +363,6 @@ export class ReportService {
       }
       return returnObj(HttpStatus.OK, "success", results);
     } catch (err) {
-      console.log(err);
       if (err instanceof HttpException) {
         throw err;
       }
@@ -399,7 +392,6 @@ export class ReportService {
       const result = await queryBuilder.getRawOne();
       return returnObj(HttpStatus.OK, "success", result);
     } catch (err) {
-      console.log(err);
       if (err instanceof HttpException) {
         throw err;
       }
@@ -438,7 +430,6 @@ export class ReportService {
       const result = await queryBuilder.getRawOne();
       return returnObj(HttpStatus.OK, "success", result);
     } catch (err) {
-      console.log(err);
       if (err instanceof HttpException) {
         throw err;
       }

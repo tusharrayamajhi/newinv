@@ -35,7 +35,6 @@ export class EmailService {
             if (err instanceof HttpException) {
                 throw err
             }
-            console.log(err)
         }
     }
 

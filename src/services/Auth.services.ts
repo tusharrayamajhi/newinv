@@ -85,7 +85,6 @@ export class AuthService {
 
 
         } catch (err) {
-            console.log(err)
             if (err instanceof HttpException) {
                 throw err
             }

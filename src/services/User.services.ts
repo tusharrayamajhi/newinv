@@ -88,7 +88,6 @@ export class UserService {
                 throw new HttpException("you have no permission to create user", HttpStatus.UNAUTHORIZED)
             }
         } catch (err) {
-            console.log(err)
             if (err instanceof HttpException) {
                 throw err
             }
@@ -153,7 +152,6 @@ export class UserService {
                 throw new HttpException("you are not authorize", HttpStatus.FORBIDDEN)
             }
         } catch (err) {
-            console.log(err)
             if (err instanceof HttpException) {
                 throw err
             }
