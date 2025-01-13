@@ -42,7 +42,6 @@ export class ReportService {
 
   async getTopSellingBrands(req: any, limit: number, startDate: string, endDate: string) {
     try {
-      console.log(req.user)
       const user = await this.usersRepo.findOne({ where: { id: Equal(req.user.id) }, relations: { company: true } })
       if (!user) {
         throw new HttpException("user not found", HttpStatus.NOT_FOUND)
@@ -134,7 +133,6 @@ export class ReportService {
           results.pop()
         }
       }
-      console.log(results)
       return returnObj(HttpStatus.OK, "success", results)
     } catch (err) {
       console.log(err)

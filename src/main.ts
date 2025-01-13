@@ -101,7 +101,6 @@ async function bootstrap() {
       customSiteTitle: `${title} Documentation`,
       customfavIcon: 'https://example.com/favicon.ico',
     });
-    console.log(`Swagger setup for ${title} at path ${path}`);
   });
 
   // API landing page with Tailwind CSS design
@@ -143,3 +142,4 @@ async function bootstrap() {
 }
 
 bootstrap();
+

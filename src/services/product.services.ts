@@ -37,13 +37,11 @@ export class ProductService {
                 let category: Category | null = null;
                 let brand: Brands | null = null;
                 let unit: Units | null = null;
-                console.log(createProduct)
                 if (createProduct.companyId) {
                     company = await this.companyRepo.findOne({ where: { id: Equal(createProduct.companyId) } });
                     if (!company) {
                         throw new HttpException('invalid company id', HttpStatus.NOT_FOUND);
                     }
-                    console.log(company)
 
                     if (createProduct.categoryId) {
                         category = await this.categoryRepo.findOne({ where: { id: Equal(createProduct.categoryId), company: Equal(company.id) } });
@@ -51,7 +49,6 @@ export class ProductService {
                             throw new HttpException('invalid category id', HttpStatus.NOT_FOUND);
                         }
                     }
-                    console.log(category)
 
                     if (createProduct.brandId) {
                         brand = await this.brandRepo.findOne({ where: { id: Equal(createProduct.brandId), company: Equal(company.id) } });
@@ -59,14 +56,12 @@ export class ProductService {
                             throw new HttpException('invalid brand id', HttpStatus.NOT_FOUND);
                         }
                     }
-                    console.log(brand)
                     if (createProduct.unitId) {
                         unit = await this.unitRepo.findOne({ where: { id: Equal(createProduct.unitId), company: Equal(company.id) } });
                         if (!unit) {
                             throw new HttpException('invalid unit id', HttpStatus.NOT_FOUND);
                         }
                     }
-                    console.log(unit)
                 }
                 const existsProduct = await this.productRepo.findOne({ where: { product_name: Equal(createProduct.product_name), company: Equal(company.id) } })
                 if (existsProduct) {

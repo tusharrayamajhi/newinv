@@ -237,7 +237,6 @@ export class UserService {
 
     async updateUser(req: any, id: string, data: baseUpdateUserDto) {
         try {
-            console.log(data)
             if (req.user.role == roles.SuperAdmin) {
                 const user = await this.UserRepo.findOne({ where: { id: Equal(id) } })
                 if (!user) {
@@ -260,7 +259,6 @@ export class UserService {
                         user.roles = role
                     }
                 }
-                console.log(user)
                 Object.assign(user, data)
                 const result = await this.UserRepo.save(user)
                 if (!result) {
@@ -360,7 +358,6 @@ export class UserService {
                 email:user.email,
                 otp: otp
             })
-            console.log(otp)
             return {status:HttpStatus.OK,message:`OTP is sent to: ${user.email}`}
         }catch(err){
             if(err instanceof HttpException){

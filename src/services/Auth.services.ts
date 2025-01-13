@@ -38,7 +38,6 @@ export class AuthService {
             if (user) {
                 throw new HttpException("email already in used", HttpStatus.CONFLICT)
             }
-            console.log(user)
             userSignUpDto.password = await bcrypt.hash(userSignUpDto.password, 10)
             const createUser = this.userRepo.create({ ...userSignUpDto, user_image: user_profile.filename });
             const result = await this.userRepo.save(createUser);

@@ -27,7 +27,6 @@ export class canAccess implements CanActivate{
         if(!user){
             return false;
         }
-        console.log(user)
         if(roles.includes(user.role)){
             req.user = user;
             return true

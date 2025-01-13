@@ -19,13 +19,11 @@ export class havePermissionGuards implements CanActivate {
         const permission  = this.reflector.get<string[]>('permission', context.getHandler());
         const req = context.switchToHttp().getRequest();
         const token = req.headers.authorization;
-        console.log(token)
         if (!token) {
             return false;
         }
         const newToken = token.split(" ")[1]
         const user = await this.jwtService.decode(await this.cacheManager.get(`token:${newToken}`));
-        console.log(user)
         if (!user) {
             return false;
         }
@@ -34,7 +32,6 @@ export class havePermissionGuards implements CanActivate {
             return true;
         }
          const havePermission = await this.permissionService.havePermission(user,permission)
-         console.log(havePermission)
         if (havePermission) {
             req.user = user;
             return true

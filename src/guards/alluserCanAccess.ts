@@ -21,7 +21,6 @@ export class AllUserCanAccess implements CanActivate {
         if(!user){
             return false;
         }
-        console.log(user)
         if(user){
             req.user = user
             return true

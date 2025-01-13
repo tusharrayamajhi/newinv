@@ -101,7 +101,6 @@ export class CompanyController {
         }
         company.company_logo = companylogo?.filename || ""
         // return company
-        console.log(updateCompanyDto)
         return await this.companyService.updateCompany(company_id, company)
     }
 

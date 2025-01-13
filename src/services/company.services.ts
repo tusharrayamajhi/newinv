@@ -30,7 +30,6 @@ export class CompanyService {
                 return returnObj(HttpStatus.OK, "success", company);
             }
             const company = await this.companyRepo.findOneBy({ id: Equal(id)})
-            console.log(company)
             if(!company){
                 throw new HttpException("invalid company id",HttpStatus.NOT_FOUND)
             }
@@ -60,7 +59,6 @@ export class CompanyService {
 
     async addCompany(createCompany: baseDto,req:any) {
         try {
-            console.log(createCompany)
             const queryRunner = this.companyRepo.manager.connection.createQueryRunner();
             await queryRunner.startTransaction()
             try {
@@ -109,7 +107,6 @@ export class CompanyService {
 
     async updateCompany(company_id: string, updateCompanyDto: baseUpdateDto) {
         try {
-            console.log(updateCompanyDto)
             const company = await this.companyRepo.findOne({ where: { id: Equal(company_id) } })
             if (!company) {
                 throw new HttpException("invalid compnay id", HttpStatus.NOT_FOUND)
@@ -133,7 +130,6 @@ export class CompanyService {
                 }
             }
             Object.assign(company,updateCompanyDto)
-            console.log(company)
             const result = await this.companyRepo.save(company);
             // const data = await this.companyRepo.findOne({ where: { id: Equal(company_id) } })
             return returnObj(HttpStatus.OK, 'success', result)

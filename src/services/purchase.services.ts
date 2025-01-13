@@ -103,7 +103,6 @@ export class purchaseService {
                 const item = await queryRunner.manager.save(purItem)
                 purchaseItem.push(item)
             }
-            console.log(purchaseItem)
 
             const paymentDetails: Payment[] = []
             // let totalPayed:number = 0
@@ -152,7 +151,6 @@ export class purchaseService {
             })
             const savedData = await queryRunner.manager.save(purchaseDetails)
             await queryRunner.commitTransaction()
-            console.log(savedData)
             return returnObj(HttpStatus.OK, "success", savedData)
         } catch (err) {
             console.log(err)

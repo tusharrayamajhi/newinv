@@ -37,12 +37,10 @@ export class UserController {
     @UseInterceptors(FileInterceptor('user_image', multerOption))
     async addUser(@Req() req: Request, @Body() userData: createUserDto, @UploadedFile() user_image?: Express.Multer.File | null) {
         let data = userData.data
-        console.log(userData.data)
         if (typeof data == "string") {
             data = JSON.parse(data)
         }
         const user = Object.assign(new AddUsersDto(), data)
-        console.log(user)
         const result = await validate(user, { whitelist: true })
         if (result.length > 0) {
             throw new BadRequestException({
@@ -119,12 +117,10 @@ export class UserController {
     @UseInterceptors(FileInterceptor("user_image", multerOption))
     async updateUser(@Req() req: Request, @Param("id", new ParseUUIDPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE })) id: string, @Body() updateUser: UpdateUserDto, @UploadedFile() user_image?: Express.Multer.File) {
         let data = updateUser.data
-        console.log(updateUser.data)
         if (typeof data == "string") {
             data = JSON.parse(data)
         }
         const user = Object.assign(new baseUpdateUserDto(), data)
-        console.log(user)
         const result = await validate(user, { whitelist: true })
         if (result.length > 0) {
             throw new BadRequestException({
@@ -139,7 +135,6 @@ export class UserController {
         if (user_image) {
             user['user_image'] = user_image.filename
         }
-        console.log(user)
         return await this.userService.updateUser(req, id, user)
     }
 

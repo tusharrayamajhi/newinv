@@ -91,12 +91,10 @@ export class RolesService {
                 const roles = await this.RolesRepo.find({skip:page * 10,take:10,relations:{company:true,createdBy:true}})
                 return returnObj(HttpStatus.OK, "success", roles)
             } else if (req.user.role == roles.Admin) {
-                console.log(req.user.company)
                 const companyId = (await this.userRepo.findOne({where:{id:Equal(req.user.id)},relations:{company:true}}))?.company?.id;
                 if(!companyId){
                     throw new HttpException("this user don't belongs to give company",HttpStatus.NOT_ACCEPTABLE)
                 }
-                console.log(companyId)
                 const roles = await this.RolesRepo.find({skip:page* 10,take:10,where:{company:Equal(companyId)}})
                 return returnObj(HttpStatus.OK, "success", roles)
             } else {
@@ -271,21 +269,17 @@ export class RolesService {
 
     async haveRoles(id: any, role_id: any, company: any) {
         try{
-            console.log("inside haverole")
             const user = await this.userRepo.findOne({where:{id:Equal(id),company:Equal(company)}})
-            console.log(user)
             if(!user){
                 return false
             }
             const role = await this.RolesRepo.findOne({where:{id:Equal(role_id),company:Equal(company)}})
-            console.log(role)
             if(!role){
                 return false
             }
             return true
 
         }catch(err){
-            console.log("havepermission")
             console.log(err)
             if(err instanceof HttpException){
                 throw err
@@ -298,7 +292,6 @@ export class RolesService {
         try{
             if(req.user.role == roles.SuperAdmin || req.user.role == roles.Admin){
                 const permission = await this.PermissionRepo.find()
-                console.log(permission)
                 return returnObj(HttpStatus.OK,"success",permission)
             }else{
                 const roleId = (await this.userRepo.findOne({where:{id:Equal(req.user.id)},relations:{roles:true}}))?.roles?.id
@@ -306,7 +299,6 @@ export class RolesService {
                 return returnObj(HttpStatus.OK,"success",permission)
             }
         }catch(err){
-            console.log("my permission")
             console.log(err)
             if(err instanceof HttpException){
                 throw err

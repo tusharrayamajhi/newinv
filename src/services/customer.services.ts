@@ -119,7 +119,6 @@ export class CustomerService {
         try {
             if (roles.SuperAdmin == req.user.role) {
                 const customers = await this.customerRepo.find({skip:page * 10,take:10, where: { company: Equal(companyId) } });
-                console.log(customers)
                 if (!customers || customers.length == 0) {
                     throw new HttpException("no data found", HttpStatus.NOT_FOUND);
                 }

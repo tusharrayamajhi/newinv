@@ -131,7 +131,6 @@ export class salesService{
             const total_after_tax = total_after_discount + (total_after_discount * salesDetail.tax_in_total_sales / 100);
             
             const code = await this.getSellsCode(user.company.id,user.company.company_code);
-            console.log(code)
             const sales = await queryRunner.manager.save(queryRunner.manager.create(SalesDetails,{
                 sales_code:code,
                 discount:salesDetail.discount_in_total_sales,

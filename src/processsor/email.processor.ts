@@ -13,13 +13,10 @@ export class EmailProcessor extends WorkerHost{
     
     async process(job: Job<any>) {
         if(job.name == 'forgetPasswordOtp'){
-            console.log(job.data)
             await this.emailService.sendForgetPasswordEmailOtp(job.data.email,job.data.otp,"Forget Password OTP");
         }else if(job.name == "send_verify_email_otp"){
-            console.log(job.data)
             await this.emailService.sendForgetPasswordEmailOtp(job.data.email,job.data.otp,"verify email OTP");
         }else{
-            console.log("invalid job")
         }
     }
 }

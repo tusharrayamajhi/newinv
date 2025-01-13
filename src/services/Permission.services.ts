@@ -53,8 +53,6 @@ export class PermissionService{
 
     async getPermissionByRole(role: string,req:any) {
         try{
-            console.log(role)
-            console.log(req.user)
             if(req.user.role == roles.SuperAdmin){
                 const permission = await this.RolesRepo.findOne({where:{id:Equal(role)},relations:{permission:true}})
                 if(!permission){
@@ -89,12 +87,10 @@ export class PermissionService{
         try{
 
             const roles = await this.RolesRepo.findOne({where:{name:Equal(user.role),company:Equal(user.company)},relations:{permission:true}})
-            console.log(roles)
             if(!roles){
                 return false
             }
             const permissions = await this.PermissionRepo.find({where:{name:In(Equal(permission))}})
-            console.log(permissions)
             if(!permissions || permissions.length == 0){
                 return false
             }
