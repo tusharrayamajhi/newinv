@@ -57,7 +57,7 @@ async function bootstrap() {
       description: 'Inventory management system',
       tags: Object.keys(swaggerController).map(key => `${swaggerUser.superAdmin}${swaggerController[key]}`),
       path: '/api/superAdmin/docs',
-      filter:swaggerUser.superAdmin
+      filter: swaggerUser.superAdmin
     },
     {
       role: swaggerUser.admin,
@@ -65,7 +65,7 @@ async function bootstrap() {
       description: 'Inventory management system',
       tags: Object.keys(swaggerController).map(key => `${swaggerUser.admin}${swaggerController[key]}`),
       path: '/api/admin/docs',
-      filter:swaggerUser.admin
+      filter: swaggerUser.admin
     },
     {
       role: swaggerUser.other,
@@ -73,11 +73,11 @@ async function bootstrap() {
       description: 'Inventory management system',
       tags: Object.keys(swaggerController).map(key => `${swaggerUser.other}${swaggerController[key]}`),
       path: '/api/other/docs',
-      filter:swaggerUser.other
+      filter: swaggerUser.other
     }
   ];
 
-  roles.forEach(({ title, description, tags, path,filter }) => {
+  roles.forEach(({ title, description, tags, path, filter }) => {
     const document = createSwaggerDocument(
       title,
       description,
@@ -92,16 +92,12 @@ async function bootstrap() {
         showRequestDuration: true,
         filter: filter,
       },
-      customCss: `
-        .swagger-ui .topbar { background-color: rgb(221, 13, 13); color: white; }
-        .swagger-ui .info { font-size: 18px; }
-        .swagger-ui .filter {display:none }
-      `,
-      customJs: `
-        window.onload = function() {
-          alert("Swagger UI Loaded");
-        }
-      `,
+      customCssUrl:
+        'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.15.5/swagger-ui.min.css',
+      customJs: [
+        'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.15.5/swagger-ui-bundle.js',
+        'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.15.5/swagger-ui-standalone-preset.js',
+      ],
       customSiteTitle: `${title} Documentation`,
       customfavIcon: 'https://example.com/favicon.ico',
     });
