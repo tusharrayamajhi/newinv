@@ -1,8 +1,16 @@
 export const swaggerController = {
-    auth:" auth",
-    company:" company",
-    user:" user",
-    roles:" roles",
-    permission:" permission",
-    category:" category"
+    auth:" Auth",
+    company:" Company",
+    user:" User",
+    roles:" Roles",
+    permission:" Permission",
+    category:" Category",
+    brand:" Brands",
+    units:" Units",
+    customer:" Customer",
+    vendor:" Vendors",
+    product:" Product",
+    purchase:" Purchase",
+    sales:" Sales",
+    report:" Report",
 }

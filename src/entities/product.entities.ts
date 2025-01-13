@@ -9,9 +9,9 @@ import { Brands } from './Brands.entities';
 import { Units } from './units.entities';
 import { Users } from './user.entities';
 import { Category } from './Category.entities';
-import { Purchase } from './Purchase.entities';
-import { Invoices } from './invoice.entities';
-import { InvoiceReturn } from './InvoiceReturn.entities';
+import { Companies } from './Company.entities';
+import { PurchaseItem } from './PurchaseItem.entities';
+import { salesItem } from './salesItem.entities';
 
 
 @Entity()
@@ -26,34 +26,43 @@ export class Product extends BaseEntities {
     @Column({ type: 'tinyint', default: 0 })
     vat: number;
 
-    @Column({ type: 'decimal', precision: 10, scale: 2, nullable: true })
+    @Column({ type: 'decimal', precision: 10, scale: 2, nullable: true,default:0,unsigned:true })
     buying_rate: number;
 
-    @Column({ type: 'decimal', precision: 10, scale: 2, nullable: true })
+    @Column({ type: 'decimal', precision: 10, scale: 2, nullable: true,default:0, unsigned:true })
     selling_rate: number;
 
     @Column({ type: 'int', unsigned: true, default: 0 })
     stock: number;
 
+    @Column({type:"boolean",default:false})
+    can_sell:boolean
+
     //relations
-    @ManyToOne(() => Category, (category) => category.product, { nullable: false })
+    @ManyToOne(() => Category, (category) => category.product, { nullable: true })
     category: Category;
 
-    @ManyToOne(() => Users, (user) => user.product, { nullable: false })
+    @ManyToOne(() => Users, (user) => user.product, { nullable: true })
     createdBy: Users;
 
-    @ManyToOne(() => Brands, (brand) => brand.products, { nullable: false })
+    @ManyToOne(() => Brands, (brand) => brand.products, { nullable: true })
     brand: Brands;
 
-    @ManyToOne(() => Units, (unit) => unit.products, { nullable: false })
+    @ManyToOne(() => Units, (unit) => unit.products, { nullable: true })
     unit: Units;
 
-    @OneToMany(() => Purchase, (purchase) => purchase.product)
-    purchase: Purchase
+    @Column({ type: 'int', unsigned: true, default: 0 })
+    notificationThreshold: number;
 
-    @OneToMany(() => Invoices, (invoice) => invoice.product)
-    invoice: Invoices[]
+    @OneToMany(() => PurchaseItem, (purchase) => purchase.product)
+    purchase: PurchaseItem[]
 
-    @OneToMany(()=>InvoiceReturn,(invoiceReturn)=>invoiceReturn.product)
-    salesReturn:InvoiceReturn[]
+    @OneToMany(() => salesItem, (sale) => sale.product)
+    sales: salesItem[]
+
+    // @OneToMany(()=>InvoiceReturn,(invoiceReturn)=>invoiceReturn.product)
+    // salesReturn:InvoiceReturn[]
+
+    @ManyToOne(() => Companies, (company) => company.products)
+    company: Companies
 }

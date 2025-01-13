@@ -2,6 +2,7 @@ import { Column, Entity, ManyToOne, OneToMany } from "typeorm";
 import { BaseEntities } from "./BaseEntities.entities";
 import { Product } from "./product.entities";
 import { Users } from "./user.entities";
+import { Companies } from "./Company.entities";
 
 
 @Entity()
@@ -17,4 +18,7 @@ export class Brands extends BaseEntities {
 
     @ManyToOne(() => Users,(user)=>user.brand)
     createdBy: Users
+
+    @ManyToOne(()=>Companies,(company)=>company.brands)
+    company:Companies
 }

@@ -4,7 +4,7 @@ import { PermissionService } from './../services/Permission.services';
 import { Body, Controller, Get, HttpStatus, Param, ParseUUIDPipe, Post, Req, UseGuards, ValidationPipe} from "@nestjs/common";
 import { Roles } from 'src/decorator/Roles.decorator';
 import { roles } from 'src/object/roles.object';
-import { CreatePermissionDto } from 'src/dtos/addPermission.dtos';
+import { CreatePermissionDto } from 'src/dtos/createDtos/addPermission.dtos';
 import { Request } from 'express';
 import { swaggerUser } from 'src/swagger/swagger.user';
 import { swaggerController } from 'src/swagger/swaggercontroller';

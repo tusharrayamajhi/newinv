@@ -1,12 +1,12 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { CreatePermissionDto } from "src/dtos/addPermission.dtos";
+import { CreatePermissionDto } from "src/dtos/createDtos/addPermission.dtos";
 import { Permission } from "src/entities/permission.entites";
 import { Roles } from "src/entities/Roles.entities";
 import { Users } from "src/entities/user.entities";
 import { roles } from "src/object/roles.object";
 import { returnObj } from "src/utils/returnObj";
-import { Equal, Repository } from "typeorm";
+import { Equal, In, Repository } from "typeorm";
 
 @Injectable()
 export class PermissionService{
@@ -85,7 +85,7 @@ export class PermissionService{
         }
     }
 
-    async havePermission(user:any,permission:string){
+    async havePermission(user:any,permission:string[]){
         try{
 
             const roles = await this.RolesRepo.findOne({where:{name:Equal(user.role),company:Equal(user.company)},relations:{permission:true}})
@@ -93,12 +93,13 @@ export class PermissionService{
             if(!roles){
                 return false
             }
-            const permissions = await this.PermissionRepo.findOne({where:{name:Equal(permission)}})
+            const permissions = await this.PermissionRepo.find({where:{name:In(Equal(permission))}})
             console.log(permissions)
-            if(!permissions){
+            if(!permissions || permissions.length == 0){
                 return false
             }
-            if (roles.permission.some(p => p.id === permissions.id)) {
+            
+            if ((permissions.map(p=> roles.permission.includes(p))).length == permission.length) {
                 return true;
             }
             return false

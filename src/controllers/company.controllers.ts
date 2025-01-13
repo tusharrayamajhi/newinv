@@ -1,13 +1,13 @@
 import { roles } from '../object/roles.object';
 import { canAccess } from './../guards/canAccess.guards';
-import { baseDto, CreateCompanyDto } from './../dtos/addCompany.dtos';
+import { baseDto, CreateCompanyDto } from './../dtos/createDtos/addCompany.dtos';
 import { ApiBearerAuth, ApiConsumes, ApiTags } from '@nestjs/swagger';
 import { CompanyService } from './../services/company.services';
-import { BadRequestException, Body, Controller, Delete, Get, HttpStatus, Param, ParseUUIDPipe, Patch, Post, Req, UploadedFile, UseGuards, UseInterceptors } from "@nestjs/common";
+import { BadRequestException, Body, Controller, Delete, Get, HttpStatus, Param, ParseUUIDPipe, Patch, Post, Query, Req, UploadedFile, UseGuards, UseInterceptors } from "@nestjs/common";
 import { FileInterceptor } from '@nestjs/platform-express';
 import { multerOption } from '../utils/multeroptions.utils';
 import { Roles } from '../decorator/Roles.decorator';
-import { baseUpdateDto, UpdateCompanyDto } from 'src/dtos/updateCompany.dtos';
+import { baseUpdateDto, UpdateCompanyDto } from 'src/dtos/updateDtos/updateCompany.dtos';
 import { Request } from 'express';
 import { validate } from 'class-validator';
 import { swaggerUser } from 'src/swagger/swagger.user';
@@ -50,7 +50,7 @@ export class CompanyController {
             });
         }
         company.company_logo = company_logo?.filename || "";
-        return await this.companyService.addcompany(company, req);
+        return await this.companyService.addCompany(company, req);
     }
 
     //swagger
@@ -59,8 +59,8 @@ export class CompanyController {
     @Get()
     @UseGuards(canAccess)
     @Roles(roles.SuperAdmin)
-    async getAllCompany() {
-        return await this.companyService.getAllCompany();
+    async getAllCompany(@Query('page') page:number = 0) {
+        return await this.companyService.getAllCompany(page);
     }
 
     //swagger

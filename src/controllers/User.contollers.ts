@@ -1,8 +1,6 @@
-import { baseUpdateUserDto, UpdateUserDto } from './../dtos/updateUser.dtos';
 import { UserService } from './../services/User.services';
-import { BadRequestException, Body, Controller, Delete, Get, HttpStatus, Param, ParseUUIDPipe, Patch, Post, Req, UploadedFile, UseGuards, UseInterceptors } from "@nestjs/common";
+import { BadRequestException, Body, Controller, Delete, Get, HttpStatus, Param, ParseIntPipe, ParseUUIDPipe, Patch, Post, Query, Req, UploadedFile, UseGuards, UseInterceptors } from "@nestjs/common";
 import { ApiBearerAuth, ApiConsumes, ApiTags } from "@nestjs/swagger";
-import { AddUsersDto, createUserDto } from '../dtos/addUser.dtos';
 import { canAccess } from '../guards/canAccess.guards';
 import { Roles } from 'src/decorator/Roles.decorator';
 import { roles } from 'src/object/roles.object';
@@ -15,9 +13,13 @@ import { permissions } from 'src/object/permission.object';
 import { havePermissionGuards } from 'src/guards/havePermission.guards';
 import { swaggerUser } from 'src/swagger/swagger.user';
 import { swaggerController } from 'src/swagger/swaggercontroller';
+import { AddUsersDto, createUserDto } from 'src/dtos/createDtos/addUser.dtos';
+import { baseUpdateUserDto, UpdateUserDto } from 'src/dtos/updateDtos/updateUser.dtos';
+import { AllUserCanAccess } from 'src/guards/alluserCanAccess';
 
 //swagger
 @ApiBearerAuth("jwt")
+@ApiTags(swaggerUser.superAdmin+swaggerController.user,swaggerUser.admin+swaggerController.user)
 //code
 @Controller('user')
 export class UserController {
@@ -28,7 +30,6 @@ export class UserController {
 
     //swagger
     @ApiConsumes("multipart/form-data")
-    @ApiTags(swaggerUser.superAdmin+swaggerController.user,swaggerUser.admin+swaggerController.user)
     //code
     @Post()
     @UseGuards(canAccess)
@@ -60,17 +61,21 @@ export class UserController {
     }
 
     //swagger
-    @ApiTags(swaggerUser.superAdmin+swaggerController.user,swaggerUser.admin+swaggerController.user)
     //code
     @Get()
     @UseGuards(canAccess)
     @Roles(roles.Admin, roles.SuperAdmin)
-    async getUsers(@Req() req: Request) {
-        return await this.userService.getUsers(req)
+    async getAllUsers(@Req() req: Request,@Query('page') page:number = 0,) {
+        return await this.userService.getAllUsers(req,page)
+    }
+
+    @Get('verify_email')
+    @UseGuards(AllUserCanAccess)
+    async sendVerifyEmail(@Req() req:Request){
+        return await this.userService.sendVerifyEmail(req)
     }
 
      //swagger
-    @ApiTags(swaggerUser.superAdmin+swaggerController.user,swaggerUser.admin+swaggerController.user)
      //code
     @Get(":id")
     @UseGuards(havePermissionGuards)
@@ -80,13 +85,12 @@ export class UserController {
     }
 
      //swagger
-    @ApiTags(swaggerUser.superAdmin+swaggerController.user)
      //code
     @Get("company/:id")
     @UseGuards(canAccess)
-    @Roles(roles.SuperAdmin)
-    async getUsersByCompany(@Req() req: Request, @Param("id", new ParseUUIDPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE })) id: string) {
-        return await this.userService.getUsersByCompany(req, id)
+    @Roles(roles.SuperAdmin,roles.Admin)
+    async getUsersByCompany(@Req() req: Request,@Query('page') page:number = 0, @Param("id", new ParseUUIDPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE })) id: string) {
+        return await this.userService.getUsersByCompany(req, id,page)
     }
 
      //swagger
@@ -94,21 +98,28 @@ export class UserController {
     @Get("role/:id")
     @UseGuards(canAccess)
     @Roles(roles.SuperAdmin, roles.Admin)
-    async getUsersByRole(@Req() req: Request, @Param("id", new ParseUUIDPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE })) id: string) {
-        return await this.userService.getUsersByRole(req, id)
+    async getUsersByRole(@Req() req: Request,@Query('page') page:number = 0, @Param("id", new ParseUUIDPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE })) id: string) {
+        return await this.userService.getUsersByRole(req, id,page)
+    }
+
+   
+
+    @Get('verify_email/:otp')
+    @UseGuards(AllUserCanAccess)
+    async VerifyEmail(@Req() req:Request,@Param('otp', ParseIntPipe) otp:number){
+        return await this.userService.VerifyEmail(req,otp)
     }
 
      //swagger
-    @ApiTags(swaggerUser.superAdmin+swaggerController.user,swaggerUser.admin+swaggerController.user)
      //code
     @Patch(":id")
     @ApiConsumes("multipart/form-data")
     @UseGuards(canAccess)
     @Roles(roles.Admin, roles.SuperAdmin)
     @UseInterceptors(FileInterceptor("user_image", multerOption))
-    async updateUser(@Req() req: Request, @Param("id", new ParseUUIDPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE })) id: string, @Body() updateuser: UpdateUserDto, @UploadedFile() user_image?: Express.Multer.File) {
-        let data = updateuser.data
-        console.log(updateuser.data)
+    async updateUser(@Req() req: Request, @Param("id", new ParseUUIDPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE })) id: string, @Body() updateUser: UpdateUserDto, @UploadedFile() user_image?: Express.Multer.File) {
+        let data = updateUser.data
+        console.log(updateUser.data)
         if (typeof data == "string") {
             data = JSON.parse(data)
         }
@@ -125,7 +136,7 @@ export class UserController {
                 })),
             });
         }
-        if (user_image.filename) {
+        if (user_image) {
             user['user_image'] = user_image.filename
         }
         console.log(user)
@@ -133,7 +144,6 @@ export class UserController {
     }
 
      //swagger
-    @ApiTags(swaggerUser.superAdmin+swaggerController.user,swaggerUser.admin+swaggerController.user)
      //code
     @Delete(":id")
     @UseGuards(canAccess)
@@ -141,4 +151,6 @@ export class UserController {
     async deleteUser(@Req() req: Request, @Param("id", new ParseUUIDPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE })) id: string) {
         return await this.userService.deleteUser(req, id)
     }
+
+   
 }

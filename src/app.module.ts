@@ -10,23 +10,41 @@ import { RolesModule } from './modules/Roles.modules';
 import { PermissionModules } from './modules/Permission.modules';
 import { UserModules } from "./modules/user.modues";
 import { CategoryModule } from "./modules/Category.modules";
-import { DiscoveryModule } from "@nestjs/core";
+import { BrandModule } from "./modules/brand.modules";
+import { unitsModule } from "./modules/unit.modules";
+import { CustomerModule } from "./modules/customer.modules";
+import { productModule } from "./modules/product.modules";
+import { purchaseModule } from "./modules/purchase.modules";
+import { VendorModule } from "./modules/vendors.modules";
+import { salesModule } from "./modules/sales.modules";
+import { BullModule } from "@nestjs/bullmq";
+import { ReportModule } from "./modules/report.modules";
 
 
 @Module({
   imports: [
-    DiscoveryModule,
-    CacheModule.register({isGlobal:true,ttl:0}),
-    ConfigModule.forRoot({isGlobal:true,envFilePath:"./.env"}),
+    CacheModule.register({ isGlobal: true, ttl: 0 }),
+    ConfigModule.forRoot({ isGlobal: true, envFilePath: "./.env" }),
     JwtModule.registerAsync({
       inject: [ConfigService],
       global: true,
       useFactory: (configService: ConfigService) => ({
         secret: configService.get('JWT_SECRET'),
-        signOptions:{
-          expiresIn:"1h"
+        signOptions: {
+          expiresIn: "1h"
+        },
+      }),
+    }),
+    BullModule.forRootAsync({
+      imports: [ConfigModule],
+      useFactory: (configService: ConfigService) => ({
+        connection: {
+          url: configService.get<string>("REDIS_URL")
+          // host:"127.0.0.1",
+          // port:6379
         }
       }),
+      inject: [ConfigService],
     }),
     DatabaseModule,
     AuthModule,
@@ -34,10 +52,19 @@ import { DiscoveryModule } from "@nestjs/core";
     RolesModule,
     PermissionModules,
     UserModules,
-    CategoryModule
+    CategoryModule,
+    BrandModule,
+    unitsModule,
+    CustomerModule,
+    productModule,
+    purchaseModule,
+    VendorModule,
+    salesModule,
+    ReportModule
   ],
   controllers: [],
   providers: [],
-  exports:[PermissionModules]
+  exports: [PermissionModules]
 })
-export class AppModule {}
+export class AppModule { }
+

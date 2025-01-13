@@ -8,9 +8,8 @@ import { Brands } from "./Brands.entities";
 import { Product } from "./product.entities";
 import { Vendor } from "./vendors.entities";
 import { Customer } from "./customers.entities";
-import { Purchase } from "./Purchase.entities";
-import { Invoices } from "./invoice.entities";
-import { InvoiceReturn } from "./InvoiceReturn.entities";
+import { PurchaseDetails } from "./purchaseDetails.entities";
+import { SalesDetails } from "./SalesDetails.entities";
 
 @Entity()
 export class Users extends BaseEntities {
@@ -32,6 +31,9 @@ export class Users extends BaseEntities {
 
     @Column({ length: 100, unique: true, nullable: false, type: "varchar" })
     email: string;
+
+    @Column({ type: "boolean",default:false })
+    is_verify_email: boolean;
 
     @Column({ type: "varchar", length: 255, nullable: false }) 
     password: string;
@@ -73,16 +75,16 @@ export class Users extends BaseEntities {
     @OneToMany(() => Customer, (customer) => customer.createdBy)
     customer: Customer[]
 
-    @OneToMany(() => Purchase, (purchase) => purchase.purchasedBy)
-    purchase: Purchase[]
+    @OneToMany(() => PurchaseDetails, (purchaseDetails) => purchaseDetails.purchaseBy)
+    purchaseDetails: PurchaseDetails[]
 
-    @OneToMany(() => Invoices, (invoice) => invoice.createdBy)
-    invoice: Invoices[]
+    @OneToMany(() => SalesDetails, (sales) => sales.salesBy)
+    salesDetails: SalesDetails[]
 
-    @OneToMany(() => InvoiceReturn, (invoiceReturn) => invoiceReturn.processBy)
-    salesReturn: InvoiceReturn[]
+    // @OneToMany(() => InvoiceReturn, (invoiceReturn) => invoiceReturn.processBy)
+    // salesReturn: InvoiceReturn[]
 
-    @OneToMany(() => Users,(user)=>user.createdBy)
+    @ManyToOne(() => Users,(user)=>user.createdBy)
     createdUser: Users[];
 
     @OneToMany(() => Users,(user)=>user.createdUser)

@@ -1,11 +1,13 @@
 import { Companies } from 'src/entities/Company.entities';
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
-import { baseDto} from "src/dtos/addCompany.dtos";
 import { Equal, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { returnObj } from 'src/utils/returnObj';
-import { baseUpdateDto, } from 'src/dtos/updateCompany.dtos';
 import { roles } from 'src/object/roles.object';
+import { Roles } from 'src/entities/Roles.entities';
+import { Permission } from 'src/entities/permission.entites';
+import { baseDto } from 'src/dtos/createDtos/addCompany.dtos';
+import { baseUpdateDto } from 'src/dtos/updateDtos/updateCompany.dtos';
 
 
 @Injectable()
@@ -13,7 +15,9 @@ export class CompanyService {
    
 
     constructor(
-        @InjectRepository(Companies) private readonly companyRepo: Repository<Companies>
+        @InjectRepository(Companies) private readonly companyRepo: Repository<Companies>,
+        @InjectRepository(Roles) private readonly roleRepo: Repository<Roles>,
+        @InjectRepository(Permission) private readonly permissionRepo: Repository<Permission>
     ) { }
 
     async getCompanyById(id: string,req:any) {
@@ -39,9 +43,12 @@ export class CompanyService {
         }
     }
 
-    async getAllCompany() {
+    async getAllCompany(page:number) {
         try {
-            const Companies = await this.companyRepo.find();
+            const Companies = await this.companyRepo.find({skip:page*10,take:10});
+            if(!Companies || Companies.length == 0){
+                throw new HttpException("no companies found",HttpStatus.NOT_FOUND)
+            }
             return returnObj(HttpStatus.OK, "successfully get All companies", Companies);
         } catch (err) {
             if (err instanceof HttpException) {
@@ -51,40 +58,52 @@ export class CompanyService {
         }
     }
 
-    async addcompany(createCompany: baseDto,req:any) {
+    async addCompany(createCompany: baseDto,req:any) {
         try {
             console.log(createCompany)
             const queryRunner = this.companyRepo.manager.connection.createQueryRunner();
             await queryRunner.startTransaction()
+            try {
             const company = await queryRunner.manager.findOne(Companies, {
                 where: [
-                    { email: Equal(createCompany.email) },
-                    { company_code: Equal(createCompany.company_code) },
-                    { pan_vat_no: Equal(createCompany.pan_vat_no) },
+                { email: Equal(createCompany.email) },
+                { company_code: Equal(createCompany.company_code) },
+                { pan_vat_no: Equal(createCompany.pan_vat_no) },
                 ]
             })
             if (company) {
                 if (company.email == createCompany.email) {
-                    throw new HttpException('email already in used', HttpStatus.CONFLICT)
+                throw new HttpException('email already in used', HttpStatus.CONFLICT)
                 }
                 if (company.pan_vat_no == createCompany.pan_vat_no) {
-                    throw new HttpException("pan vat number are already in used", HttpStatus.CONFLICT)
+                throw new HttpException("pan vat number are already in used", HttpStatus.CONFLICT)
                 }
                 if (company.company_code == createCompany.company_code) {
-                    throw new HttpException("company code is already in used", HttpStatus.CONFLICT)
-                }
+                throw new HttpException("company code is already in used", HttpStatus.CONFLICT)
+                } 
             }
-                const final = this.companyRepo.create({...createCompany,createdBy:req.user.id});
+            const final = this.companyRepo.create({...createCompany, createdBy: req.user.id});
             await queryRunner.manager.save(final);
+
+            const permissions = await this.permissionRepo.find()
+            const adminRole = this.roleRepo.create({name: roles.Admin,permission:permissions, company: final, description: "this is admin role and have full access to the company"});
+            await queryRunner.manager.save(adminRole);
+
             await queryRunner.commitTransaction()
             return returnObj(HttpStatus.OK, "company register successfully", final)
-
-        } catch (err) {
+            } catch (err) {
+            await queryRunner.rollbackTransaction()
             console.log(err)
             if (err instanceof HttpException) {
                 throw err
             }
-            throw new HttpException("internal server", HttpStatus.INTERNAL_SERVER_ERROR)
+            throw new HttpException("internal server error", HttpStatus.INTERNAL_SERVER_ERROR)
+            } finally {
+            await queryRunner.release()
+            }
+        } catch (err) {
+            console.log(err)
+            throw new HttpException("internal server error", HttpStatus.INTERNAL_SERVER_ERROR)
         }
     }
 

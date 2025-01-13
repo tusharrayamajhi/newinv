@@ -3,6 +3,17 @@ import { BaseEntities } from "./BaseEntities.entities";
 import { Users } from "./user.entities";
 import { Roles } from "./Roles.entities";
 import { Category } from "./Category.entities";
+import { Brands } from "./Brands.entities";
+import { Units } from "./units.entities";
+import { Customer } from "./customers.entities";
+import { Product } from "./product.entities";
+import { Vendor } from "./vendors.entities";
+import { PurchaseDetails } from "./purchaseDetails.entities";
+import { PurchaseItem } from "./PurchaseItem.entities";
+import { Payment } from "./payment.entities";
+import { salesItem } from "./salesItem.entities";
+import { SalesDetails } from "./SalesDetails.entities";
+import { Refund } from "./Refund.entities";
 
 
 @Entity()
@@ -72,5 +83,38 @@ export class Companies extends BaseEntities{
   createdBy: Users
 
   @OneToMany(()=>Category,(category)=>category.company)
-  category:Category
+  category:Category[]
+
+  @OneToMany(()=>Brands,(brand)=>brand.company)
+  brands:Brands[]
+
+  @OneToMany(()=>Units,(unit)=>unit.company)
+  units:Units[]
+
+  @OneToMany(()=>Customer,(customer)=>customer.company)
+  customers:Customer[]
+
+  @OneToMany(()=>Product,(product)=>product.company)
+  products:Product[]
+
+  @OneToMany(()=>Vendor,(vendor)=>vendor.company)
+  vendors:Vendor[]
+
+  @OneToMany(()=>PurchaseDetails,(purchaseDetails)=>purchaseDetails.company)
+  purchaseDetails:PurchaseDetails[]
+  
+  @OneToMany(()=>SalesDetails,(salesDetails)=>salesDetails.company)
+  salesDetails:SalesDetails[]
+
+  @OneToMany(()=>PurchaseItem,(purchaseItem)=>purchaseItem.company)
+  purchaseItem:PurchaseItem[]
+
+  @OneToMany(()=>Payment,(payment)=>payment.company)
+  payment:Payment[]
+
+  @OneToMany(()=>Refund,(sales)=>sales.company)
+  refund:Refund[]
+
+  @OneToMany(()=>salesItem,(sales)=>sales.company)
+  salesItem:salesItem
 }

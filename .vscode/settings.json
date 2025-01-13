@@ -17,5 +17,6 @@
             "username": "root",
             "password": "tushar"
         }
-    ]
+    ],
+    "C_Cpp.dimInactiveRegions": false
 }

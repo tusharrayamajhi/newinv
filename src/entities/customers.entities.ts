@@ -1,7 +1,10 @@
 import { Entity, Column, ManyToOne, OneToMany } from 'typeorm';
 import { BaseEntities } from './BaseEntities.entities';
 import { Users } from './user.entities';
-import { Invoices } from './invoice.entities';
+import { Companies } from './Company.entities';
+import { Payment } from './payment.entities';
+import { SalesDetails } from './SalesDetails.entities';
+import { Refund } from './Refund.entities';
 
 @Entity()
 export class Customer extends BaseEntities {
@@ -31,16 +34,31 @@ export class Customer extends BaseEntities {
   })
   customer_type: 'Individual' | 'Business';
 
-  @Column({
-    type: 'enum',
-    enum: ['Cash', 'Credit', 'Bank Transfer'],
-    default: 'Cash',
-  })
-  payment_method: 'Cash' | 'Credit' | 'Bank Transfer';
+  // @Column({
+  //   type: 'enum',
+  //   enum: ['Cash', 'Credit', 'Bank Transfer', 'Cheque', 'Mobile Payment'],
+  // })
+  // payment_method: 'Cash' | 'Credit' | 'Bank Transfer' | 'Cheque' | 'Mobile Payment';
+
+  // @Column({ type: 'decimal', precision: 10, scale: 2 })
+  // amount: number;
 
   @Column({ type: 'text', nullable: true })
   notes: string;
 
-  @OneToMany(()=>Invoices,(invoice)=>invoice.customer)
-  invoice:Invoices[]
+  // @Column({ type: 'decimal', precision: 10, scale: 2, nullable: true })
+  // credit_amount: number;
+
+  @OneToMany(() => SalesDetails, (sale) => sale.customer)
+  salesDetails: SalesDetails[]
+
+  @ManyToOne(() => Companies, (company) => company.customers)
+  company: Companies
+
+  @OneToMany(()=>Payment,(payment)=>payment.customer)
+  payment:Payment[]
+
+  @OneToMany(()=>Refund,(refund)=>refund.customer)
+  refund: Refund[]
+
 }
