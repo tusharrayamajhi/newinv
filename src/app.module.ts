@@ -39,9 +39,9 @@ import { ReportModule } from "./modules/report.modules";
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => ({
         connection: {
-          url: configService.get<string>("REDIS_URL")
-          // host:"127.0.0.1",
-          // port:6379
+          // url: configService.get<string>("REDIS_URL")
+          host:"127.0.0.1",
+          port:6379
         }
       }),
       inject: [ConfigService],

@@ -1,0 +1,1188 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>project-name documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">project-name documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content injectable">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Injectables</li>
+  <li class="breadcrumb-item" >AuthService</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/services/Auth.services.ts</code>
+        </p>
+
+
+
+
+
+            <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#changeForgetPassword" >changeForgetPassword</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#changePassword" >changePassword</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#changeUserPassword" >changeUserPassword</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#forgotPassword" >forgotPassword</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#getMyProfile" >getMyProfile</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#login" >login</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#logout" >logout</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#signup" >signup</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+            <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(emailQueue: Queue, userRepo: <a href="../entitys/Users.html" target="_self">Repository&lt;Users&gt;</a>, jwtService: JwtService, cacheManager: Cache)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/services/Auth.services.ts:25</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>emailQueue</td>
+                                                  
+                                                        <td>
+                                                                    <code>Queue</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>userRepo</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../entitys/Users.html" target="_self" >Repository&lt;Users&gt;</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>jwtService</td>
+                                                  
+                                                        <td>
+                                                                    <code>JwtService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>cacheManager</td>
+                                                  
+                                                        <td>
+                                                                    <code>Cache</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+            <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="changeForgetPassword"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>changeForgetPassword</b></span>
+                        <a href="#changeForgetPassword"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>changeForgetPassword(passwordDto: <a href="../classes/changeForgetPasswordDto.html" target="_self">changeForgetPasswordDto</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="210"
+                                    class="link-to-prism">src/services/Auth.services.ts:210</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>passwordDto</td>
+                                            <td>
+                                                            <code><a href="../classes/changeForgetPasswordDto.html" target="_self" >changeForgetPasswordDto</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="changePassword"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>changePassword</b></span>
+                        <a href="#changePassword"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>changePassword(changePassword: <a href="../classes/changeMyPassword.html" target="_self">changeMyPassword</a>, req: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="113"
+                                    class="link-to-prism">src/services/Auth.services.ts:113</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>changePassword</td>
+                                            <td>
+                                                            <code><a href="../classes/changeMyPassword.html" target="_self" >changeMyPassword</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>req</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="changeUserPassword"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>changeUserPassword</b></span>
+                        <a href="#changeUserPassword"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>changeUserPassword(changeUserPassword: <a href="../classes/ChangeUserPasswordDto.html" target="_self">ChangeUserPasswordDto</a>, req: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="137"
+                                    class="link-to-prism">src/services/Auth.services.ts:137</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>changeUserPassword</td>
+                                            <td>
+                                                            <code><a href="../classes/ChangeUserPasswordDto.html" target="_self" >ChangeUserPasswordDto</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>req</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="forgotPassword"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>forgotPassword</b></span>
+                        <a href="#forgotPassword"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>forgotPassword(forgetPasswordDto: <a href="../classes/forgetPasswordDto.html" target="_self">forgetPasswordDto</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="188"
+                                    class="link-to-prism">src/services/Auth.services.ts:188</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>forgetPasswordDto</td>
+                                            <td>
+                                                            <code><a href="../classes/forgetPasswordDto.html" target="_self" >forgetPasswordDto</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getMyProfile"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>getMyProfile</b></span>
+                        <a href="#getMyProfile"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getMyProfile(req: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="96"
+                                    class="link-to-prism">src/services/Auth.services.ts:96</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>req</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="login"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>login</b></span>
+                        <a href="#login"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>login(loginDto: <a href="../classes/LoginDto.html" target="_self">LoginDto</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="58"
+                                    class="link-to-prism">src/services/Auth.services.ts:58</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>loginDto</td>
+                                            <td>
+                                                            <code><a href="../classes/LoginDto.html" target="_self" >LoginDto</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="logout"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>logout</b></span>
+                        <a href="#logout"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>logout(req: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="174"
+                                    class="link-to-prism">src/services/Auth.services.ts:174</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>req</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="signup"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>signup</b></span>
+                        <a href="#signup"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>signup(user_profile: Express.Multer.File, userSignUpDto: <a href="../classes/SignupDto.html" target="_self">SignupDto</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="35"
+                                    class="link-to-prism">src/services/Auth.services.ts:35</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>user_profile</td>
+                                            <td>
+                                                        <code>Express.Multer.File</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>userSignUpDto</td>
+                                            <td>
+                                                            <code><a href="../classes/SignupDto.html" target="_self" >SignupDto</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { HttpException, HttpStatus, Inject, Injectable } from &quot;@nestjs/common&quot;;
+import { InjectRepository } from &quot;@nestjs/typeorm&quot;;
+import { Users } from &quot;src/entities/user.entities&quot;;
+import { returnObj } from &quot;src/utils/returnObj&quot;;
+import { Equal, Repository } from &quot;typeorm&quot;;
+import * as bcrypt from &#x27;bcrypt&#x27;;
+import { JwtService } from &quot;@nestjs/jwt&quot;;
+import { CACHE_MANAGER } from &quot;@nestjs/cache-manager&quot;;
+import { Cache } from &quot;cache-manager&quot;;
+import { SignupDto } from &quot;src/dtos/createDtos/signup.dto&quot;;
+import { LoginDto } from &quot;src/dtos/createDtos/login.dto&quot;;
+import { changeMyPassword } from &quot;src/dtos/updateDtos/changePasswordDtos&quot;;
+import { ChangeUserPasswordDto } from &quot;src/dtos/updateDtos/changeUserPassword.dtos&quot;;
+import { roles } from &quot;src/object/roles.object&quot;;
+import { EmailService } from &quot;./Email.services&quot;;
+import { forgetPasswordDto } from &quot;src/dtos/createDtos/forgetPassword.dtos&quot;;
+import { InjectQueue } from &quot;@nestjs/bullmq&quot;;
+import { Queue } from &quot;bullmq&quot;;
+import { generateOtp } from &quot;src/utils/generateOtp&quot;;
+import { changeForgetPasswordDto } from &quot;src/dtos/createDtos/changeforgetPassword.Dto&quot;;
+import { TransformationType } from &quot;class-transformer&quot;;
+
+
+@Injectable()
+export class AuthService {
+    
+    
+    constructor(
+        @InjectQueue(&#x27;opt_email&#x27;) private readonly emailQueue: Queue,
+        @InjectRepository(Users) private userRepo: Repository&lt;Users&gt;,
+        private jwtService: JwtService,
+        @Inject(CACHE_MANAGER) private cacheManager: Cache
+    ) { }
+
+    async signup(user_profile: Express.Multer.File, userSignUpDto: SignupDto) {
+        try {
+            const user &#x3D; await this.userRepo.findOne({ where: { email: Equal(userSignUpDto.email) } });
+            if (user) {
+                throw new HttpException(&quot;email already in used&quot;, HttpStatus.CONFLICT)
+            }
+            userSignUpDto.password &#x3D; await bcrypt.hash(userSignUpDto.password, 10)
+            const createUser &#x3D; this.userRepo.create({ ...userSignUpDto, user_image: user_profile.filename });
+            const result &#x3D; await this.userRepo.save(createUser);
+            if (!result) {
+                throw new HttpException(&quot;cannot save user&quot;, HttpStatus.INTERNAL_SERVER_ERROR)
+            }
+            delete result.password
+            return returnObj(HttpStatus.OK, &quot;signup save successfully contact to admin for further process&quot;, result);
+
+        } catch (err) {
+            if (err instanceof HttpException) {
+                throw err
+            }
+            throw new HttpException(err, HttpStatus.INTERNAL_SERVER_ERROR)
+        }
+    }
+
+    async login(loginDto: LoginDto) {
+        try {
+            const user &#x3D; await this.userRepo.findOne({ where: { email: Equal(loginDto.email) }, relations: { roles: true, company: true } });
+
+            if (!user) {
+                throw new HttpException(&quot;invalid email id&quot;, HttpStatus.NOT_FOUND)
+            }
+
+            if (!(await bcrypt.compare(loginDto.password, user.password))) {
+                throw new HttpException(&quot;invalid password&quot;, HttpStatus.FORBIDDEN)
+            }
+            if (!user.is_active) {
+                throw new HttpException(&quot;you account is not active&quot;, HttpStatus.FORBIDDEN)
+            }
+            if (!user.company) {
+                throw new HttpException(&quot;you have not assign any company&quot;, HttpStatus.FORBIDDEN)
+            }
+            if (!user.roles) {
+                throw new HttpException(&quot;you have not assign any roles at&quot;, HttpStatus.FORBIDDEN)
+            }
+
+            const token &#x3D; this.jwtService.sign({ username: user.first_name + &quot; &quot; + user.middle_name + &quot; &quot; + user.last_name, id: user.id, role_id: user.roles.id, role: user.roles.name, company: user.company.id })
+            await this.cacheManager.set(&#x60;token:${token}&#x60;, token);
+            if (!token) {
+                throw new HttpException(&quot;something wrong in jwt token generate&quot;, HttpStatus.INTERNAL_SERVER_ERROR)
+            }
+            return returnObj(HttpStatus.OK, &quot;login successfully&quot;, token)
+
+
+        } catch (err) {
+            if (err instanceof HttpException) {
+                throw err
+            }
+            throw new HttpException(err, HttpStatus.INTERNAL_SERVER_ERROR)
+        }
+
+    }
+
+    async getMyProfile(req: any) {
+        try {
+            const user &#x3D; await this.userRepo.findOne({ where: { id: Equal(req.user.id) }, relations: { company: true, roles: { permission: true } } })
+            if (!user) {
+                throw new HttpException(&quot;not found&quot;, HttpStatus.NOT_FOUND)
+            }
+            delete user.password
+            return returnObj(HttpStatus.OK, &quot;success&quot;, user)
+        } catch (err) {
+            if (err instanceof HttpException) {
+                throw err
+            }
+            throw new HttpException(&quot;internal server error&quot;, HttpStatus.INTERNAL_SERVER_ERROR)
+        }
+    }
+
+
+    async changePassword(changePassword: changeMyPassword, req: any) {
+        try {
+            const user &#x3D; await this.userRepo.findOne({ where: { id: Equal(req.user.id) } });
+            if (!user) {
+                throw new HttpException(&quot;invalid user id&quot;, HttpStatus.NOT_FOUND)
+            }
+            if (!(await bcrypt.compare(changePassword.old_password, user.password))) {
+                throw new HttpException(&quot;invalid password&quot;, HttpStatus.FORBIDDEN)
+            }
+            user.password &#x3D; await bcrypt.hash(changePassword.new_password, 10);
+            const result &#x3D; await this.userRepo.save(user);
+            if (!result) {
+                throw new HttpException(&quot;cannot save password&quot;, HttpStatus.INTERNAL_SERVER_ERROR)
+            }
+            delete result.password
+            return returnObj(HttpStatus.OK, &quot;success fully change password&quot;, result)
+        } catch (err) {
+            if (err instanceof HttpException) {
+                throw err
+            }
+            throw new HttpException(&quot;internal server error&quot;, HttpStatus.INTERNAL_SERVER_ERROR)
+        }
+    }
+
+    async changeUserPassword(changeUserPassword: ChangeUserPasswordDto, req: any) {
+        try {
+            if (req.user.role &#x3D;&#x3D; roles.SuperAdmin) {
+                const user &#x3D; await this.userRepo.findOne({ where: { id: Equal(changeUserPassword.user_id) } });
+                if (!user) {
+                    throw new HttpException(&quot;invalid user id&quot;, HttpStatus.NOT_FOUND)
+                }
+                user.password &#x3D; await bcrypt.hash(changeUserPassword.password, 10);
+                const result &#x3D; await this.userRepo.save(user);
+                if (!result) {
+                    throw new HttpException(&quot;cannot save password&quot;, HttpStatus.INTERNAL_SERVER_ERROR)
+                }
+                delete result.password
+                return returnObj(HttpStatus.OK, &quot;success fully change password&quot;, result)
+            } else if(req.user.role &#x3D;&#x3D; roles.Admin){
+                const user &#x3D; await this.userRepo.findOne({ where: { id: Equal(req.user.id) }, relations: { company: true } });
+                if (!user) {
+                    throw new HttpException(&quot;invalid user id&quot;, HttpStatus.NOT_FOUND)
+                }
+                const newHashPassword &#x3D; await bcrypt.hash(changeUserPassword.password, 10);
+                user.password &#x3D; newHashPassword;
+                const result &#x3D; await this.userRepo.save(user);
+                if (!result) {
+                    throw new HttpException(&quot;cannot save password&quot;, HttpStatus.INTERNAL_SERVER_ERROR)
+                }
+                delete result.password
+                return returnObj(HttpStatus.OK, &quot;success fully change password&quot;, result)
+            }
+        } catch (err) {
+            if (err instanceof HttpException) {
+                throw err
+            }
+            throw new HttpException(&quot;internal server error&quot;, HttpStatus.INTERNAL_SERVER_ERROR)
+        }
+    }
+
+
+    async logout(req: any) {
+        try {
+            const token &#x3D; req.headers.authorization.split(&quot; &quot;)[1];
+            await this.cacheManager.del(&#x60;token:${token}&#x60;);
+            return returnObj(HttpStatus.OK, &quot;logout successfully&quot;)
+        } catch (err) {
+            if (err instanceof HttpException) {
+                throw err
+            }
+            throw new HttpException(&quot;internal server error&quot;, HttpStatus.INTERNAL_SERVER_ERROR)
+        }
+    }
+
+    
+    async forgotPassword(forgetPasswordDto: forgetPasswordDto) {
+        try {
+            const user &#x3D; await this.userRepo.findOne({ where: { email: Equal(forgetPasswordDto.email) } });
+            if (!user) {
+                throw new HttpException(&quot;invalid email&quot;, HttpStatus.NOT_FOUND)
+            }
+            const otp &#x3D; generateOtp();
+            await this.cacheManager.set(&#x60;otp:${forgetPasswordDto.email}&#x60;,otp, 120000);
+            await this.emailQueue.add(&quot;forgetPasswordOtp&quot;, {
+                email: forgetPasswordDto.email,
+                otp: otp
+            })
+
+            return returnObj(HttpStatus.OK, &#x60;opt send to you email id :- ${forgetPasswordDto.email}&#x60;, { email: forgetPasswordDto.email })
+        } catch (err) {
+            if (err instanceof HttpException) {
+                throw err
+            }
+            throw new HttpException(&quot;internal server error&quot;, HttpStatus.INTERNAL_SERVER_ERROR)
+        }
+    }
+
+    async changeForgetPassword(passwordDto: changeForgetPasswordDto) {
+        try{
+            const otp &#x3D; await this.cacheManager.get(&#x60;otp:${passwordDto.email}&#x60;);
+            if(otp !&#x3D; passwordDto.otp || !otp){
+                throw new HttpException(&quot;invalid otp&quot;,HttpStatus.NOT_FOUND)
+            }
+            const user &#x3D; await this.userRepo.findOne({where:{email:Equal(passwordDto.email)}})
+            if(!user){
+                throw new HttpException(&#x27;user not found&#x27;,HttpStatus.NOT_FOUND)
+            }
+            const hashPassword &#x3D; await bcrypt.hash(passwordDto.new_password,10)
+            user.password &#x3D; hashPassword
+            const result &#x3D; await this.userRepo.save(user)
+            if(!result){
+                throw new HttpException(&quot;something went wrong&quot;,HttpStatus.INTERNAL_SERVER_ERROR)
+            }
+            await this.cacheManager.del(&#x60;otp:${passwordDto.email}&#x60;)
+            return {status:HttpStatus.OK,message:&quot;password change successfully&quot;}
+        }catch(err){
+            if(err instanceof HttpException){
+                throw err
+            }
+            throw new HttpException(&quot;internal server error&quot;,HttpStatus.INTERNAL_SERVER_ERROR)
+        }
+    }
+
+}</code></pre>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'AuthService.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

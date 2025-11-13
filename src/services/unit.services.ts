@@ -65,10 +65,10 @@ export class UnitService{
         }
     }
 
-    async getAllUnits(req: any,page:number) {
+    async getAllUnits(req: any) {
         try {
             if (roles.SuperAdmin == req.user.role) {
-                const units = await this.unitRepo.find({skip:page * 10, take:10 , relations: { company: true } });
+                const units = await this.unitRepo.find({ relations: { company: true } });
                 if (!units) {
                     throw new HttpException("no units found", HttpStatus.NOT_FOUND);
                 }
@@ -78,7 +78,7 @@ export class UnitService{
                 if (!company) {
                     throw new HttpException('company not found', HttpStatus.NOT_FOUND);
                 }
-                const units = await this.unitRepo.find({ skip:page * 10,take:10,where: { company: Equal(company.id) } });
+                const units = await this.unitRepo.find({ where: { company: Equal(company.id) } });
                 if (!units) {
                     throw new HttpException("no units found", HttpStatus.NOT_FOUND);
                 }

@@ -1,6 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { CreatePermissionDto } from "src/dtos/createDtos/addPermission.dtos";
+import { Companies } from "src/entities/Company.entities";
 import { Permission } from "src/entities/permission.entites";
 import { Roles } from "src/entities/Roles.entities";
 import { Users } from "src/entities/user.entities";
@@ -83,20 +84,20 @@ export class PermissionService{
 
     async havePermission(user:any,permission:string[]){
         try{
-
-            const roles = await this.RolesRepo.findOne({where:{name:Equal(user.role),company:Equal(user.company)},relations:{permission:true}})
+            const users = await this.UserRepo.findOne({where:{id:Equal(user.id)},relations:{company:true}})
+            if(!users){
+                return false
+            }
+            const roles = await this.RolesRepo.findOne({where:{name:Equal(user.role),company:Equal(users.company.id)},relations:{permission:true}})
             if(!roles){
                 return false
             }
-            const permissions = await this.PermissionRepo.find({where:{name:In(Equal(permission))}})
+            const permissions = await this.PermissionRepo.find({ where: { name: In(permission) } });
             if(!permissions || permissions.length == 0){
                 return false
             }
-            
-            if ((permissions.map(p=> roles.permission.includes(p))).length == permission.length) {
-                return true;
-            }
-            return false
+            const rolePermissions = roles.permission.map(p => p.name);
+            return permission.every(p => rolePermissions.includes(p));
         }catch(err){
             if(err instanceof HttpException){
                 throw err

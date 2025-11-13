@@ -7,13 +7,16 @@ import { PermissionModules } from './Permission.modules';
 import { BullModule } from '@nestjs/bullmq';
 import { EmailService } from 'src/services/Email.services';
 import { EmailProcessor } from 'src/processsor/email.processor';
+import { Companies } from 'src/entities/Company.entities';
+import { Roles } from 'src/decorator/Roles.decorator';
+import { Permission } from 'src/entities/permission.entites';
 
 @Module({
   imports: [
     BullModule.registerQueue({
       name: "opt_email",
     }),
-    TypeOrmModule.forFeature([Users]),
+    TypeOrmModule.forFeature([Users,Companies,Roles,Permission]),
     PermissionModules,
 
   ],

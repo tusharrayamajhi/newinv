@@ -21,7 +21,7 @@ export class CreateRoleDto {
   description: string;
 
   @ApiProperty({required:false,description:"only for superAdmin if super admin want to create a role for any company",example:"company uuid"})
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   companyId?:string
 

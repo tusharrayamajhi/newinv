@@ -1,0 +1,1708 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>project-name documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">project-name documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content injectable">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Injectables</li>
+  <li class="breadcrumb-item" >ProductService</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/services/product.services.ts</code>
+        </p>
+
+
+
+
+
+            <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#addProduct" >addProduct</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#deleteProduct" >deleteProduct</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#getAllProductAvailableForSale" >getAllProductAvailableForSale</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#getAllProducts" >getAllProducts</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#getProductById" >getProductById</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#getProductsByBrandId" >getProductsByBrandId</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#getProductsByCategoryId" >getProductsByCategoryId</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#getProductsByCompanyId" >getProductsByCompanyId</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#lowStockNotification" >lowStockNotification</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#updateProduct" >updateProduct</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+            <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(userRepo: <a href="../entitys/Users.html" target="_self">Repository&lt;Users&gt;</a>, productRepo: <a href="../entitys/Product.html" target="_self">Repository&lt;Product&gt;</a>, categoryRepo: <a href="../entitys/Category.html" target="_self">Repository&lt;Category&gt;</a>, unitRepo: <a href="../entitys/Units.html" target="_self">Repository&lt;Units&gt;</a>, brandRepo: <a href="../entitys/Brands.html" target="_self">Repository&lt;Brands&gt;</a>, companyRepo: <a href="../entitys/Companies.html" target="_self">Repository&lt;Companies&gt;</a>, dataSource: DataSource)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/services/product.services.ts:16</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>userRepo</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../entitys/Users.html" target="_self" >Repository&lt;Users&gt;</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>productRepo</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../entitys/Product.html" target="_self" >Repository&lt;Product&gt;</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>categoryRepo</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../entitys/Category.html" target="_self" >Repository&lt;Category&gt;</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>unitRepo</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../entitys/Units.html" target="_self" >Repository&lt;Units&gt;</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>brandRepo</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../entitys/Brands.html" target="_self" >Repository&lt;Brands&gt;</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>companyRepo</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../entitys/Companies.html" target="_self" >Repository&lt;Companies&gt;</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>dataSource</td>
+                                                  
+                                                        <td>
+                                                                    <code>DataSource</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+            <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="addProduct"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>addProduct</b></span>
+                        <a href="#addProduct"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>addProduct(req: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, createProduct: <a href="../classes/AddProductDto.html" target="_self">AddProductDto</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="33"
+                                    class="link-to-prism">src/services/product.services.ts:33</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>req</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>createProduct</td>
+                                            <td>
+                                                            <code><a href="../classes/AddProductDto.html" target="_self" >AddProductDto</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="deleteProduct"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>deleteProduct</b></span>
+                        <a href="#deleteProduct"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>deleteProduct(req: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="126"
+                                    class="link-to-prism">src/services/product.services.ts:126</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>req</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getAllProductAvailableForSale"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>getAllProductAvailableForSale</b></span>
+                        <a href="#getAllProductAvailableForSale"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getAllProductAvailableForSale(req: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, page: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="328"
+                                    class="link-to-prism">src/services/product.services.ts:328</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>req</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>page</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getAllProducts"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>getAllProducts</b></span>
+                        <a href="#getAllProducts"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getAllProducts(req: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, page: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="274"
+                                    class="link-to-prism">src/services/product.services.ts:274</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>req</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>page</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getProductById"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>getProductById</b></span>
+                        <a href="#getProductById"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getProductById(req: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="247"
+                                    class="link-to-prism">src/services/product.services.ts:247</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>req</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getProductsByBrandId"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>getProductsByBrandId</b></span>
+                        <a href="#getProductsByBrandId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getProductsByBrandId(req: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, brandId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, page: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="301"
+                                    class="link-to-prism">src/services/product.services.ts:301</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>req</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>brandId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>page</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getProductsByCategoryId"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>getProductsByCategoryId</b></span>
+                        <a href="#getProductsByCategoryId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getProductsByCategoryId(req: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, categoryId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, page: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="374"
+                                    class="link-to-prism">src/services/product.services.ts:374</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>req</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>categoryId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>page</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getProductsByCompanyId"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>getProductsByCompanyId</b></span>
+                        <a href="#getProductsByCompanyId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getProductsByCompanyId(req: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, companyId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, page: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="347"
+                                    class="link-to-prism">src/services/product.services.ts:347</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>req</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>companyId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>page</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="lowStockNotification"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>lowStockNotification</b></span>
+                        <a href="#lowStockNotification"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>lowStockNotification(req: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, page: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="402"
+                                    class="link-to-prism">src/services/product.services.ts:402</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>req</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>page</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateProduct"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>updateProduct</b></span>
+                        <a href="#updateProduct"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>updateProduct(req: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, updateProductDto: <a href="../classes/UpdateProdcutDtos.html" target="_self">UpdateProdcutDtos</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="155"
+                                    class="link-to-prism">src/services/product.services.ts:155</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>req</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>updateProductDto</td>
+                                            <td>
+                                                            <code><a href="../classes/UpdateProdcutDtos.html" target="_self" >UpdateProdcutDtos</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { HttpException, HttpStatus, Inject, Injectable } from &quot;@nestjs/common&quot;;
+import { InjectRepository } from &quot;@nestjs/typeorm&quot;;
+import { AddProductDto } from &quot;src/dtos/createDtos/addProduct.dtos&quot;;
+import { UpdateProdcutDtos } from &quot;src/dtos/updateDtos/updateProduct.dtos&quot;;
+import { Brands } from &quot;src/entities/Brands.entities&quot;;
+import { Category } from &quot;src/entities/Category.entities&quot;;
+import { Companies } from &quot;src/entities/Company.entities&quot;;
+import { Product } from &quot;src/entities/product.entities&quot;;
+import { Units } from &quot;src/entities/units.entities&quot;;
+import { Users } from &quot;src/entities/user.entities&quot;;
+import { roles } from &quot;src/object/roles.object&quot;;
+import { returnObj } from &quot;src/utils/returnObj&quot;;
+import { DataSource, Equal, Repository } from &quot;typeorm&quot;;
+
+@Injectable()
+export class ProductService {
+
+
+
+
+    constructor(
+        @InjectRepository(Users) private readonly userRepo: Repository&lt;Users&gt;,
+        @InjectRepository(Product) private readonly productRepo: Repository&lt;Product&gt;,
+        @InjectRepository(Category) private readonly categoryRepo: Repository&lt;Category&gt;,
+        @InjectRepository(Units) private readonly unitRepo: Repository&lt;Units&gt;,
+        @InjectRepository(Brands) private readonly brandRepo: Repository&lt;Brands&gt;,
+        @InjectRepository(Companies) private readonly companyRepo: Repository&lt;Companies&gt;,
+        @Inject(DataSource) private readonly dataSource: DataSource
+    ) { }
+
+
+
+    async addProduct(req: any, createProduct: AddProductDto) {
+        try {
+            if (roles.SuperAdmin &#x3D;&#x3D; req.user.role) {
+                let company: Companies | null &#x3D; null;
+                let category: Category | null &#x3D; null;
+                let brand: Brands | null &#x3D; null;
+                let unit: Units | null &#x3D; null;
+                if (createProduct.companyId) {
+                    company &#x3D; await this.companyRepo.findOne({ where: { id: Equal(createProduct.companyId) } });
+                    if (!company) {
+                        throw new HttpException(&#x27;invalid company id&#x27;, HttpStatus.NOT_FOUND);
+                    }
+
+                    if (createProduct.categoryId) {
+                        category &#x3D; await this.categoryRepo.findOne({ where: { id: Equal(createProduct.categoryId), company: Equal(company.id) } });
+                        if (!category) {
+                            throw new HttpException(&#x27;invalid category id&#x27;, HttpStatus.NOT_FOUND);
+                        }
+                    }
+
+                    if (createProduct.brandId) {
+                        brand &#x3D; await this.brandRepo.findOne({ where: { id: Equal(createProduct.brandId), company: Equal(company.id) } });
+                        if (!brand) {
+                            throw new HttpException(&#x27;invalid brand id&#x27;, HttpStatus.NOT_FOUND);
+                        }
+                    }
+                    if (createProduct.unitId) {
+                        unit &#x3D; await this.unitRepo.findOne({ where: { id: Equal(createProduct.unitId), company: Equal(company.id) } });
+                        if (!unit) {
+                            throw new HttpException(&#x27;invalid unit id&#x27;, HttpStatus.NOT_FOUND);
+                        }
+                    }
+                }
+                const existsProduct &#x3D; await this.productRepo.findOne({ where: { product_name: Equal(createProduct.product_name), company: Equal(company.id) } })
+                if (existsProduct) {
+                    throw new HttpException(&#x27;product already exits in company&#x27;, HttpStatus.NOT_FOUND)
+                }
+                const product &#x3D; this.productRepo.create({ ...createProduct, company: company, category: category, brand: brand, unit: unit, createdBy: req.user.id });
+                const result &#x3D; await this.productRepo.save(product);
+                if (!result) {
+                    throw new HttpException(&quot;cannot save product&quot;, HttpStatus.INTERNAL_SERVER_ERROR);
+                }
+                return returnObj(HttpStatus.OK, &quot;success&quot;, result);
+            } else {
+                const user &#x3D; await this.userRepo.findOne({ where: { id: Equal(req.user.id) }, relations: { company: true } });
+                if (!user) {
+                    throw new HttpException(&#x27;company not found&#x27;, HttpStatus.NOT_FOUND);
+                }
+                const company &#x3D; user.company;
+
+                let category: Category | null &#x3D; null;
+                let brand: Brands | null &#x3D; null;
+                let unit: Units | null &#x3D; null;
+
+                if (createProduct.categoryId) {
+                    category &#x3D; await this.categoryRepo.findOne({ where: { id: Equal(createProduct.categoryId), company: Equal(company.id) } });
+                    if (!category) {
+                        throw new HttpException(&#x27;invalid category id&#x27;, HttpStatus.NOT_FOUND);
+                    }
+                }
+
+                if (createProduct.brandId) {
+                    brand &#x3D; await this.brandRepo.findOne({ where: { id: Equal(createProduct.brandId), company: Equal(company.id) } });
+                    if (!brand) {
+                        throw new HttpException(&#x27;invalid brand id&#x27;, HttpStatus.NOT_FOUND);
+                    }
+                }
+
+                if (createProduct.unitId) {
+                    unit &#x3D; await this.unitRepo.findOne({ where: { id: Equal(createProduct.unitId), company: Equal(company.id) } });
+                    if (!unit) {
+                        throw new HttpException(&#x27;invalid unit id&#x27;, HttpStatus.NOT_FOUND);
+                    }
+                }
+                const existsProduct &#x3D; await this.productRepo.findOne({ where: { product_name: Equal(createProduct.product_name), company: Equal(company.id) } })
+                if (existsProduct) {
+                    throw new HttpException(&#x27;product already exits in company&#x27;, HttpStatus.NOT_FOUND)
+                }
+                const product &#x3D; this.productRepo.create({ ...createProduct, company: company, category: category, brand: brand, unit: unit, createdBy: req.user.id });
+                const result &#x3D; await this.productRepo.save(product);
+                if (!result) {
+                    throw new HttpException(&quot;cannot save product&quot;, HttpStatus.INTERNAL_SERVER_ERROR);
+                }
+                return returnObj(HttpStatus.OK, &quot;success&quot;, result);
+            }
+        } catch (err) {
+            if (err instanceof HttpException) {
+                throw err;
+            }
+            throw new HttpException(&quot;internal server error&quot;, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    async deleteProduct(req: any, id: string) {
+        try {
+            if (roles.SuperAdmin &#x3D;&#x3D; req.user.role) {
+                const product &#x3D; await this.productRepo.findOne({ where: { id: Equal(id) } });
+                if (!product) {
+                    throw new HttpException(&#x27;Product not found&#x27;, HttpStatus.NOT_FOUND);
+                }
+                await this.productRepo.remove(product);
+                return returnObj(HttpStatus.OK, &quot;Product deleted successfully&quot;);
+            } else {
+                const user &#x3D; await this.userRepo.findOne({ where: { id: Equal(req.user.id) }, relations: { company: true } });
+                if (!user || !user.company) {
+                    throw new HttpException(&#x27;Company not found&#x27;, HttpStatus.NOT_FOUND);
+                }
+                const product &#x3D; await this.productRepo.findOne({ where: { id: Equal(id), company: { id: Equal(user.company.id) } } });
+                if (!product) {
+                    throw new HttpException(&#x27;Product not found&#x27;, HttpStatus.NOT_FOUND);
+                }
+                await this.productRepo.remove(product);
+                return returnObj(HttpStatus.OK, &quot;Product deleted successfully&quot;);
+            }
+        } catch (err) {
+            if (err instanceof HttpException) {
+                throw err;
+            }
+            throw new HttpException(&quot;Internal server error&quot;, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    async updateProduct(req: any, id: string, updateProductDto: UpdateProdcutDtos) {
+        try {
+            if (roles.SuperAdmin &#x3D;&#x3D; req.user.role) {
+                const product &#x3D; await this.productRepo.findOne({ where: { id: Equal(id) } });
+                let company: Companies | null &#x3D; product.company;
+                let category: Category | null &#x3D; product.category;
+                let brand: Brands | null &#x3D;product.brand;
+                let unit: Units | null &#x3D; product.unit;
+                if (updateProductDto.companyId) {
+                    company &#x3D; await this.companyRepo.findOne({ where: { id: Equal(updateProductDto.companyId) } });
+                    if (!company) {
+                        throw new HttpException(&#x27;invalid company id&#x27;, HttpStatus.NOT_FOUND);
+                    }
+
+                    if (updateProductDto.categoryId) {
+                        category &#x3D; await this.categoryRepo.findOne({ where: { id: Equal(updateProductDto.categoryId), company: Equal(company.id) } });
+                        if (!category) {
+                            throw new HttpException(&#x27;invalid category id&#x27;, HttpStatus.NOT_FOUND);
+                        }
+                    }
+
+                    if (updateProductDto.brandId) {
+                        brand &#x3D; await this.brandRepo.findOne({ where: { id: Equal(updateProductDto.brandId), company: Equal(company.id) } });
+                        if (!brand) {
+                            throw new HttpException(&#x27;invalid brand id&#x27;, HttpStatus.NOT_FOUND);
+                        }
+                    }
+
+                    if (updateProductDto.unitId) {
+                        unit &#x3D; await this.unitRepo.findOne({ where: { id: Equal(updateProductDto.unitId), company: Equal(company.id) } });
+                        if (!unit) {
+                            throw new HttpException(&#x27;invalid unit id&#x27;, HttpStatus.NOT_FOUND);
+                        }
+                    }
+                }
+
+                if (!product) {
+                    throw new HttpException(&#x27;Product not found&#x27;, HttpStatus.NOT_FOUND);
+                }
+                Object.assign(product, updateProductDto, { company, category, brand, unit });
+                const result &#x3D; await this.productRepo.save(product);
+                return returnObj(HttpStatus.OK, &quot;Product updated successfully&quot;, result);
+            } else {
+                const user &#x3D; await this.userRepo.findOne({ where: { id: Equal(req.user.id) }, relations: { company: true } });
+                if (!user) {
+                    throw new HttpException(&#x27;Company not found&#x27;, HttpStatus.NOT_FOUND);
+                }
+                const company &#x3D; user.company;
+                
+                const product &#x3D; await this.productRepo.findOne({ where: { id: Equal(id), company: { id: Equal(company.id) } } });
+                let category: Category | null &#x3D; product.category;
+                let brand: Brands | null &#x3D; product.brand;
+                let unit: Units | null &#x3D; product.unit;
+
+                if (updateProductDto.categoryId) {
+                    category &#x3D; await this.categoryRepo.findOne({ where: { id: Equal(updateProductDto.categoryId), company: Equal(company.id) } });
+                    if (!category) {
+                        throw new HttpException(&#x27;invalid category id&#x27;, HttpStatus.NOT_FOUND);
+                    }
+                }
+
+                if (updateProductDto.brandId) {
+                    brand &#x3D; await this.brandRepo.findOne({ where: { id: Equal(updateProductDto.brandId), company: Equal(company.id) } });
+                    if (!brand) {
+                        throw new HttpException(&#x27;invalid brand id&#x27;, HttpStatus.NOT_FOUND);
+                    }
+                }
+
+                if (updateProductDto.unitId) {
+                    unit &#x3D; await this.unitRepo.findOne({ where: { id: Equal(updateProductDto.unitId), company: Equal(company.id) } });
+                    if (!unit) {
+                        throw new HttpException(&#x27;invalid unit id&#x27;, HttpStatus.NOT_FOUND);
+                    }
+                }
+
+                if (!product) {
+                    throw new HttpException(&#x27;Product not found&#x27;, HttpStatus.NOT_FOUND);
+                }
+                console.log(updateProductDto);
+                console.log(product)
+                Object.assign(product, updateProductDto, { category, brand, unit });
+                const result &#x3D; await this.productRepo.save(product);
+                return returnObj(HttpStatus.OK, &quot;Product updated successfully&quot;, result);
+            }
+        } catch (err) {
+            if (err instanceof HttpException) {
+                throw err;
+            }
+            throw new HttpException(&quot;internal server error&quot;, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    async getProductById(req: any, id: string) {
+        try {
+            if (roles.SuperAdmin &#x3D;&#x3D; req.user.role) {
+                const product &#x3D; await this.productRepo.findOne({ where: { id: Equal(id) }, relations: { company: true, category: true, brand: true, unit: true } });
+                if (!product) {
+                    throw new HttpException(&#x27;Product not found&#x27;, HttpStatus.NOT_FOUND);
+                }
+                return returnObj(HttpStatus.OK, &quot;success&quot;, product);
+            } else {
+                const user &#x3D; await this.userRepo.findOne({ where: { id: Equal(req.user.id) }, relations: { company: true } });
+                if (!user || !user.company) {
+                    throw new HttpException(&#x27;company not found&#x27;, HttpStatus.NOT_FOUND);
+                }
+                const product &#x3D; await this.productRepo.findOne({ where: { id: Equal(id), company: { id: Equal(user.company.id) } }, relations: { company: true, category: true, brand: true, unit: true } });
+                if (!product) {
+                    throw new HttpException(&#x27;Product not found&#x27;, HttpStatus.NOT_FOUND);
+                }
+                return returnObj(HttpStatus.OK, &quot;success&quot;, product);
+            }
+        } catch (err) {
+            if (err instanceof HttpException) {
+                throw err;
+            }
+            throw new HttpException(&quot;internal server error&quot;, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    async getAllProducts(req: any, page: number) {
+        try {
+            if (roles.SuperAdmin &#x3D;&#x3D; req.user.role) {
+                const products &#x3D; await this.productRepo.find({ skip: page * 10, take: 10, relations: { company: true, category: true, brand: true, unit: true } });
+                if (!products.length) {
+                    throw new HttpException(&#x27;No products found&#x27;, HttpStatus.NOT_FOUND);
+                }
+                return returnObj(HttpStatus.OK, &quot;success&quot;, products);
+            } else {
+                const user &#x3D; await this.userRepo.findOne({ where: { id: Equal(req.user.id) }, relations: { company: true } });
+                if (!user || !user.company) {
+                    throw new HttpException(&#x27;company not found&#x27;, HttpStatus.NOT_FOUND);
+                }
+                const products &#x3D; await this.productRepo.find({ skip: page * 10, take: 10, where: { company: { id: Equal(user.company.id) } }, relations: { company: true, category: true, brand: true, unit: true } });
+                if (!products.length) {
+                    throw new HttpException(&#x27;No products found&#x27;, HttpStatus.NOT_FOUND);
+                }
+                return returnObj(HttpStatus.OK, &quot;success&quot;, products);
+            }
+        } catch (err) {
+            if (err instanceof HttpException) {
+                throw err;
+            }
+            throw new HttpException(&quot;internal server error&quot;, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    async getProductsByBrandId(req: any, brandId: string, page: number) {
+        try {
+            if (roles.SuperAdmin &#x3D;&#x3D; req.user.role) {
+                const products &#x3D; await this.productRepo.find({ skip: page * 10, take: 10, where: { brand: { id: Equal(brandId) } }, relations: { company: true, category: true, brand: true, unit: true } });
+                if (!products.length) {
+                    throw new HttpException(&#x27;No products found for this brand&#x27;, HttpStatus.NOT_FOUND);
+                }
+                return returnObj(HttpStatus.OK, &quot;success&quot;, products);
+            } else {
+                const user &#x3D; await this.userRepo.findOne({ where: { id: Equal(req.user.id) }, relations: { company: true } });
+                if (!user) {
+                    throw new HttpException(&#x27;user not found&#x27;, HttpStatus.NOT_FOUND);
+                }
+                const products &#x3D; await this.productRepo.find({ skip: page * 10, take: 10, where: { brand: { id: Equal(brandId) }, company: { id: Equal(user.company.id) } }, relations: { company: true, category: true, brand: true, unit: true } });
+                if (!products.length) {
+                    throw new HttpException(&#x27;No products found for this brand&#x27;, HttpStatus.NOT_FOUND);
+                }
+                return returnObj(HttpStatus.OK, &quot;success&quot;, products);
+            }
+        } catch (err) {
+            if (err instanceof HttpException) {
+                throw err;
+            }
+            throw new HttpException(&quot;internal server error&quot;, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    async getAllProductAvailableForSale(req: any, page: number) {
+        try {
+            const user &#x3D; await this.userRepo.findOne({ where: { id: Equal(req.user.id) }, relations: { company: true } })
+            if (!user) {
+                throw new HttpException(&quot;user not found&quot;, HttpStatus.NOT_FOUND)
+            }
+            const product &#x3D; await this.productRepo.find({ skip: page * 10, take: 10, where: { company: Equal(user.company.id), can_sale: true } })
+            if (!product || product.length &#x3D;&#x3D; 0) {
+                throw new HttpException(&quot;no product found&quot;, HttpStatus.NOT_FOUND)
+            }
+            return returnObj(HttpStatus.OK, &quot;success&quot;, product)
+        } catch (err) {
+            if (err instanceof HttpException) {
+                throw err
+            }
+            throw new HttpException(&quot;internal server error&quot;, HttpStatus.INTERNAL_SERVER_ERROR)
+        }
+    }
+
+    async getProductsByCompanyId(req: any, companyId: string, page: number) {
+        try {
+            if (roles.SuperAdmin &#x3D;&#x3D; req.user.role) {
+                const products &#x3D; await this.productRepo.find({ skip: page * 10, take: 10, where: { company: { id: Equal(companyId) } }, relations: { company: true, category: true, brand: true, unit: true } });
+                if (!products.length) {
+                    throw new HttpException(&#x27;No products found for this company&#x27;, HttpStatus.NOT_FOUND);
+                }
+                return returnObj(HttpStatus.OK, &quot;success&quot;, products);
+            } else {
+                const user &#x3D; await this.userRepo.findOne({ where: { id: Equal(req.user.id) }, relations: { company: true } });
+                if (!user || !user.company || user.company.id !&#x3D;&#x3D; companyId) {
+                    throw new HttpException(&#x60;You do not have access to this company&#x27;s products&#x60;, HttpStatus.FORBIDDEN);
+                }
+                const products &#x3D; await this.productRepo.find({ skip: page * 10, take: 10, where: { company: { id: Equal(companyId) } }, relations: { company: true, category: true, brand: true, unit: true } });
+                if (!products.length) {
+                    throw new HttpException(&#x27;No products found for this company&#x27;, HttpStatus.NOT_FOUND);
+                }
+                return returnObj(HttpStatus.OK, &quot;success&quot;, products);
+            }
+        } catch (err) {
+            if (err instanceof HttpException) {
+                throw err;
+            }
+            throw new HttpException(&quot;internal server error&quot;, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    async getProductsByCategoryId(req: any, categoryId: string, page: number) {
+        try {
+            if (roles.SuperAdmin &#x3D;&#x3D; req.user.role) {
+                const products &#x3D; await this.productRepo.find({ skip: page * 10, take: 10, where: { category: { id: Equal(categoryId) } }, relations: { company: true, category: true, brand: true, unit: true } });
+                if (!products.length) {
+                    throw new HttpException(&#x27;No products found for this company&#x27;, HttpStatus.NOT_FOUND);
+                }
+                return returnObj(HttpStatus.OK, &quot;success&quot;, products);
+            } else {
+                const user &#x3D; await this.userRepo.findOne({ where: { id: Equal(req.user.id) }, relations: { company: true } });
+                if (!user) {
+                    throw new HttpException(&#x60;You do not have access to this company&#x27;s products&#x60;, HttpStatus.FORBIDDEN);
+                }
+                const products &#x3D; await this.productRepo.find({ skip: page * 10, take: 10, where: { category: { id: Equal(categoryId) } }, relations: { company: true, category: true, brand: true, unit: true } });
+                if (!products.length) {
+                    throw new HttpException(&#x27;No products found for this company&#x27;, HttpStatus.NOT_FOUND);
+                }
+                return returnObj(HttpStatus.OK, &quot;success&quot;, products);
+            }
+        } catch (err) {
+            if (err instanceof HttpException) {
+                throw err;
+            }
+            throw new HttpException(&quot;internal server error&quot;, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
+    async lowStockNotification(req: any, page: number) {
+        try {
+            const user &#x3D; await this.userRepo.findOne({ where: { id: Equal(req.user.id) }, relations: { company: true } });
+            if (!user) {
+                throw new HttpException(&#x27;user not found&#x27;, HttpStatus.NOT_FOUND);
+            }
+
+            const queryBuilder &#x3D; this.dataSource.getRepository(Product).createQueryBuilder(&#x27;product&#x27;)
+                .where(&#x27;product.stock &lt; product.notificationThreshold&#x27;)
+                .andWhere(&#x27;product.companyId &#x3D; :companyId&#x27;, { companyId: user.company.id })
+                .skip(page * 10)
+                .take(10)
+
+            const products &#x3D; await queryBuilder.getRawMany()
+            const notification  &#x3D;{
+                product_name:&quot;&quot;,
+                stock:&quot;&quot;,
+                notificationThreshold:&quot;&quot;,
+                message:&quot;&quot;,
+            }
+            for (let i &#x3D; 0; i &lt; products.length; i++) {
+                notification.product_name &#x3D; products[i].product_name
+                notification.stock &#x3D; products[i].stock
+                notification.notificationThreshold &#x3D; products[i].notificationThreshold
+                notification.message &#x3D; &#x60;${products[i].product_name} has ${products[i].stock} stock left which is less than the notification threshold of ${products[i].notificationThreshold}&#x60;
+            }
+            if (!products.length) {
+                throw new HttpException(&#x27;No low stock products found&#x27;, HttpStatus.NOT_FOUND);
+            }
+            return returnObj(HttpStatus.OK, &quot;success&quot;, products);
+        } catch (err) {
+            if (err instanceof HttpException) {
+                throw err;
+            }
+            throw new HttpException(&quot;internal server error&quot;, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
+
+}</code></pre>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'ProductService.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

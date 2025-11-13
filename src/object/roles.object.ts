@@ -1,7 +1,7 @@
 
 
 export const roles = {
-    SuperAdmin:"superadmin",
-    Admin:"admin"
+    SuperAdmin:"SuperAdmin",
+    Admin:"Admin"
 }
 

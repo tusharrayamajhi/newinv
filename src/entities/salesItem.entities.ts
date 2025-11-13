@@ -14,9 +14,6 @@ export class salesItem extends BaseEntities {
     @Column({ nullable: false, type: "decimal", unsigned: false })
     unit_rate: number
 
-    // @Column({ nullable: false, type: "decimal", unsigned: false })
-    // cost_price: number
-
     @Column({ type: 'decimal', default: 0.0, unsigned: false })
     total_before_dis: number
 
@@ -32,8 +29,6 @@ export class salesItem extends BaseEntities {
     @Column({ type: 'decimal', default: 0.0 })
     total_after_tax: number;
 
-    // @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-    // sales_date: Date
 
     @Column({ type: 'text', nullable: true })
     remarks: string;

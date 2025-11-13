@@ -15,33 +15,21 @@ export class PurchaseDetails {
   @Column({ primary: true, type: "varchar", nullable: false, unique: true })
   purchaseCode: string
   
-  @Column({
-    type: 'enum',
-    enum: purchaseStatus,
-    default: purchaseStatus.received,
-  })
-  shipment_status: purchaseStatus;
+  // @Column({
+  //   type: 'enum',
+  //   enum: purchaseStatus,
+  //   default: purchaseStatus.received,
+  // })
+  // shipment_status: purchaseStatus;
   
   @Column({ type: 'decimal', precision: 10, scale: 2, default: 0.0,unsigned:false })
-  total_before_dis: number;
-
-  @Column({ type: 'decimal', precision: 10, scale: 2, default: 0.0,unsigned:false })
-  discountInTotalPurchase: number;
+  TotalPurchaseAmount: number;
   
-  @Column({ type: 'decimal', precision: 20, scale: 5, default: 0.0,unsigned:false })
-  total_after_dis: number;
-
-  
-  @Column({ type: 'decimal', precision: 10, scale: 2, default: 0.0,unsigned:false })
-  taxInTotalPurchase: number;
-  
-  @Column({ type: 'decimal', precision: 20, scale: 5, default: 0.0,unsigned:false })
-  total_after_tax: number;
 
   @Column({nullable:true,type:"text"})
   remark:string
   
-  @OneToMany(() => PurchaseItem, (purchase) => purchase.purchaseDetails)
+  @OneToMany(() => PurchaseItem, (purchase) => purchase.purchaseDetails,{eager:true})
   purchases: PurchaseItem[]
 
   @ManyToOne(() => Vendor, (vendor) => vendor.purchaseDetails)

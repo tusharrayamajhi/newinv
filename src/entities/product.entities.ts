@@ -36,7 +36,7 @@ export class Product extends BaseEntities {
     stock: number;
 
     @Column({type:"boolean",default:false})
-    can_sell:boolean
+    can_sale:boolean
 
     //relations
     @ManyToOne(() => Category, (category) => category.product, { nullable: true })

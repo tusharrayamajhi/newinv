@@ -29,8 +29,8 @@ export class VendorController {
     @Get()
     @Permission(permissions.view_vendor)
     @UseGuards(havePermissionGuards)
-    async viewAllVendors(@Req() req: Request,@Query('page') page:number = 0) {
-        return await this.vendorService.getAllVendors(req,page);
+    async viewAllVendors(@Req() req: Request) {
+        return await this.vendorService.getAllVendors(req);
     }
 
     @Get(":id")

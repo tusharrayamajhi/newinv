@@ -8,14 +8,14 @@ import { purchaseReturnItem } from './purchaseReturnItem.entities';
 @Entity()
 export class PurchaseItem extends BaseEntities {
 
-    // @Column({ type: 'int', unsigned: true })
-    // ordered_qnt: number;
+    @Column({ type: 'int', unsigned: true })
+    ordered_qnt: number;
 
     @Column({ type: 'int', unsigned: true, default: 0 })
     received_qnt: number;
 
-    // @Column({ type: 'int',})
-    // balance: number;
+    @Column({ type: 'int',})
+    balance: number;
 
     @Column({ type: 'decimal', unsigned: true })
     unit_rate: number;
@@ -23,19 +23,13 @@ export class PurchaseItem extends BaseEntities {
     @Column({ type: 'int', nullable: true })
     tax_rate: number;
 
-    // @Column({ type: 'int', nullable: true })
-    // remaining_qnt_to_sell: number;
-
-    @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-    purchase_date: Date;
-
     @Column({ type: 'text', nullable: true })
     remarks: string;
 
     @Column({nullable:false,type:"decimal"})
     total:number
 
-    @ManyToOne(() => Product, (product) => product.purchase, { nullable: false })
+    @ManyToOne(() => Product, (product) => product.purchase, { nullable: false,eager:true })
     product: Product;
 
     @Column({ type: 'decimal', default: 0.0 })

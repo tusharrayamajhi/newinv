@@ -31,8 +31,8 @@ export class BrandsController {
     @Get()
     @Permission(permissions.view_brand)
     @UseGuards(havePermissionGuards)
-    async ViewAllBrand(@Req() req: Request,@Query('page') page:number = 0) {
-        return await this.brandService.getAllBrands(req,page)
+    async ViewAllBrand(@Req() req: Request) {
+        return await this.brandService.getAllBrands(req)
     }
 
     @Get("company/:companyId")

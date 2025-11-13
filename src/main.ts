@@ -6,11 +6,12 @@ import { ExpressAdapter } from '@nestjs/platform-express';
 import { swaggerUser } from './swagger/swagger.user';
 import { swaggerController } from './swagger/swaggercontroller';
 import { Request, Response } from 'express';
+import { join } from 'path';
 
 async function bootstrap() {
   const expressApp = express();
   const app = await NestFactory.create(AppModule, new ExpressAdapter(expressApp));
-
+  expressApp.use('/uploads', express.static(join(__dirname, '..', 'uploads')));
   // Helper function to create Swagger documents
   const createSwaggerDocument = (title: string, description: string, version: string, tags: string[]) => {
     const config = new DocumentBuilder()

@@ -119,7 +119,7 @@ export class ReportService {
         )
         .select('customer.name', 'customerName')
         .addSelect('customer.id', 'customer_id')
-        .addSelect('SUM(salesDetails.total_after_tax)', 'total')
+        .addSelect('SUM(salesDetails.total_Amount)', 'total')
         .where('salesDetails.companyId = :companyId  AND salesDetails.createdAt Between :start and :end', { companyId, start, end })
         .groupBy('customer.name, customer.id')
         .orderBy('total', 'DESC')

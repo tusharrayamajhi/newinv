@@ -28,8 +28,8 @@ export class ProductController {
     @Get("company/:companyId")
     @Permission(permissions.view_product)
     @UseGuards(havePermissionGuards)
-    async getProductsByCompanyId(@Req() req: Request,@Query('page') page:number = 0, @Param('companyId', new ParseUUIDPipe({ errorHttpStatusCode: HttpStatus.INTERNAL_SERVER_ERROR })) companyId: string) {
-        return await this.productService.getProductsByCompanyId(req, companyId,page);
+    async getProductsByCompanyId(@Req() req: Request, @Param('companyId', new ParseUUIDPipe({ errorHttpStatusCode: HttpStatus.INTERNAL_SERVER_ERROR })) companyId: string) {
+        return await this.productService.getProductsByCompanyId(req,companyId);
     }
 
     @Get("brand/:brandId")
@@ -59,7 +59,14 @@ export class ProductController {
     async getAllProductAvailableForSale(@Req() req: Request,@Query('page') page:number = 0) {
         return await this.productService.getAllProductAvailableForSale(req,page);
     }
-
+    
+    @Get('lowStockNotification')
+    @Permission(permissions.get_low_stock_notification)
+    @UseGuards(havePermissionGuards)
+    async lowStockNotification(@Req() req: Request,@Query('page') page:number = 0) {
+        return await this.productService.lowStockNotification(req,page);
+    }
+    
     @Get(":id")
     @Permission(permissions.view_product)
     @UseGuards(havePermissionGuards)
@@ -74,12 +81,6 @@ export class ProductController {
         return await this.productService.updateProduct(req, id, updateProductDto);
     }
 
-    @Get('lowStockNotification')
-    @Permission(permissions.get_low_stock_notification)
-    @UseGuards(havePermissionGuards)
-    async lowStockNotification(@Req() req: Request,@Query('page') page:number = 0) {
-        return await this.productService.lowStockNotification(req,page);
-    }
 
     @Delete(':id')
     @Permission(permissions.delete_product)

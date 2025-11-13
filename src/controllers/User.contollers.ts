@@ -13,13 +13,13 @@ import { permissions } from 'src/object/permission.object';
 import { havePermissionGuards } from 'src/guards/havePermission.guards';
 import { swaggerUser } from 'src/swagger/swagger.user';
 import { swaggerController } from 'src/swagger/swaggercontroller';
-import { AddUsersDto, createUserDto } from 'src/dtos/createDtos/addUser.dtos';
+import { AddUsersDto } from 'src/dtos/createDtos/addUser.dtos';
 import { baseUpdateUserDto, UpdateUserDto } from 'src/dtos/updateDtos/updateUser.dtos';
 import { AllUserCanAccess } from 'src/guards/alluserCanAccess';
 
 //swagger
 @ApiBearerAuth("jwt")
-@ApiTags(swaggerUser.superAdmin+swaggerController.user,swaggerUser.admin+swaggerController.user)
+@ApiTags(swaggerUser.superAdmin + swaggerController.user, swaggerUser.admin + swaggerController.user)
 //code
 @Controller('user')
 export class UserController {
@@ -35,12 +35,15 @@ export class UserController {
     @UseGuards(canAccess)
     @Roles(roles.Admin, roles.SuperAdmin)
     @UseInterceptors(FileInterceptor('user_image', multerOption))
-    async addUser(@Req() req: Request, @Body() userData: createUserDto, @UploadedFile() user_image?: Express.Multer.File | null) {
-        let data = userData.data
-        if (typeof data == "string") {
-            data = JSON.parse(data)
+    async addUser(@Req() req: Request, @Body() userData: any, @UploadedFile() user_image?: Express.Multer.File | null) {
+
+        if (userData.is_active == "true") {
+            userData.is_active = true
+        } else {
+            userData.is_active = false
         }
-        const user = Object.assign(new AddUsersDto(), data)
+        const user: AddUsersDto = Object.assign(new AddUsersDto(), userData)
+        console.log("user", user)
         const result = await validate(user, { whitelist: true })
         if (result.length > 0) {
             throw new BadRequestException({
@@ -52,10 +55,14 @@ export class UserController {
                 })),
             });
         }
-        if (user_image) {
-            user['user_image'] = user_image.filename
-        }
-        return await this.userService.addUser(req, user)
+        // if (user_image) {
+        //     user['user_image'] = user_image.filename
+        // }
+        console.log(user)
+        userData.data = user
+        userData.user_image = user_image?.filename || "";
+        console.log(userData)
+        return await this.userService.addUser(req, userData)
     }
 
     //swagger
@@ -63,18 +70,18 @@ export class UserController {
     @Get()
     @UseGuards(canAccess)
     @Roles(roles.Admin, roles.SuperAdmin)
-    async getAllUsers(@Req() req: Request,@Query('page') page:number = 0,) {
-        return await this.userService.getAllUsers(req,page)
+    async getAllUsers(@Req() req: Request) {
+        return await this.userService.getAllUsers(req)
     }
 
     @Get('verify_email')
     @UseGuards(AllUserCanAccess)
-    async sendVerifyEmail(@Req() req:Request){
+    async sendVerifyEmail(@Req() req: Request) {
         return await this.userService.sendVerifyEmail(req)
     }
 
-     //swagger
-     //code
+    //swagger
+    //code
     @Get(":id")
     @UseGuards(havePermissionGuards)
     @Permission(permissions.view_user)
@@ -82,45 +89,51 @@ export class UserController {
         return await this.userService.getUserById(req, id)
     }
 
-     //swagger
-     //code
+    //swagger
+    //code
     @Get("company/:id")
     @UseGuards(canAccess)
-    @Roles(roles.SuperAdmin,roles.Admin)
-    async getUsersByCompany(@Req() req: Request,@Query('page') page:number = 0, @Param("id", new ParseUUIDPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE })) id: string) {
-        return await this.userService.getUsersByCompany(req, id,page)
+    @Roles(roles.SuperAdmin, roles.Admin)
+    async getUsersByCompany(@Req() req: Request, @Query('page') page: number = 0, @Param("id", new ParseUUIDPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE })) id: string) {
+        return await this.userService.getUsersByCompany(req, id, page)
     }
 
-     //swagger
-     //code
+    //swagger
+    //code
     @Get("role/:id")
     @UseGuards(canAccess)
     @Roles(roles.SuperAdmin, roles.Admin)
-    async getUsersByRole(@Req() req: Request,@Query('page') page:number = 0, @Param("id", new ParseUUIDPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE })) id: string) {
-        return await this.userService.getUsersByRole(req, id,page)
+    async getUsersByRole(@Req() req: Request, @Query('page') page: number = 0, @Param("id", new ParseUUIDPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE })) id: string) {
+        return await this.userService.getUsersByRole(req, id, page)
     }
 
-   
+
 
     @Get('verify_email/:otp')
     @UseGuards(AllUserCanAccess)
-    async VerifyEmail(@Req() req:Request,@Param('otp', ParseIntPipe) otp:number){
-        return await this.userService.VerifyEmail(req,otp)
+    async VerifyEmail(@Req() req: Request, @Param('otp', ParseIntPipe) otp: number) {
+        return await this.userService.VerifyEmail(req, otp)
     }
 
-     //swagger
-     //code
+    //swagger
+    //code
     @Patch(":id")
     @ApiConsumes("multipart/form-data")
     @UseGuards(canAccess)
     @Roles(roles.Admin, roles.SuperAdmin)
     @UseInterceptors(FileInterceptor("user_image", multerOption))
-    async updateUser(@Req() req: Request, @Param("id", new ParseUUIDPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE })) id: string, @Body() updateUser: UpdateUserDto, @UploadedFile() user_image?: Express.Multer.File) {
-        let data = updateUser.data
-        if (typeof data == "string") {
-            data = JSON.parse(data)
+    async updateUser(@Req() req: Request, @Param("id", new ParseUUIDPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE })) id: string, @Body() updateUser: any, @UploadedFile() user_image?: Express.Multer.File) {
+        // let data = updateUser
+        // if (typeof data == "string") {
+        //     data = JSON.parse(data)
+        // }
+        if (updateUser.is_active == "true") {
+            updateUser.is_active = true
+        } else {
+            updateUser.is_active = false
         }
-        const user = Object.assign(new baseUpdateUserDto(), data)
+        console.log(updateUser)
+        const user = Object.assign(new baseUpdateUserDto(), updateUser)
         const result = await validate(user, { whitelist: true })
         if (result.length > 0) {
             throw new BadRequestException({
@@ -132,14 +145,18 @@ export class UserController {
                 })),
             });
         }
+
+        updateUser.data = user
         if (user_image) {
-            user['user_image'] = user_image.filename
+            console.log(user)
+            updateUser.user_image = user_image?.filename || "";
+            console.log(updateUser)
         }
-        return await this.userService.updateUser(req, id, user)
+        return await this.userService.updateUser(req, id, updateUser)
     }
 
-     //swagger
-     //code
+    //swagger
+    //code
     @Delete(":id")
     @UseGuards(canAccess)
     @Roles(roles.Admin, roles.SuperAdmin)
@@ -147,5 +164,5 @@ export class UserController {
         return await this.userService.deleteUser(req, id)
     }
 
-   
+
 }

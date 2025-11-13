@@ -13,20 +13,6 @@ export class SalesDetailsDto{
     @IsEnum(salesStatus,{message:"shipment status most be valid status from enum"})
     shipment_status: salesStatus;
 
-    @ApiProperty({ description: "discount rate in total sales", example: 5, default: 0 })
-    @IsOptional()
-    @IsNumber()
-    @Min(0)
-    @Max(100)
-    discount_in_total_sales?: number;
-
-    @ApiProperty({ description: "discount rate in total sales", example: 5, default: 0 })
-    @IsOptional()
-    @IsNumber()
-    @Min(0)
-    @Max(100)
-    tax_in_total_sales?: number;
-
     @ApiProperty({ description: "sales customer id", example: "customer id 1" })
     @IsNotEmpty()
     @IsString()
@@ -47,16 +33,6 @@ export class SalesDetailsDto{
     @IsArray()
     @Type(() => createSalesItemDto)
     salesItems:createSalesItemDto[];
-
-    // @ApiProperty({
-    //     type: () => Details,
-    //     description: 'JSON data associated with the upload',
-    // })
-    // @Transform(({ value }) => (typeof value === 'string' ? JSON.parse(value) : value))
-    // @ValidateNested()
-    // @IsObject()
-    // @Type(() => Details)
-    // purchaseDetails:Details;
 
     @ApiProperty({
         type:[SalesPaymentDTO],

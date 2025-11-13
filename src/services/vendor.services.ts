@@ -62,10 +62,10 @@ export class VendorService {
         }
     }
 
-    async getAllVendors(req: any,page:number) {
+    async getAllVendors(req: any) {
         try {
             if (req.user.role == roles.SuperAdmin) {
-                const vendors = await this.vendorRepo.find({skip:page * 10, take:10, relations: { company: true } });
+                const vendors = await this.vendorRepo.find({relations: { company: true } });
                 if (!vendors) {
                     throw new HttpException("no vendors found", HttpStatus.NOT_FOUND);
                 }
@@ -75,7 +75,7 @@ export class VendorService {
                 if (!company) {
                     throw new HttpException('company not found', HttpStatus.NOT_FOUND);
                 }
-                const vendors = await this.vendorRepo.find({skip:page * 10,take:10, where: { company: Equal(company.id) } });
+                const vendors = await this.vendorRepo.find({where: { company: Equal(company.id) } });
                 if (!vendors) {
                     throw new HttpException("no vendors found", HttpStatus.NOT_FOUND);
                 }

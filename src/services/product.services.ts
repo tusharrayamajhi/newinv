@@ -155,10 +155,11 @@ export class ProductService {
     async updateProduct(req: any, id: string, updateProductDto: UpdateProdcutDtos) {
         try {
             if (roles.SuperAdmin == req.user.role) {
-                let company: Companies | null = null;
-                let category: Category | null = null;
-                let brand: Brands | null = null;
-                let unit: Units | null = null;
+                const product = await this.productRepo.findOne({ where: { id: Equal(id) } });
+                let company: Companies | null = product.company;
+                let category: Category | null = product.category;
+                let brand: Brands | null =product.brand;
+                let unit: Units | null = product.unit;
                 if (updateProductDto.companyId) {
                     company = await this.companyRepo.findOne({ where: { id: Equal(updateProductDto.companyId) } });
                     if (!company) {
@@ -187,7 +188,6 @@ export class ProductService {
                     }
                 }
 
-                const product = await this.productRepo.findOne({ where: { id: Equal(id) } });
                 if (!product) {
                     throw new HttpException('Product not found', HttpStatus.NOT_FOUND);
                 }
@@ -200,10 +200,11 @@ export class ProductService {
                     throw new HttpException('Company not found', HttpStatus.NOT_FOUND);
                 }
                 const company = user.company;
-
-                let category: Category | null = null;
-                let brand: Brands | null = null;
-                let unit: Units | null = null;
+                
+                const product = await this.productRepo.findOne({ where: { id: Equal(id), company: { id: Equal(company.id) } } });
+                let category: Category | null = product.category;
+                let brand: Brands | null = product.brand;
+                let unit: Units | null = product.unit;
 
                 if (updateProductDto.categoryId) {
                     category = await this.categoryRepo.findOne({ where: { id: Equal(updateProductDto.categoryId), company: Equal(company.id) } });
@@ -226,10 +227,11 @@ export class ProductService {
                     }
                 }
 
-                const product = await this.productRepo.findOne({ where: { id: Equal(id), company: { id: Equal(company.id) } } });
                 if (!product) {
                     throw new HttpException('Product not found', HttpStatus.NOT_FOUND);
                 }
+                console.log(updateProductDto);
+                console.log(product)
                 Object.assign(product, updateProductDto, { category, brand, unit });
                 const result = await this.productRepo.save(product);
                 return returnObj(HttpStatus.OK, "Product updated successfully", result);
@@ -329,7 +331,7 @@ export class ProductService {
             if (!user) {
                 throw new HttpException("user not found", HttpStatus.NOT_FOUND)
             }
-            const product = await this.productRepo.find({ skip: page * 10, take: 10, where: { company: Equal(user.company.id), can_sell: true } })
+            const product = await this.productRepo.find({ skip: page * 10, take: 10, where: { company: Equal(user.company.id), can_sale: true } })
             if (!product || product.length == 0) {
                 throw new HttpException("no product found", HttpStatus.NOT_FOUND)
             }
@@ -342,10 +344,10 @@ export class ProductService {
         }
     }
 
-    async getProductsByCompanyId(req: any, companyId: string, page: number) {
+    async getProductsByCompanyId(req: any, companyId: string) {
         try {
             if (roles.SuperAdmin == req.user.role) {
-                const products = await this.productRepo.find({ skip: page * 10, take: 10, where: { company: { id: Equal(companyId) } }, relations: { company: true, category: true, brand: true, unit: true } });
+                const products = await this.productRepo.find({ where: { company: { id: Equal(companyId) } }, relations: { company: true, category: true, brand: true, unit: true } });
                 if (!products.length) {
                     throw new HttpException('No products found for this company', HttpStatus.NOT_FOUND);
                 }
@@ -355,7 +357,7 @@ export class ProductService {
                 if (!user || !user.company || user.company.id !== companyId) {
                     throw new HttpException(`You do not have access to this company's products`, HttpStatus.FORBIDDEN);
                 }
-                const products = await this.productRepo.find({ skip: page * 10, take: 10, where: { company: { id: Equal(companyId) } }, relations: { company: true, category: true, brand: true, unit: true } });
+                const products = await this.productRepo.find({ where: { company: { id: Equal(companyId) } }, relations: { company: true, category: true, brand: true, unit: true } });
                 if (!products.length) {
                     throw new HttpException('No products found for this company', HttpStatus.NOT_FOUND);
                 }

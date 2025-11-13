@@ -1,0 +1,1065 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>project-name documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">project-name documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content injectable">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Injectables</li>
+  <li class="breadcrumb-item" >VendorService</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/services/vendor.services.ts</code>
+        </p>
+
+
+
+
+
+            <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#addVendor" >addVendor</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#deleteVendor" >deleteVendor</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#getAllVendors" >getAllVendors</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#getVendorById" >getVendorById</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#getVendorsByCompanyId" >getVendorsByCompanyId</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#updateVendor" >updateVendor</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+            <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(userRepo: <a href="../entitys/Users.html" target="_self">Repository&lt;Users&gt;</a>, companyRepo: <a href="../entitys/Companies.html" target="_self">Repository&lt;Companies&gt;</a>, vendorRepo: <a href="../entitys/Vendor.html" target="_self">Repository&lt;Vendor&gt;</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/services/vendor.services.ts:13</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>userRepo</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../entitys/Users.html" target="_self" >Repository&lt;Users&gt;</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>companyRepo</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../entitys/Companies.html" target="_self" >Repository&lt;Companies&gt;</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>vendorRepo</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../entitys/Vendor.html" target="_self" >Repository&lt;Vendor&gt;</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+            <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="addVendor"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>addVendor</b></span>
+                        <a href="#addVendor"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>addVendor(req: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, createVendorDto: <a href="../classes/CreateVendor.html" target="_self">CreateVendor</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="21"
+                                    class="link-to-prism">src/services/vendor.services.ts:21</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>req</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>createVendorDto</td>
+                                            <td>
+                                                            <code><a href="../classes/CreateVendor.html" target="_self" >CreateVendor</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="deleteVendor"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>deleteVendor</b></span>
+                        <a href="#deleteVendor"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>deleteVendor(req: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="146"
+                                    class="link-to-prism">src/services/vendor.services.ts:146</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>req</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getAllVendors"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>getAllVendors</b></span>
+                        <a href="#getAllVendors"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getAllVendors(req: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, page: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="65"
+                                    class="link-to-prism">src/services/vendor.services.ts:65</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>req</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>page</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getVendorById"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>getVendorById</b></span>
+                        <a href="#getVendorById"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getVendorById(req: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="92"
+                                    class="link-to-prism">src/services/vendor.services.ts:92</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>req</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getVendorsByCompanyId"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>getVendorsByCompanyId</b></span>
+                        <a href="#getVendorsByCompanyId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getVendorsByCompanyId(req: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, companyId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="119"
+                                    class="link-to-prism">src/services/vendor.services.ts:119</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>req</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>companyId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateVendor"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>updateVendor</b></span>
+                        <a href="#updateVendor"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>updateVendor(req: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, updateVendorDto: <a href="../classes/updateVendor.html" target="_self">updateVendor</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="175"
+                                    class="link-to-prism">src/services/vendor.services.ts:175</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>req</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>updateVendorDto</td>
+                                            <td>
+                                                            <code><a href="../classes/updateVendor.html" target="_self" >updateVendor</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable, HttpException, HttpStatus } from &quot;@nestjs/common&quot;;
+import { InjectRepository } from &quot;@nestjs/typeorm&quot;;
+import { CreateVendor } from &quot;src/dtos/createDtos/createVendor.dtos&quot;;
+import { updateVendor } from &quot;src/dtos/updateDtos/updateVendor.dtos&quot;;
+import { Companies } from &quot;src/entities/Company.entities&quot;;
+import { Users } from &quot;src/entities/user.entities&quot;;
+import { Vendor } from &quot;src/entities/vendors.entities&quot;;
+import { roles } from &quot;src/object/roles.object&quot;;
+import { returnObj } from &quot;src/utils/returnObj&quot;;
+import { Repository, Equal } from &quot;typeorm&quot;;
+
+@Injectable()
+export class VendorService {
+
+    constructor(
+        @InjectRepository(Users) private readonly userRepo: Repository&lt;Users&gt;,
+        @InjectRepository(Companies) private readonly companyRepo: Repository&lt;Companies&gt;,
+        @InjectRepository(Vendor) private readonly vendorRepo: Repository&lt;Vendor&gt;,
+    ) { }
+
+    async addVendor(req: any, createVendorDto: CreateVendor) {
+        try {
+            if (roles.SuperAdmin &#x3D;&#x3D; req.user.role) {
+                let company: Companies | null &#x3D; null;
+                if (createVendorDto.companyId) {
+                    company &#x3D; await this.companyRepo.findOne({ where: { id: Equal(createVendorDto.companyId) } });
+                    if (!company) {
+                        throw new HttpException(&#x27;invalid company id&#x27;, HttpStatus.NOT_FOUND);
+                    }
+                    const vendors &#x3D; await this.vendorRepo.findOne({ where: { tax_number: Equal(createVendorDto.tax_number), company: Equal(company.id) } });
+                    if (vendors) {
+                        throw new HttpException(&#x60;Vendor with tax number ${createVendorDto.tax_number} already exists in the company&#x60;, HttpStatus.CONFLICT);
+                    }
+                }
+                const vendor &#x3D; this.vendorRepo.create({ ...createVendorDto, company: company,createdBy:req.user.id });
+                const result &#x3D; await this.vendorRepo.save(vendor);
+                if (!result) {
+                    throw new HttpException(&quot;cannot save vendor&quot;, HttpStatus.INTERNAL_SERVER_ERROR);
+                }
+                return { statusCode: HttpStatus.OK, message: &quot;success&quot;, data: result };
+            } else {
+                const company &#x3D; (await this.userRepo.findOne({ where: { id: Equal(req.user.id) }, relations: { company: true } }))?.company;
+                if (!company) {
+                    throw new HttpException(&#x27;company not found&#x27;, HttpStatus.NOT_FOUND);
+                }
+
+                const vendor &#x3D; await this.vendorRepo.findOne({ where: { tax_number: Equal(createVendorDto.tax_number), company: Equal(company.id) } });
+                if (vendor) {
+                    throw new HttpException(&#x60;Vendor with PAN ${createVendorDto.tax_number} already exists in the company&#x60;, HttpStatus.CONFLICT);
+                }
+                const result &#x3D; await this.vendorRepo.save(this.vendorRepo.create({ ...createVendorDto, company: company, createdBy: req.user.id }));
+                if (!result) {
+                    throw new HttpException(&quot;cannot save vendor&quot;, HttpStatus.INTERNAL_SERVER_ERROR);
+                }
+                return returnObj(HttpStatus.OK, &quot;success&quot;, result);
+            }
+        } catch (err) {
+            if (err instanceof HttpException) {
+                throw err;
+            }
+            throw new HttpException(&quot;internal server error&quot;, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    async getAllVendors(req: any,page:number) {
+        try {
+            if (req.user.role &#x3D;&#x3D; roles.SuperAdmin) {
+                const vendors &#x3D; await this.vendorRepo.find({skip:page * 10, take:10, relations: { company: true } });
+                if (!vendors) {
+                    throw new HttpException(&quot;no vendors found&quot;, HttpStatus.NOT_FOUND);
+                }
+                return returnObj(HttpStatus.OK, &quot;Success&quot;, vendors);
+            } else {
+                const company &#x3D; (await this.userRepo.findOne({ where: { id: Equal(req.user.id) }, relations: { company: true } }))?.company;
+                if (!company) {
+                    throw new HttpException(&#x27;company not found&#x27;, HttpStatus.NOT_FOUND);
+                }
+                const vendors &#x3D; await this.vendorRepo.find({skip:page * 10,take:10, where: { company: Equal(company.id) } });
+                if (!vendors) {
+                    throw new HttpException(&quot;no vendors found&quot;, HttpStatus.NOT_FOUND);
+                }
+                return returnObj(HttpStatus.OK, &quot;success&quot;, vendors);
+            }
+        } catch (err) {
+            if (err instanceof HttpException) {
+                throw err;
+            }
+            throw new HttpException(&quot;internal server error&quot;, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    async getVendorById(req: any, id: string) {
+        try {
+            if (roles.SuperAdmin &#x3D;&#x3D; req.user.role) {
+                const vendor &#x3D; await this.vendorRepo.findOne({ where: { id: Equal(id) } });
+                if (!vendor) {
+                    throw new HttpException(&quot;invalid vendor id&quot;, HttpStatus.NOT_FOUND);
+                }
+                return { statusCode: HttpStatus.OK, message: &quot;success&quot;, data: vendor };
+            } else {
+                const company &#x3D; (await this.userRepo.findOne({ where: { id: Equal(req.user.id) }, relations: { company: true } }))?.company;
+                if (!company) {
+                    throw new HttpException(&quot;company not found&quot;, HttpStatus.NOT_FOUND);
+                }
+                const vendor &#x3D; await this.vendorRepo.findOne({ where: { id: Equal(id), company: Equal(company.id) } });
+                if (!vendor) {
+                    throw new HttpException(&quot;invalid vendor id&quot;, HttpStatus.NOT_FOUND);
+                }
+                return returnObj(HttpStatus.OK, &quot;success&quot;, vendor);
+            }
+        } catch (err) {
+            if (err instanceof HttpException) {
+                throw err;
+            }
+            throw new HttpException(&quot;internal server error&quot;, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    async getVendorsByCompanyId(req: any, companyId: string) {
+        try {
+            if (roles.SuperAdmin &#x3D;&#x3D; req.user.role) {
+                const vendors &#x3D; await this.vendorRepo.find({ where: { company: Equal(companyId) } });
+                if (!vendors || vendors.length &#x3D;&#x3D; 0) {
+                    throw new HttpException(&quot;no data found&quot;, HttpStatus.NOT_FOUND);
+                }
+                return returnObj(HttpStatus.OK, &quot;success&quot;, vendors);
+            } else {
+                const company &#x3D; (await this.userRepo.findOne({ where: { id: Equal(req.user.id) }, relations: { company: true } }))?.company;
+                if (company.id !&#x3D; companyId || !company) {
+                    throw new HttpException(&quot;invalid company id&quot;, HttpStatus.NOT_FOUND);
+                }
+                const vendors &#x3D; await this.vendorRepo.find({ where: { company: Equal(company.id) } });
+                if (!vendors) {
+                    throw new HttpException(&quot;no vendor found&quot;, HttpStatus.NOT_FOUND);
+                }
+                return returnObj(HttpStatus.OK, &quot;success&quot;, vendors);
+            }
+        } catch (err) {
+            if (err instanceof HttpException) {
+                throw err;
+            }
+            throw new HttpException(&quot;internal server error&quot;, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    async deleteVendor(req: any, id: string) {
+        try {
+            if (roles.SuperAdmin &#x3D;&#x3D; req.user.role) {
+                const vendor &#x3D; await this.vendorRepo.findOne({ where: { id: Equal(id) } });
+                if (!vendor) {
+                    throw new HttpException(&quot;invalid vendor id&quot;, HttpStatus.NOT_FOUND);
+                }
+                await this.vendorRepo.remove(vendor);
+                return { statusCode: HttpStatus.OK, message: &quot;success&quot;, data: null };
+            } else {
+                const company &#x3D; (await this.userRepo.findOne({ where: { id: Equal(req.user.id) }, relations: { company: true } }))?.company;
+                if (!company) {
+                    throw new HttpException(&quot;company not found&quot;, HttpStatus.NOT_FOUND);
+                }
+                const vendor &#x3D; await this.vendorRepo.findOne({ where: { id: Equal(id), company: Equal(company.id) } });
+                if (!vendor) {
+                    throw new HttpException(&quot;invalid vendor id&quot;, HttpStatus.NOT_FOUND);
+                }
+                await this.vendorRepo.remove(vendor);
+                return returnObj(HttpStatus.OK, &quot;success&quot;, null);
+            }
+        } catch (err) {
+            if (err instanceof HttpException) {
+                throw err;
+            }
+            throw new HttpException(&quot;internal server error&quot;, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    async updateVendor(req: any, id: string, updateVendorDto: updateVendor) {
+        try {
+            if (roles.SuperAdmin &#x3D;&#x3D; req.user.role) {
+                const vendor &#x3D; await this.vendorRepo.findOne({ where: { id: Equal(id) } });
+                if (!vendor) {
+                    throw new HttpException(&quot;invalid vendor id&quot;, HttpStatus.NOT_FOUND);
+                }
+                if (updateVendorDto.companyId) {
+                    const company &#x3D; await this.companyRepo.findOne({ where: { id: Equal(updateVendorDto.companyId) } });
+                    if (!company) {
+                        throw new HttpException(&quot;invalid company id&quot;, HttpStatus.NOT_FOUND);
+                    }
+                    const existingVendor &#x3D; await this.vendorRepo.findOne({ where: { tax_number: Equal(updateVendorDto.tax_number), company: Equal(company.id) } });
+                    if (existingVendor &amp;&amp; existingVendor.id !&#x3D;&#x3D; id) {
+                        throw new HttpException(&#x60;Vendor with PAN ${updateVendorDto.tax_number} already exists in the company&#x60;, HttpStatus.CONFLICT);
+                    }
+                    vendor.company &#x3D; company
+                }
+                Object.assign(vendor, updateVendorDto);
+                const result &#x3D; await this.vendorRepo.save(vendor);
+                return returnObj(HttpStatus.OK, &quot;success&quot;, result);
+            } else {
+                const company &#x3D; (await this.userRepo.findOne({ where: { id: Equal(req.user.id) }, relations: { company: true } }))?.company;
+                if (!company) {
+                    throw new HttpException(&quot;company not found&quot;, HttpStatus.NOT_FOUND);
+                }
+                const vendor &#x3D; await this.vendorRepo.findOne({ where: { id: Equal(id), company: Equal(company.id) } });
+                if (!vendor) {
+                    throw new HttpException(&quot;invalid vendor id&quot;, HttpStatus.NOT_FOUND);
+                }
+                if (updateVendorDto.tax_number) {
+                    const existingVendor &#x3D; await this.vendorRepo.findOne({ where: { tax_number: Equal(updateVendorDto.tax_number), company: Equal(company.id) } });
+                    if (existingVendor &amp;&amp; existingVendor.id !&#x3D;&#x3D; id) {
+                        throw new HttpException(&#x60;Vendor with PAN ${updateVendorDto.tax_number} already exists in the company&#x60;, HttpStatus.CONFLICT);
+                    }
+                }
+                Object.assign(vendor, updateVendorDto);
+                const result &#x3D; await this.vendorRepo.save(vendor);
+                return returnObj(HttpStatus.OK, &quot;success&quot;, result);
+            }
+        } catch (err) {
+            if (err instanceof HttpException) {
+                throw err;
+            }
+            throw new HttpException(&quot;internal server error&quot;, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+}
+</code></pre>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'VendorService.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

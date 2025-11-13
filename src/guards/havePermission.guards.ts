@@ -24,6 +24,7 @@ export class havePermissionGuards implements CanActivate {
         }
         const newToken = token.split(" ")[1]
         const user = await this.jwtService.decode(await this.cacheManager.get(`token:${newToken}`));
+        console.log(user)
         if (!user) {
             return false;
         }

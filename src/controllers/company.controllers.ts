@@ -23,35 +23,35 @@ export class CompanyController {
         private readonly companyService: CompanyService
     ) { }
 
-    //swagger
-    @ApiConsumes("multipart/form-data")
-    @ApiTags(swaggerUser.superAdmin+swaggerController.company)
-    //code
-    @Post()
-    @UseGuards(canAccess)
-    @Roles(roles.SuperAdmin)
-    @UseInterceptors(FileInterceptor('company_logo', multerOption))
-    async addCompany(@Body() createCompany: CreateCompanyDto, @Req() req: Request, @UploadedFile() company_logo?: Express.Multer.File) {
-        let data = createCompany.data
-        if (typeof data == "string") {
-            data = JSON.parse(data)
-        }
-        const company = Object.assign(new baseDto(), data)
-        const result = await validate(company, { whitelist: true })
-        if (result.length > 0) {
-            // If validation fails, throw a BadRequestException with the errors
-            throw new BadRequestException({
-                statusCode: 400,
-                message: 'Validation failed',
-                errors: result.map((error) => ({
-                    property: error.property,
-                    constraints: error.constraints,
-                })),
-            });
-        }
-        company.company_logo = company_logo?.filename || "";
-        return await this.companyService.addCompany(company, req);
-    }
+    // //swagger
+    // @ApiConsumes("multipart/form-data")
+    // @ApiTags(swaggerUser.superAdmin+swaggerController.company)
+    // //code
+    // @Post()
+    // @UseGuards(canAccess)
+    // @Roles(roles.SuperAdmin)
+    // @UseInterceptors(FileInterceptor('company_logo', multerOption))
+    // async addCompany(@Body() createCompany: CreateCompanyDto, @Req() req: Request, @UploadedFile() company_logo?: Express.Multer.File) {
+    //     let data = createCompany.data
+    //     if (typeof data == "string") {
+    //         data = JSON.parse(data)
+    //     }
+    //     const company = Object.assign(new baseDto(), data)
+    //     const result = await validate(company, { whitelist: true })
+    //     if (result.length > 0) {
+    //         // If validation fails, throw a BadRequestException with the errors
+    //         throw new BadRequestException({
+    //             statusCode: 400,
+    //             message: 'Validation failed',
+    //             errors: result.map((error) => ({
+    //                 property: error.property,
+    //                 constraints: error.constraints,
+    //             })),
+    //         });
+    //     }
+    //     company.company_logo = company_logo?.filename || "";
+    //     return await this.companyService.addCompany(company, req);
+    // }
 
     //swagger
     @ApiTags(swaggerUser.superAdmin+swaggerController.company)
@@ -74,35 +74,35 @@ export class CompanyController {
     }
 
     //swagger
-    @ApiConsumes("multipart/form-data")
-    @ApiTags(swaggerUser.superAdmin+swaggerController.company)
-    //code
-    @Roles(roles.SuperAdmin)
-    @Patch(':company_id')
-    @UseGuards(canAccess)
-    @UseInterceptors(FileInterceptor('company_logo', multerOption))
-    async updateCompany(@Param("company_id", new ParseUUIDPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE })) company_id: string, @Body() updateCompanyDto: UpdateCompanyDto, @UploadedFile() companylogo?: Express.Multer.File) {
-        let data = updateCompanyDto.data
-        if (typeof data == "string") {
-            data = JSON.parse(data)
-        }
-        const company = Object.assign(new baseUpdateDto(), data)
-        const result = await validate(company, { whitelist: true })
-        if (result.length > 0) {
-            // If validation fails, throw a BadRequestException with the errors
-            throw new BadRequestException({
-                statusCode: 400,
-                message: 'Validation failed',
-                errors: result.map((error) => ({
-                    property: error.property,
-                    constraints: error.constraints,
-                })),
-            });
-        }
-        company.company_logo = companylogo?.filename || ""
-        // return company
-        return await this.companyService.updateCompany(company_id, company)
-    }
+    // @ApiConsumes("multipart/form-data")
+    // @ApiTags(swaggerUser.superAdmin+swaggerController.company)
+    // //code
+    // @Roles(roles.SuperAdmin)
+    // @Patch(':company_id')
+    // @UseGuards(canAccess)
+    // @UseInterceptors(FileInterceptor('company_logo', multerOption))
+    // async updateCompany(@Param("company_id", new ParseUUIDPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE })) company_id: string, @Body() updateCompanyDto: UpdateCompanyDto, @UploadedFile() companylogo?: Express.Multer.File) {
+    //     let data = updateCompanyDto.data
+    //     if (typeof data == "string") {
+    //         data = JSON.parse(data)
+    //     }
+    //     const company = Object.assign(new baseUpdateDto(), data)
+    //     const result = await validate(company, { whitelist: true })
+    //     if (result.length > 0) {
+    //         // If validation fails, throw a BadRequestException with the errors
+    //         throw new BadRequestException({
+    //             statusCode: 400,
+    //             message: 'Validation failed',
+    //             errors: result.map((error) => ({
+    //                 property: error.property,
+    //                 constraints: error.constraints,
+    //             })),
+    //         });
+    //     }
+    //     company.company_logo = companylogo?.filename || ""
+    //     // return company
+    //     return await this.companyService.updateCompany(company_id, company)
+    // }
 
     //swagger
     @ApiTags(swaggerUser.superAdmin+swaggerController.company)

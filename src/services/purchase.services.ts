@@ -65,7 +65,7 @@ export class purchaseService {
                 throw new HttpException("invalid vendor id", HttpStatus.NOT_FOUND)
             }
 
-            let total_amt: number = 0;
+            let total_amt = 0;
 
             const purchaseItem: PurchaseItem[] = []
             for (const items of purchaseDto.purchaseItems) {
@@ -74,9 +74,6 @@ export class purchaseService {
                 if (!product) {
                     throw new HttpException("invalid product id", HttpStatus.NOT_FOUND)
                 }
-                if(!product.can_sell){
-                    throw new HttpException("prodcut is not available for sale",HttpStatus.FORBIDDEN)
-                }
                 const tax_rate = product.vat
                 if (!items.discount_rate) {
                     items.discount_rate = 0;
@@ -84,12 +81,13 @@ export class purchaseService {
                 const total = items.received_qnt * items.unit_rate;
                 const totalAfterDis = (items.received_qnt * items.unit_rate) - ((items.received_qnt * items.unit_rate) * items.discount_rate / 100)
                 const totalAfterTax = totalAfterDis + ((totalAfterDis) * tax_rate / 100)
-                total_amt += totalAfterTax
+                total_amt = total_amt + totalAfterTax
                 const purItem = queryRunner.manager.create(PurchaseItem, {
+                    ordered_qnt: items.ordered_qnt,
+                    balance: items.ordered_qnt - items.received_qnt,
                     received_qnt: items.received_qnt,
                     unit_rate: items.unit_rate,
                     tax_rate: tax_rate,
-                    purchase_date: items.purchase_date,
                     remarks: items.remarks,
                     total: total,
                     totalAfterDis: totalAfterDis,
@@ -122,32 +120,15 @@ export class purchaseService {
 
             const purchaseCode = await this.getPurchaseCode(user.company.id, user.company.company_code);
 
-            if (!purchaseDto.discountInTotalPurchase) {
-                purchaseDto.discountInTotalPurchase = 0;
-            }
-            const totalAfterDiscount = total_amt - (total_amt * purchaseDto.discountInTotalPurchase / 100)
-
-            if (purchaseDto.taxInTotalPurchase) {
-                purchaseDto.taxInTotalPurchase = 0;
-            }
-            const totalAfterTax = totalAfterDiscount + (totalAfterDiscount * purchaseDto.taxInTotalPurchase / 100)
-            // if(totalPayed != totalAfterTax){
-            //     throw new HttpException("amount didn't match",HttpStatus.CONFLICT)
-            // }
+    
             const purchaseDetails = queryRunner.manager.create(PurchaseDetails, {
                 purchaseBy: req.user.id,
-                total_before_dis: total_amt,
-                discountInTotalPurchase: purchaseDto.discountInTotalPurchase,
-                total_after_dis: totalAfterDiscount,
-                taxInTotalPurchase: purchaseDto.taxInTotalPurchase,
-                total_after_tax: totalAfterTax,
+                TotalPurchaseAmount: total_amt,
                 purchaseCode: purchaseCode,
                 company: user.company,
                 vendor: vendor,
-                shipment_status: purchaseDto.shipment_status,
                 purchases: purchaseItem,
-                payments: paymentDetails,
-                remark: purchaseDto.remark
+                payments: paymentDetails
             })
             const savedData = await queryRunner.manager.save(purchaseDetails)
             await queryRunner.commitTransaction()
@@ -164,7 +145,7 @@ export class purchaseService {
     }
 
 
-    async getAllPurchase(req: any,page:number) {
+    async getAllPurchase(req: any) {
         try {
             if (roles.SuperAdmin == req.user.role) {
                 throw new HttpException("you cannot create a purchase", HttpStatus.FORBIDDEN)
@@ -174,13 +155,13 @@ export class purchaseService {
                 throw new HttpException("user and company not found", HttpStatus.NOT_FOUND)
             }
             if (roles.Admin == req.user.role) {
-                const purchase = await this.purchaseDetailRepo.find({skip:page * 10, take:10, where: { company: Equal(user.company.id) }, relations: { purchases: true, payments: true, purchaseBy: true } })
+                const purchase = await this.purchaseDetailRepo.find({where: { company: Equal(user.company.id) }, relations: { purchases: true, payments: true, purchaseBy: true,vendor:true } })
                 if (!purchase || purchase.length == 0) {
                     throw new HttpException("no purchases found", HttpStatus.NOT_FOUND)
                 }
                 return returnObj(HttpStatus.OK, "success", purchase)
             } else {
-                const purchase = await this.purchaseDetailRepo.find({skip:page * 10, take:10, where: { company: Equal(user.company.id), purchaseBy: user }, relations: { purchases: true, payments: true, purchaseBy: true } })
+                const purchase = await this.purchaseDetailRepo.find({where: { company: Equal(user.company.id), purchaseBy: user }, relations: { purchases: true, payments: true, purchaseBy: true,vendor:true } })
                 if (!purchase || purchase.length == 0) {
                     throw new HttpException("no purchases found", HttpStatus.NOT_FOUND)
                 }
@@ -392,29 +373,6 @@ export class purchaseService {
 
                     await this.payRepo.save(payment);
                 }
-            }
-
-            if (updatePurchaseDto.discountInTotalPurchase !== undefined) {
-                purchase.discountInTotalPurchase = updatePurchaseDto.discountInTotalPurchase;
-            }
-
-            if (updatePurchaseDto.taxInTotalPurchase !== undefined) {
-                purchase.taxInTotalPurchase = updatePurchaseDto.taxInTotalPurchase;
-            }
-
-            purchase.total_after_dis =
-                purchase.total_before_dis -
-                (purchase.total_before_dis * purchase.discountInTotalPurchase) / 100;
-            purchase.total_after_tax =
-                purchase.total_after_dis +
-                (purchase.total_after_dis * purchase.taxInTotalPurchase) / 100;
-
-            if (updatePurchaseDto.shipment_status) {
-                purchase.shipment_status = updatePurchaseDto.shipment_status;
-            }
-
-            if (updatePurchaseDto.remark) {
-                purchase.remark = updatePurchaseDto.remark;
             }
 
             const updatedPurchase = await queryRunner.manager.save(purchase);

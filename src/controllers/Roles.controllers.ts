@@ -38,8 +38,17 @@ export class RolesController {
     @Get()
     @UseGuards(canAccess)
     @Roles(roles.Admin,roles.SuperAdmin)
-    async getRoles(@Req() req: Request,@Query('page') page:number = 0) {
-        return await this.rollService.getRoles(req,page)
+    async getRoles(@Req() req: Request) {
+        return await this.rollService.getRoles(req)
+    }
+
+    //swagger
+    //code
+    @Get("company/:id")
+    @UseGuards(canAccess)
+    @Roles(roles.Admin,roles.SuperAdmin)
+    async getRolesByCompanyId(@Param('id') id:string,@Req() req: Request) {
+        return await this.rollService.getRolesByCompanyId(req,id)
     }
 
     //swagger

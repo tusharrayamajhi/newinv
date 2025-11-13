@@ -3,8 +3,10 @@ import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 import { Request } from "express";
 import { Permission } from "src/decorator/Permission.decorator";
 import { AllUserCanAccess } from "src/guards/alluserCanAccess";
+import { canAccess } from "src/guards/canAccess.guards";
 import { havePermissionGuards } from "src/guards/havePermission.guards";
 import { permissions } from "src/object/permission.object";
+import { roles } from "src/object/roles.object";
 import { ReportService } from "src/services/Report.services";
 import { swaggerUser } from "src/swagger/swagger.user";
 import { swaggerController } from "src/swagger/swaggercontroller";
@@ -112,8 +114,8 @@ export class ReportController{
   }
 
   @Get('sales/:sellerId')
-  @UseGuards(havePermissionGuards)
-  @Permission(permissions.get_seller_sales)
+  @UseGuards(canAccess)
+  @Permission(roles.Admin)
   async getSalesBySeller(
     @Req() req: Request,
     @Query('startDate') startDate: string,

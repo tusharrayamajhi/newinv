@@ -1,0 +1,1552 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>project-name documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">project-name documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content injectable">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Injectables</li>
+  <li class="breadcrumb-item" >salesService</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/services/sales.services.ts</code>
+        </p>
+
+
+
+
+
+            <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#createSales" >createSales</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#getAllSales" >getAllSales</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#getMySales" >getMySales</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#getSalesByCustomerId" >getSalesByCustomerId</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#getSalesBySaleCode" >getSalesBySaleCode</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#getSalesByUser" >getSalesByUser</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#getSellsCode" >getSellsCode</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#updateSales" >updateSales</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+            <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(userRepo: <a href="../entitys/Users.html" target="_self">Repository&lt;Users&gt;</a>, companyRepo: <a href="../entitys/Companies.html" target="_self">Repository&lt;Companies&gt;</a>, paymentRepo: <a href="../entitys/Payment.html" target="_self">Repository&lt;Payment&gt;</a>, productRepo: <a href="../entitys/Product.html" target="_self">Repository&lt;Product&gt;</a>, salesItemRepo: <a href="../entitys/salesItem.html" target="_self">Repository&lt;salesItem&gt;</a>, purchaseItemRepo: <a href="../entitys/PurchaseItem.html" target="_self">Repository&lt;PurchaseItem&gt;</a>, salesDetailsRepo: <a href="../entitys/SalesDetails.html" target="_self">Repository&lt;SalesDetails&gt;</a>, purchaseDetailsRepo: <a href="../classes/PurchaseDetail.html" target="_self">Repository&lt;PurchaseDetails&gt;</a>, customerRepo: <a href="../entitys/Customer.html" target="_self">Repository&lt;Customer&gt;</a>, dataSource: DataSource)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/services/sales.services.ts:20</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>userRepo</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../entitys/Users.html" target="_self" >Repository&lt;Users&gt;</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>companyRepo</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../entitys/Companies.html" target="_self" >Repository&lt;Companies&gt;</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>paymentRepo</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../entitys/Payment.html" target="_self" >Repository&lt;Payment&gt;</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>productRepo</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../entitys/Product.html" target="_self" >Repository&lt;Product&gt;</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>salesItemRepo</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../entitys/salesItem.html" target="_self" >Repository&lt;salesItem&gt;</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>purchaseItemRepo</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../entitys/PurchaseItem.html" target="_self" >Repository&lt;PurchaseItem&gt;</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>salesDetailsRepo</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../entitys/SalesDetails.html" target="_self" >Repository&lt;SalesDetails&gt;</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>purchaseDetailsRepo</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../classes/PurchaseDetail.html" target="_self" >Repository&lt;PurchaseDetails&gt;</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>customerRepo</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../entitys/Customer.html" target="_self" >Repository&lt;Customer&gt;</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>dataSource</td>
+                                                  
+                                                        <td>
+                                                                    <code>DataSource</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+            <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createSales"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>createSales</b></span>
+                        <a href="#createSales"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>createSales(salesDetail: <a href="../classes/SalesDetailsDto.html" target="_self">SalesDetailsDto</a>, req: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="58"
+                                    class="link-to-prism">src/services/sales.services.ts:58</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>salesDetail</td>
+                                            <td>
+                                                            <code><a href="../classes/SalesDetailsDto.html" target="_self" >SalesDetailsDto</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>req</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getAllSales"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>getAllSales</b></span>
+                        <a href="#getAllSales"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getAllSales(req: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, page: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="163"
+                                    class="link-to-prism">src/services/sales.services.ts:163</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>req</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>page</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getMySales"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>getMySales</b></span>
+                        <a href="#getMySales"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getMySales(req: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, page: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="270"
+                                    class="link-to-prism">src/services/sales.services.ts:270</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>req</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>page</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getSalesByCustomerId"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>getSalesByCustomerId</b></span>
+                        <a href="#getSalesByCustomerId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getSalesByCustomerId(req: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, customer_id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, page: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="247"
+                                    class="link-to-prism">src/services/sales.services.ts:247</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>req</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>customer_id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>page</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getSalesBySaleCode"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>getSalesBySaleCode</b></span>
+                        <a href="#getSalesBySaleCode"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getSalesBySaleCode(req: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, sales_code: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="193"
+                                    class="link-to-prism">src/services/sales.services.ts:193</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>req</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>sales_code</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getSalesByUser"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>getSalesByUser</b></span>
+                        <a href="#getSalesByUser"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getSalesByUser(req: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, user_id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, page: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="220"
+                                    class="link-to-prism">src/services/sales.services.ts:220</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>req</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>user_id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>page</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getSellsCode"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>getSellsCode</b></span>
+                        <a href="#getSellsCode"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getSellsCode(companyId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, company_code: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="38"
+                                    class="link-to-prism">src/services/sales.services.ts:38</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>companyId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>company_code</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateSales"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>updateSales</b></span>
+                        <a href="#updateSales"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>updateSales(req: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, code: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, updateSalesDto: <a href="../classes/updateSales.html" target="_self">updateSales</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="289"
+                                    class="link-to-prism">src/services/sales.services.ts:289</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>req</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>code</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>updateSalesDto</td>
+                                            <td>
+                                                            <code><a href="../classes/updateSales.html" target="_self" >updateSales</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { HttpException, HttpStatus, Injectable } from &quot;@nestjs/common&quot;;
+import { InjectRepository } from &quot;@nestjs/typeorm&quot;;
+import { SalesDetailsDto } from &quot;src/dtos/createDtos/salesDetails.dtos&quot;;
+import { updateSales } from &quot;src/dtos/updateDtos/updateSales.dtos&quot;;
+import { Companies } from &quot;src/entities/Company.entities&quot;;
+import { Customer } from &quot;src/entities/customers.entities&quot;;
+import { Payment } from &quot;src/entities/payment.entities&quot;;
+import { Product } from &quot;src/entities/product.entities&quot;;
+import { PurchaseItem } from &quot;src/entities/PurchaseItem.entities&quot;;
+import { PurchaseDetails } from &quot;src/entities/purchaseDetails.entities&quot;;
+import { SalesDetails } from &quot;src/entities/SalesDetails.entities&quot;;
+import { salesItem } from &quot;src/entities/salesItem.entities&quot;;
+import { Users } from &quot;src/entities/user.entities&quot;;
+import { roles } from &quot;src/object/roles.object&quot;;
+import { returnObj } from &quot;src/utils/returnObj&quot;;
+import { Between, DataSource, Equal, Repository } from &quot;typeorm&quot;;
+
+
+@Injectable()
+export class salesService{
+   
+    
+    
+    constructor(
+        @InjectRepository(Users) private readonly userRepo:Repository&lt;Users&gt;,
+        @InjectRepository(Companies) private readonly companyRepo:Repository&lt;Companies&gt;,
+        @InjectRepository(Payment) private readonly paymentRepo:Repository&lt;Payment&gt;,
+        @InjectRepository(Product) private readonly productRepo:Repository&lt;Product&gt;,
+        @InjectRepository(salesItem) private readonly salesItemRepo:Repository&lt;salesItem&gt;,
+        @InjectRepository(PurchaseItem) private readonly purchaseItemRepo:Repository&lt;PurchaseItem&gt;,
+        @InjectRepository(SalesDetails) private readonly salesDetailsRepo:Repository&lt;SalesDetails&gt;,
+        @InjectRepository(PurchaseDetails) private readonly purchaseDetailsRepo:Repository&lt;PurchaseDetails&gt;,
+        @InjectRepository(Customer) private readonly customerRepo:Repository&lt;Customer&gt;,
+        private dataSource:DataSource
+    ){}
+
+
+    async getSellsCode(companyId:string,company_code:string){
+        const today &#x3D; new Date();
+        const startOfDay &#x3D; new Date(today.getFullYear(), today.getMonth(), today.getDate());
+        const endOfDay &#x3D; new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1);
+        const number &#x3D; (await this.salesDetailsRepo.find({
+             where: {
+                company: Equal(companyId),
+                createdAt: Between(startOfDay, endOfDay) 
+            } 
+        })).length
+        const date &#x3D; new Date();
+        const day &#x3D; String(date.getDate()).padStart(2, &quot;0&quot;);
+        const month &#x3D; String(date.getMonth() + 1).padStart(2, &quot;0&quot;);
+        const year &#x3D; date.getFullYear().toString();
+
+        const code &#x3D; &#x60;${company_code}-${day}${month}${year}-${number + 1}&#x60;;
+        return code
+    }
+
+
+    async createSales(salesDetail: SalesDetailsDto, req: any) {
+        if(req.user.roles &#x3D;&#x3D; roles.SuperAdmin){
+            throw new HttpException(&quot;you can&#x27;t create sales&quot;,HttpStatus.BAD_REQUEST);
+        }
+        const queryRunner &#x3D;  this.dataSource.createQueryRunner()
+        queryRunner.connect();
+        queryRunner.startTransaction();
+        try{    
+            const user &#x3D; await queryRunner.manager.findOne(Users,{where:{id:req.user.id},relations:{company:true}});
+            if(!user){
+                throw new HttpException(&quot;User not found&quot;,HttpStatus.NOT_FOUND);
+            }
+            const customer &#x3D; await queryRunner.manager.findOne(Customer,{where:{id:Equal(salesDetail.customerId),company:Equal(user.company.id)}});
+            if(!customer){
+                throw new HttpException(&quot;Customer not found&quot;,HttpStatus.NOT_FOUND);
+            }
+            const salesItems : salesItem[] &#x3D; [];
+            for(const Item of salesDetail.salesItems){
+                const product &#x3D; await queryRunner.manager.findOne(Product,{where:{id:Item.productId,company:Equal(user.company.id)}});
+                if(!product){
+                    throw new HttpException(&quot;Product not found&quot;,HttpStatus.NOT_FOUND);
+                }
+                if(product.stock &lt; Item.quantity){
+                    throw new HttpException(&quot;Product out of stock&quot;,HttpStatus.BAD_REQUEST);
+                }
+               
+            
+                const total &#x3D; Item.unit_rate * Item.quantity;
+                if(!Item.discount_rate){
+                    Item.discount_rate &#x3D; 0;
+                }
+                if(!salesDetail.tax_in_total_sales){   
+                    salesDetail.tax_in_total_sales &#x3D; 0;
+                }
+                const discount &#x3D; total * Item.discount_rate / 100;
+                const total_after_discount &#x3D; total - discount;
+                const total_after_tax &#x3D; total_after_discount + (total_after_discount * salesDetail.tax_in_total_sales / 100);
+                product.stock &#x3D; product.stock - Item.quantity;
+                await queryRunner.manager.save(product);
+                
+                const item &#x3D; await queryRunner.manager.save(queryRunner.manager.create(salesItem,{
+                    company:user.company,
+                    product:product,
+                    quantity:Item.quantity,
+                    unit_rate:Item.unit_rate,
+                    total_before_dis:total,
+                    discount_rate:Item.discount_rate,
+                    total_after_dis:total_after_discount,
+                    tax_rate:product.vat,
+                    total_after_tax:total_after_tax,
+                    remarks:Item.remarks,
+                }))
+                salesItems.push(item);
+            }
+          const payments:Payment[] &#x3D; [];
+            for(const payment of salesDetail.payment){
+                const pay &#x3D; await queryRunner.manager.save(queryRunner.manager.create(Payment,{
+                    customer:customer,
+                    vendor:null,
+                    remark:payment.remark,
+                    company:user.company,
+                    amount:payment.amount,
+                    payment_method:payment.payment_method,
+                    // payment_date:payment.payment_date,
+                }))
+                payments.push(pay);
+            }
+
+            if(!salesDetail.discount_in_total_sales){
+                salesDetail.discount_in_total_sales &#x3D; 0;
+            }
+            const total_before_discount &#x3D; salesItems.map(item&#x3D;&gt;item.total_after_tax).reduce((a,b)&#x3D;&gt;a+b);
+            const total_after_discount &#x3D; total_before_discount - (total_before_discount * salesDetail.discount_in_total_sales / 100);
+            const total_after_tax &#x3D; total_after_discount + (total_after_discount * salesDetail.tax_in_total_sales / 100);
+            
+            const code &#x3D; await this.getSellsCode(user.company.id,user.company.company_code);
+            const sales &#x3D; await queryRunner.manager.save(queryRunner.manager.create(SalesDetails,{
+                sales_code:code,
+                discount:salesDetail.discount_in_total_sales,
+                tax_rate:salesDetail.tax_in_total_sales,
+                total_before_discount:total_before_discount,
+                total_after_dis:total_after_discount,
+                total_after_tax:total_after_tax,
+                shipment_status:salesDetail.shipment_status,
+                customer:customer,
+                company:user.company,
+                salesBy:req.user.id,
+                sales_item:salesItems,
+                payments:payments,
+                remarks:salesDetail.remark
+            }))
+            await queryRunner.commitTransaction();
+            return returnObj(HttpStatus.OK,&quot;Sales created successfully&quot;,sales);
+        }catch(err){
+            await queryRunner.rollbackTransaction();
+            if(err instanceof HttpException){
+                throw err;
+            }
+            throw new HttpException(&quot;Internal Server Error&quot;,HttpStatus.INTERNAL_SERVER_ERROR);
+        }finally{
+            await queryRunner.release()
+        }
+    }
+    
+
+    async getAllSales(req: any,page:number) {
+        try {
+            if (roles.SuperAdmin &#x3D;&#x3D; req.user.role) {
+                throw new HttpException(&quot;you cannot view sales&quot;, HttpStatus.FORBIDDEN);
+            }
+            const user &#x3D; await this.userRepo.findOne({ where: { id: Equal(req.user.id) }, relations: { company: true } });
+            if (!user || !user.company) {
+                throw new HttpException(&quot;user and company not found&quot;, HttpStatus.NOT_FOUND);
+            }
+            if (roles.Admin &#x3D;&#x3D; req.user.role) {
+                const sales &#x3D; await this.salesDetailsRepo.find({skip:page * 10,take:10, where: { company: Equal(user.company.id) }, relations: { customer:true,sales_item: true, payments: true, salesBy: true } });
+                if (!sales || sales.length &#x3D;&#x3D; 0) {
+                    throw new HttpException(&quot;no sales found&quot;, HttpStatus.NOT_FOUND);
+                }
+                return returnObj(HttpStatus.OK, &quot;success&quot;, sales);
+            } else {
+                const sales &#x3D; await this.salesDetailsRepo.find({skip:page*10,take:10, where: { company: Equal(user.company.id), salesBy: user }, relations: { customer:true,sales_item: true, payments: true, salesBy: true } });
+                if (!sales || sales.length &#x3D;&#x3D; 0) {
+                    throw new HttpException(&quot;no sales found&quot;, HttpStatus.NOT_FOUND);
+                }
+                return returnObj(HttpStatus.OK, &quot;success&quot;, sales);
+            }
+        } catch (err) {
+            if (err instanceof HttpException) {
+                throw err;
+            }
+            throw new HttpException(&quot;internal server error&quot;, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    async getSalesBySaleCode(req: any, sales_code: string) {
+        try {
+            const user &#x3D; await this.userRepo.findOne({ where: { id: Equal(req.user.id) }, relations: { company: true } });
+            if (!user) {
+                throw new HttpException(&quot;user not found&quot;, HttpStatus.NOT_FOUND);
+            }
+            if (roles.Admin &#x3D;&#x3D; req.user.role) {
+                const sales &#x3D; await this.salesDetailsRepo.find({ where: { sales_code: Equal(sales_code), company: Equal(user.company.id) }, relations: { customer:true,sales_item: true, payments: true } });
+                if (!sales || sales.length &#x3D;&#x3D; 0) {
+                    throw new HttpException(&quot;invalid sales id&quot;, HttpStatus.NOT_FOUND);
+                }
+                return returnObj(HttpStatus.OK, &quot;success&quot;, sales);
+            } else {
+                const sales &#x3D; await this.salesDetailsRepo.find({ where: { sales_code: Equal(sales_code), salesBy: user, company: Equal(user.company.id) }, relations: { customer:true,sales_item: true, payments: true } });
+                if (!sales || sales.length &#x3D;&#x3D; 0) {
+                    throw new HttpException(&quot;invalid sales id&quot;, HttpStatus.NOT_FOUND);
+                }
+                return returnObj(HttpStatus.OK, &quot;success&quot;, sales);
+            }
+        } catch (err) {
+            if (err instanceof HttpException) {
+                throw err;
+            }
+            throw new HttpException(&quot;internal server error&quot;, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    async getSalesByUser(req: any, user_id: string,page:number,) {
+        try {
+            if (roles.Admin &#x3D;&#x3D; req.user.role) {
+                const admin &#x3D; await this.userRepo.findOne({ where: { id: Equal(req.user.id) }, relations: { company: true } });
+                if (!admin) {
+                    throw new HttpException(&quot;no user found&quot;, HttpStatus.NOT_FOUND);
+                }
+                const user &#x3D; await this.userRepo.findOne({ where: { id: Equal(user_id), company: Equal(admin.company.id) }});
+                if (!user) {
+                    throw new HttpException(&quot;invalid user id&quot;, HttpStatus.NOT_FOUND);
+                }
+                const sales &#x3D; await this.salesDetailsRepo.find({skip:page * 10,take:10,where:{salesBy:Equal(user.id)},relations:{sales_item:true,customer:true,payments:true}})
+                if (!sales|| sales.length &#x3D;&#x3D; 0) {
+                    throw new HttpException(&quot;no sales found&quot;, HttpStatus.NOT_FOUND);
+                }
+                return returnObj(HttpStatus.OK, &quot;success&quot;, sales);
+            } else {
+                throw new HttpException(&quot;you are not allowed to view this&quot;, HttpStatus.FORBIDDEN);
+            }
+        } catch (err) {
+            if (err instanceof HttpException) {
+                throw err;
+            }
+            throw new HttpException(&quot;internal server error&quot;, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    async getSalesByCustomerId(req: any, customer_id: string,page:number) {
+        try {
+            const user &#x3D; await this.userRepo.findOne({ where: { id: Equal(req.user.id) }, relations: { company: true } });
+            if (!user) {
+                throw new HttpException(&quot;user not found&quot;, HttpStatus.NOT_FOUND);
+            }
+            const customer &#x3D; await this.customerRepo.findOne({ where: { id: Equal(customer_id), company: Equal(user.company.id) } });
+            if (!customer) {
+                throw new HttpException(&#x27;invalid customer id&#x27;, HttpStatus.NOT_FOUND);
+            }
+            const sales &#x3D; await this.salesDetailsRepo.find({skip:page * 10, take:10, where: { customer: { id: Equal(customer.id) } }, relations: { customer:true,sales_item: true, payments: true } });
+            if (!sales || sales.length &#x3D;&#x3D; 0) {
+                throw new HttpException(&quot;no sales found&quot;, HttpStatus.NOT_FOUND);
+            }
+            return returnObj(HttpStatus.OK, &quot;success&quot;, sales);
+        } catch (err) {
+            if (err instanceof HttpException) {
+                throw err;
+            }
+            throw new HttpException(&quot;internal server error&quot;, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    async getMySales(req: any,page:number) {
+        try {
+            const user &#x3D; await this.userRepo.findOne({ where: { id: Equal(req.user.id) }, relations: { company: true } });
+            if (!user) {
+                throw new HttpException(&quot;user not found&quot;, HttpStatus.NOT_FOUND);
+            }
+            const sales &#x3D; await this.salesDetailsRepo.find({skip:page * 10, take: 10, where: { salesBy: Equal(req.user.id), company: Equal(user.company.id) }, relations: { customer:true,sales_item: true, payments: true } });
+            if (!sales || sales.length &#x3D;&#x3D; 0) {
+                throw new HttpException(&quot;no sales found&quot;, HttpStatus.NOT_FOUND);
+            }
+            return returnObj(HttpStatus.OK, &quot;success&quot;, sales);
+        } catch (err) {
+            if (err instanceof HttpException) {
+                throw err;
+            }
+            throw new HttpException(&quot;internal server error&quot;, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    async updateSales(req: any, code: string, updateSalesDto: updateSales) {
+        const queryRunner &#x3D; this.dataSource.createQueryRunner();
+        await queryRunner.connect();
+        await queryRunner.startTransaction();
+
+        try {
+            const user &#x3D; await queryRunner.manager.findOne(Users,{
+                where: { id: Equal(req.user.id) },
+                relations: { company: true },
+            });
+
+            if (!user) {
+                throw new HttpException(&#x27;User not found&#x27;, HttpStatus.NOT_FOUND);
+            }
+
+            const sales &#x3D; await queryRunner.manager.findOne(SalesDetails,{
+                where: { sales_code: Equal(code), company: Equal(user.company.id) },
+                relations: { customer: true, sales_item: true, payments: true },
+            });
+
+            if (!sales) {
+                throw new HttpException(&#x27;Sales not found&#x27;, HttpStatus.NOT_FOUND);
+            }
+
+            if (updateSalesDto.customerId) {
+                const customer &#x3D; await queryRunner.manager.findOne(Customer,{
+                    where: { id: Equal(updateSalesDto.customerId), company: Equal(user.company.id) },
+                });
+
+                if (!customer) {
+                    throw new HttpException(&#x27;Invalid customer ID&#x27;, HttpStatus.NOT_FOUND);
+                }
+
+                sales.customer &#x3D; customer;
+            }
+
+            if (updateSalesDto.salesItems) {
+                for (const updatedItem of updateSalesDto.salesItems) {
+                    const salesItem &#x3D; sales.sales_item.find(
+                        (item) &#x3D;&gt; item.id &#x3D;&#x3D;&#x3D; updatedItem.id
+                    );
+
+                    if (!salesItem) {
+                        throw new HttpException(
+                            &#x60;Sales item id not found&#x60;,
+                            HttpStatus.NOT_FOUND
+                        );
+                    }
+
+                    const product &#x3D; await this.productRepo.findOne({
+                        where: { id: Equal(updatedItem.productId), company: Equal(user.company.id) },
+                    });
+
+                    if (!product) {
+                        throw new HttpException(&#x27;Invalid product ID&#x27;, HttpStatus.NOT_FOUND);
+                    }
+
+                    product.stock +&#x3D; salesItem.quantity; 
+                    product.stock -&#x3D; updatedItem.quantity; 
+
+                    await queryRunner.manager.save(product);
+
+                    salesItem.quantity &#x3D; updatedItem.quantity;
+                    salesItem.unit_rate &#x3D; updatedItem.unit_rate;
+                    salesItem.discount_rate &#x3D; updatedItem.discount_rate || 0;
+
+                    const total &#x3D; updatedItem.quantity * updatedItem.unit_rate;
+                    const totalAfterDis &#x3D; total - (total * updatedItem.discount_rate) / 100;
+                    const totalAfterTax &#x3D; totalAfterDis + (totalAfterDis * product.vat) / 100;
+
+                    salesItem.total_before_dis &#x3D; total;
+                    salesItem.total_after_dis &#x3D; totalAfterDis;
+                    salesItem.total_after_tax &#x3D; totalAfterTax;
+
+                    await queryRunner.manager.save(salesItem);
+                }
+            }
+
+            if (updateSalesDto.payment) {
+                for (const updatedPayment of updateSalesDto.payment) {
+                    const payment &#x3D; sales.payments.find(
+                        (pay) &#x3D;&gt; pay.id &#x3D;&#x3D;&#x3D; updatedPayment.id
+                    );
+
+                    if (!payment) {
+                        throw new HttpException(
+                            &#x60;Payment ID not found&#x60;,
+                            HttpStatus.NOT_FOUND
+                        );
+                    }
+
+                    payment.amount &#x3D; updatedPayment.amount;
+                    payment.remark &#x3D; updatedPayment.remark;
+                    payment.payment_method &#x3D; updatedPayment.payment_method;
+
+                    await queryRunner.manager.save(payment);
+                }
+            }
+
+            if (updateSalesDto.discount_in_total_sales !&#x3D;&#x3D; undefined) {
+                sales.discount &#x3D; updateSalesDto.discount_in_total_sales;
+            }
+
+            if (updateSalesDto.tax_in_total_sales !&#x3D;&#x3D; undefined) {
+                sales.tax_rate &#x3D; updateSalesDto.tax_in_total_sales;
+            }
+
+            sales.total_after_dis &#x3D;
+                sales.total_before_discount -
+                (sales.total_before_discount * sales.discount) / 100;
+            sales.total_after_tax &#x3D;
+                sales.total_after_dis +
+                (sales.total_after_dis * sales.tax_rate) / 100;
+
+            if (updateSalesDto.shipment_status) {
+                sales.shipment_status &#x3D; updateSalesDto.shipment_status;
+            }
+
+            if (updateSalesDto.remark) {
+                sales.remarks &#x3D; updateSalesDto.remark;
+            }
+
+            const updatedSales &#x3D; await queryRunner.manager.save(sales);
+
+            await queryRunner.commitTransaction();
+
+            return returnObj(HttpStatus.OK, &#x27;Sales updated successfully&#x27;, updatedSales);
+        } catch (err) {
+            await queryRunner.rollbackTransaction();
+
+            if (err instanceof HttpException) {
+                throw err;
+            }
+
+            throw new HttpException(
+                &#x27;Internal server error&#x27;,
+                HttpStatus.INTERNAL_SERVER_ERROR
+            );
+        } finally {
+            await queryRunner.release();
+        }
+    }
+
+}</code></pre>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'salesService.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

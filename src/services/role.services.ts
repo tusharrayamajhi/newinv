@@ -10,9 +10,9 @@ import { Companies } from '../entities/Company.entities';
 import { CreateRoleDto } from 'src/dtos/createDtos/addRoles.dtos';
 import { UpdateRoleDto } from 'src/dtos/updateDtos/updateRole.dtos';
 
+
 @Injectable()
 export class RolesService {
-    
    
     
 
@@ -22,6 +22,31 @@ export class RolesService {
         @InjectRepository(Users) private readonly userRepo:Repository<Users>,
         @InjectRepository(Companies) private readonly companyRepo:Repository<Companies>
     ) { }
+
+     async getRolesByCompanyId(req: any, id: string) {
+        try{
+            if (req.user.role == roles.SuperAdmin) {
+                const roles = await this.RolesRepo.find({where:{company:Equal(id)},relations:{company:true,createdBy:true}})
+                return returnObj(HttpStatus.OK, "success", roles,roles.length)
+            } else if (req.user.role == roles.Admin) {
+                const companyId = (await this.userRepo.findOne({where:{id:Equal(req.user.id)},relations:{company:true}}))?.company?.id;
+                if(!companyId){
+                    throw new HttpException("this user don't belongs to give company",HttpStatus.NOT_ACCEPTABLE)
+                }
+                const roles = await this.RolesRepo.find({where:{company:Equal(companyId)},relations:{company:true}})
+                return returnObj(HttpStatus.OK, "success", roles,roles.length)
+            } else {
+                throw new HttpException("you are not authorize", HttpStatus.FORBIDDEN)
+            }
+        }catch(err){
+            if(err instanceof HttpException){
+                throw err
+            }
+            throw new HttpException("internal server error",HttpStatus.INTERNAL_SERVER_ERROR)
+        }
+    }
+    
+   
 
     async addRoles(req: any, createRoleDto: CreateRoleDto) {
         try {
@@ -50,15 +75,15 @@ export class RolesService {
 
             }else if(req.user.role == roles.Admin){
 
-                company = await this.companyRepo.findOne({where:{id:Equal(createRoleDto.companyId)}});
-                if(!company){
-                    throw new HttpException("invalid company id",HttpStatus.CONFLICT)
-                }
-                const user = await this.userRepo.findOne({where:{id:Equal(req.user.id),company:Equal(createRoleDto.companyId)}})
+                // company = await this.companyRepo.findOne({where:{id:Equal(createRoleDto.companyId)}});
+                // if(!company){
+                //     throw new HttpException("invalid company id",HttpStatus.CONFLICT)
+                // }
+                const user = await this.userRepo.findOne({where:{id:Equal(req.user.id)},relations:{company:true}})
                 if(!user){
-                    throw new HttpException("you have no authority to add a role in other company",HttpStatus.UNAUTHORIZED)
+                    throw new HttpException("invalid user id",HttpStatus.UNAUTHORIZED)
                 }
-                const role = await this.RolesRepo.findOne({where:{name:Equal(createRoleDto.name),company:Equal(createRoleDto.companyId)}});
+                const role = await this.RolesRepo.findOne({where:{name:Equal(createRoleDto.name),company:Equal(user.company.id)}});
                 if(role){
                     throw new HttpException("roles already exists",HttpStatus.CONFLICT) 
                 }
@@ -68,7 +93,7 @@ export class RolesService {
                         throw new HttpException("permission not found",HttpStatus.NOT_FOUND)
                     }
                 }
-                finalRole = this.RolesRepo.create({...createRoleDto,permission:permissions,company:company,createdBy:req.user.id})
+                finalRole = this.RolesRepo.create({...createRoleDto,permission:permissions,company:user.company,createdBy:req.user.id})
             }
             const result = await this.RolesRepo.save(finalRole)
             if(!result){
@@ -84,17 +109,17 @@ export class RolesService {
     }
 
 
-    async getRoles(req: any,page:number) {
+    async getRoles(req: any) {
         try {
             if (req.user.role == roles.SuperAdmin) {
-                const roles = await this.RolesRepo.find({skip:page * 10,take:10,relations:{company:true,createdBy:true}})
-                return returnObj(HttpStatus.OK, "success", roles)
+                const roles = await this.RolesRepo.find({relations:{company:true,createdBy:true}})
+                return returnObj(HttpStatus.OK, "success", roles,roles.length)
             } else if (req.user.role == roles.Admin) {
                 const companyId = (await this.userRepo.findOne({where:{id:Equal(req.user.id)},relations:{company:true}}))?.company?.id;
                 if(!companyId){
                     throw new HttpException("this user don't belongs to give company",HttpStatus.NOT_ACCEPTABLE)
                 }
-                const roles = await this.RolesRepo.find({skip:page* 10,take:10,where:{company:Equal(companyId)}})
+                const roles = await this.RolesRepo.find({where:{company:Equal(companyId)},relations:{company:true,permission:true}})
                 return returnObj(HttpStatus.OK, "success", roles)
             } else {
                 throw new HttpException("you are not authorize", HttpStatus.FORBIDDEN)
@@ -109,7 +134,7 @@ export class RolesService {
 
     async getRolesById(req: any, id: string) {
         try {
-                const roles = await this.RolesRepo.findOne({ where: { id: Equal(id)}})
+                const roles = await this.RolesRepo.findOne({ where: { id: Equal(id)},relations:{permission:true}})
                 if (!roles) {
                     throw new HttpException("roles not found", HttpStatus.NOT_FOUND)
                 }

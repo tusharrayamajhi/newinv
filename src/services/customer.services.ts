@@ -61,10 +61,10 @@ export class CustomerService {
         }
     }
 
-    async getAllCustomers(req: any,page:number) {
+    async getAllCustomers(req: any) {
         try {
             if (req.user.role == roles.SuperAdmin) {
-                const customers = await this.customerRepo.find({skip:page * 10, take:10, relations: { company: true } });
+                const customers = await this.customerRepo.find({relations: { company: true } });
                 if (!customers) {
                     throw new HttpException("no customers found", HttpStatus.NOT_FOUND);
                 }
@@ -74,7 +74,7 @@ export class CustomerService {
                 if (!company) {
                     throw new HttpException('company not found', HttpStatus.NOT_FOUND);
                 }
-                const customers = await this.customerRepo.find({skip:page * 10, take: 10, where: { company: Equal(company.id) } });
+                const customers = await this.customerRepo.find({ where: { company: Equal(company.id) } });
                 if (!customers) {
                     throw new HttpException("no customers found", HttpStatus.NOT_FOUND);
                 }

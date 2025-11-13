@@ -1,21 +1,27 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsNotEmpty, IsNumber, IsOptional, IsString, Min} from "class-validator";
+import { IsNotEmpty, IsNumber, IsOptional, IsString, Max, Min, Validate} from "class-validator";
 
 
 export class PurchaseItemDto{
 
-    // @ApiProperty({description:"purchase quantity",example:50})
-    // @IsNotEmpty()
-    // @IsNumber()
-    // @Min(0)
-    // ordered_qnt: number;
+    @ApiProperty({description:"purchase quantity",example:50})
+    @IsNotEmpty()
+    @IsNumber()
+    @Min(0)
+    ordered_qnt: number;
 
     @ApiProperty({description:"received quantity",example:50})
     @IsNotEmpty()
     @IsNumber()
     @Min(0)
-    // @Validate((dto:PurchaseItemDto)=> dto.received_qnt <= dto.ordered_qnt)
+    @Validate((dto:PurchaseItemDto)=> dto.received_qnt <= dto.ordered_qnt)
     received_qnt: number;
+
+    @ApiProperty({description:"remaining quantity to sell",example:0})
+    @IsNotEmpty()
+    @IsNumber()
+    @Min(0)
+    balance:number
 
     @ApiProperty({description:"per quantity rate",example:100})
     @IsNotEmpty()
@@ -23,17 +29,12 @@ export class PurchaseItemDto{
     @Min(0)
     unit_rate: number;
 
-    // @ApiProperty({description:"tax percentage in product",example:15})
-    // @IsNotEmpty()
-    // @IsNumber()
-    // @Min(0)
-    // @Max(100)
-    // tax_rate: number;
-
-    @ApiProperty({description:"purchase date",example:"2024/12/29"})
+    @ApiProperty({description:"tax percentage in product",example:15})
     @IsNotEmpty()
-    @IsString()
-    purchase_date: string;
+    @IsNumber()
+    @Min(0)
+    @Max(100)
+    vat: number;
 
     @ApiProperty({description:"extra information",example:"this is purchased",required:false})
     @IsOptional()

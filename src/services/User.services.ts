@@ -8,7 +8,7 @@ import { Companies } from 'src/entities/Company.entities';
 import { Permission } from 'src/entities/permission.entites';
 import * as bcrypt from 'bcrypt'
 import { roles } from 'src/object/roles.object';
-import { AddUsersDto } from 'src/dtos/createDtos/addUser.dtos';
+import { createUserDto } from 'src/dtos/createDtos/addUser.dtos';
 import { baseUpdateUserDto } from 'src/dtos/updateDtos/updateUser.dtos';
 import { InjectQueue } from '@nestjs/bullmq';
 import { Queue } from 'bullmq';
@@ -29,8 +29,9 @@ export class UserService {
     ) { }
 
 
-    async addUser(req: any, data: AddUsersDto) {
+    async addUser(req: any, datas: createUserDto) {
         try {
+            const data = datas.data
             if (req.user.role == roles.SuperAdmin) {
                 const user = await this.UserRepo.findOne({ where: { email: data.email } })
                 if (user) {
@@ -52,7 +53,7 @@ export class UserService {
                 }
                 const hashPassword = await bcrypt.hash(data.password, 10)
                 data.password = hashPassword
-                const createUser = this.UserRepo.create({ ...data, roles: role, company: company, createdBy: req.user.id })
+                const createUser = this.UserRepo.create({ ...data, roles: role, company: company, createdBy: req.user.id,user_image:datas.user_image })
                 const result = await this.UserRepo.save(createUser)
                 if (!result) {
                     throw new HttpException("cannot save user", HttpStatus.INTERNAL_SERVER_ERROR)
@@ -77,7 +78,7 @@ export class UserService {
                 }
                 const hashPassword = await bcrypt.hash(data.password, 10)
                 data.password = hashPassword
-                const createUser = this.UserRepo.create({ ...data, roles: role, company: company, createdBy: req.user.id })
+                const createUser = this.UserRepo.create({ ...data, roles: role, company: company, createdBy: req.user.id,user_image:datas.user_image })
                 const result = await this.UserRepo.save(createUser)
                 if (!result) {
                     throw new HttpException("cannot save user", HttpStatus.INTERNAL_SERVER_ERROR)
@@ -95,26 +96,26 @@ export class UserService {
         }
     }
 
-    async getAllUsers(req: any,page:number) {
+    async getAllUsers(req: any) {
         try {
             if (req.user.role == roles.SuperAdmin) {
-                const users = await this.UserRepo.find({skip:page * 10,take:10, relations: { company: true } });
+                const users = await this.UserRepo.find({relations: { company: true,roles:true } });
                 if (!users || users.length == 0) {
                     throw new HttpException("no user found", HttpStatus.NOT_FOUND)
                 }
                 users.forEach(user => delete user.password);
-                return returnObj(HttpStatus.OK, "success", users)
+                return returnObj(HttpStatus.OK, "success", users,users.length)
             } else if (req.user.role == roles.Admin) {
                 const companyId = (await this.UserRepo.findOne({ where: { id: Equal(req.user.id) }, relations: { company: true } }))?.company?.id
                 if (!companyId) {
                     throw new HttpException("company not found", HttpStatus.NOT_FOUND)
                 }
-                const users = await this.UserRepo.find({skip:page * 10,take:10, where: { company: Equal(companyId) } })
+                const users = await this.UserRepo.find({where: { company: Equal(companyId) } ,relations:{roles:true,company:true}})
                 if (!users || users.length == 0) {
                     throw new HttpException("no user found", HttpStatus.NOT_FOUND)
                 }
                 users.forEach(user => delete user.password);
-                return returnObj(HttpStatus.OK, "success", users)
+                return returnObj(HttpStatus.OK, "success", users,users.length)
             } else {
                 throw new HttpException("you are not authorize", HttpStatus.FORBIDDEN)
             }
@@ -141,7 +142,7 @@ export class UserService {
                 if (!companyId) {
                     throw new HttpException("Company id not found", HttpStatus.NOT_FOUND)
                 }
-                const user = await this.UserRepo.findOne({ where: { id: Equal(id), company: Equal(companyId)},relations:{roles:true}})
+                const user = await this.UserRepo.findOne({ where: { id: Equal(id), company: Equal(companyId)},relations:{company:true,roles:true}})
                 if (!user) {
                     throw new HttpException("user not found", HttpStatus.NOT_FOUND)
                 }

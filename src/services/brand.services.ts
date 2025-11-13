@@ -66,12 +66,10 @@ export class BrandService {
         }
     }
 
-    async getAllBrands(req: any, page: number) {
+    async getAllBrands(req: any) {
         try {
             if (req.user.role == roles.SuperAdmin) {
                 const brands = await this.brandRepo.find({
-                    skip: page * 10,
-                    take: 10,
                     relations: {
                         company: true
                     },
@@ -89,8 +87,6 @@ export class BrandService {
                     throw new HttpException('company not found', HttpStatus.NOT_FOUND)
                 }
                 const brands = await this.brandRepo.find({
-                    skip:page * 10,
-                    take:10,
                     where: { 
                         company: Equal(company.id) 
                     } 

@@ -31,8 +31,8 @@ export class UnitsController {
     @Get()
     @Permission(permissions.view_unit)
     @UseGuards(havePermissionGuards)
-    async ViewAllUnits(@Req() req: Request,@Query('page') page:number = 0) {
-        return await this.unitService.getAllUnits(req,page)
+    async ViewAllUnits(@Req() req: Request) {
+        return await this.unitService.getAllUnits(req)
     }
 
     @Get(":id")

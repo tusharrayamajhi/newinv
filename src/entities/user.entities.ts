@@ -38,8 +38,8 @@ export class Users extends BaseEntities {
     @Column({ type: "varchar", length: 255, nullable: false }) 
     password: string;
 
-    @Column({ default: 0, nullable: false, type: "tinyint" })
-    is_active: number;
+    @Column({ default: false, nullable: false, type: "tinyint" })
+    is_active: boolean;
 
     @Column({ length: 300, nullable: true, type: "varchar" })
     user_image: string;

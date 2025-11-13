@@ -28,8 +28,8 @@ export class CustomerController {
     @Get()
     @Permission(permissions.view_customer)
     @UseGuards(havePermissionGuards)
-    async viewAllCustomers(@Req() req: Request,@Query('page') page:number = 0) {
-        return await this.customerService.getAllCustomers(req,page);
+    async viewAllCustomers(@Req() req: Request) {
+        return await this.customerService.getAllCustomers(req);
     }
 
    

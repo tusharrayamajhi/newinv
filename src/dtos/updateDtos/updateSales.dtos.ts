@@ -24,19 +24,6 @@ export class updateSales {
     @IsEnum(salesStatus, { message: "shipment status most be valid status from enum" })
     shipment_status?: salesStatus;
 
-    @ApiProperty({required:false, description: "discount rate in total purchase", example: 5, default: 0 })
-    @IsOptional()
-    @IsNumber()
-    @Min(0)
-    @Max(100)
-    discount_in_total_sales?: number;
-
-    @ApiProperty({ required:false,description: "discount rate in total purchase", example: 5, default: 0 })
-    @IsOptional()
-    @IsNumber()
-    @Min(0)
-    @Max(100)
-    tax_in_total_sales?: number;
 
     @ApiProperty({ required:false,description: "from which vendor do you purchase", example: "vendor id 1" })
     @IsOptional()
@@ -61,15 +48,6 @@ export class updateSales {
     @Type(() => updateSalesItem)
     salesItems?: updateSalesItem[];
 
-    // @ApiProperty({
-    //     type: () => Details,
-    //     description: 'JSON data associated with the upload',
-    // })
-    // @Transform(({ value }) => (typeof value === 'string' ? JSON.parse(value) : value))
-    // @ValidateNested()
-    // @IsObject()
-    // @Type(() => Details)
-    // purchaseDetails:Details;
 
     @ApiProperty({
         type: [updatePayment],

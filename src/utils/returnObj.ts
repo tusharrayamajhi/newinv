@@ -1,10 +1,11 @@
 import { HttpStatus } from '@nestjs/common';
 
 
-export function returnObj(statusCode: HttpStatus, message: string, data?:any) {
+export function returnObj(statusCode: HttpStatus, message: string, data?:any,total?:number) {
     return {
         statusCode: statusCode,
         message: message,
-        data: data
+        data: data,
+        total:total
     }
 }

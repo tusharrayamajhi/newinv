@@ -34,8 +34,8 @@ export class salesController {
     @Get()
     @UseGuards(havePermissionGuards)
     @Permission(permissions.view_All_sales)
-    async getAllSales(@Req() req: Request,@Query('page') page:number = 0) {
-        return await this.salesService.getAllSales(req,page);
+    async getAllSales(@Req() req: Request) {
+        return await this.salesService.getAllSales(req);
     }
 
     @Get("mySales")

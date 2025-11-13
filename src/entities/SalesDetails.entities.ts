@@ -24,20 +24,8 @@ export class SalesDetails {
     })
     shipment_status: salesStatus;
 
-    @Column({ type: 'decimal', precision: 20, scale: 5, default: 0.0 })
-    total_before_discount: number;
-
-    @Column({ type: 'decimal', precision: 10, scale: 2, default: 0.0 })
-    discount: number;
-
     @Column({ type: 'decimal', precision: 20, scale: 5, default: 0.0, })
-    total_after_dis: number;
-
-    @Column({ type: 'decimal', precision: 10, scale: 2, default: 0.0 })
-    tax_rate: number;
-
-    @Column({ type: 'decimal', precision: 20, scale: 5, default: 0.0, })
-    total_after_tax: number;
+    total_Amount: number;
 
     @OneToMany(() => salesItem, (sale) => sale.SalesDetails)
     sales_item: salesItem[]
@@ -45,8 +33,6 @@ export class SalesDetails {
     @OneToMany(() => Payment, (payment) => payment.SalesDetails)
     payments: Payment[]
 
-    // @OneToMany(() => salesItem, (sale) => sale.SalesDetails)
-    // return_item: []
     
     @ManyToOne(() => Companies, (company) => company.salesDetails)
     company: Companies
@@ -65,7 +51,4 @@ export class SalesDetails {
 
     @OneToOne(()=>SalesReturnDetails)
     sales_return_details:SalesReturnDetails
-    
-    // @DeleteDateColumn({ type: 'timestamp', nullable: true })
-    // deletedAt: string;
 }

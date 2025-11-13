@@ -34,8 +34,8 @@ export class PurchaseController{
     @Get()
     @UseGuards(havePermissionGuards)
     @Permission(permissions.view_All_purchase)
-    async getAllPurchase(@Req() req:Request,@Query('page') page:number = 0,){
-        return await this.purchaseService.getAllPurchase(req,page)
+    async getAllPurchase(@Req() req:Request){
+        return await this.purchaseService.getAllPurchase(req)
     }
 
     @Get("myPurchases")

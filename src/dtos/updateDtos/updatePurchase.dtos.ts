@@ -19,35 +19,12 @@ class updatePurchaseItem extends PartialType(PurchaseItemDto) {
     id:string
  }
 export class updatePurchase {
-    @ApiProperty({ description: "this is the shipment information", required:false,enum: purchaseStatus, default: purchaseStatus.received })
-    @IsNotEmpty()
-    @IsEnum(purchaseStatus, { message: "shipment status most be valid status from enum" })
-    shipment_status?: purchaseStatus;
 
-    @ApiProperty({required:false, description: "discount rate in total purchase", example: 5, default: 0 })
-    @IsOptional()
-    @IsNumber()
-    @Min(0)
-    @Max(100)
-    discountInTotalPurchase?: number;
-
-    @ApiProperty({ required:false,description: "discount rate in total purchase", example: 5, default: 0 })
-    @IsOptional()
-    @IsNumber()
-    @Min(0)
-    @Max(100)
-    taxInTotalPurchase?: number;
 
     @ApiProperty({ required:false,description: "from which vendor do you purchase", example: "vendor id 1" })
     @IsOptional()
     @IsString()
     vendorId?: string;
-
-    @ApiProperty({ required:false,description: "remarks", example: "vendor id 1" })
-    @IsOptional()
-    @IsString()
-    remark?: string;
-
 
     @ApiProperty({
         type: [updatePurchaseItem],
@@ -61,15 +38,6 @@ export class updatePurchase {
     @Type(() => updatePurchaseItem)
     purchaseItems?: updatePurchaseItem[];
 
-    // @ApiProperty({
-    //     type: () => Details,
-    //     description: 'JSON data associated with the upload',
-    // })
-    // @Transform(({ value }) => (typeof value === 'string' ? JSON.parse(value) : value))
-    // @ValidateNested()
-    // @IsObject()
-    // @Type(() => Details)
-    // purchaseDetails:Details;
 
     @ApiProperty({
         type: [updatePayment],

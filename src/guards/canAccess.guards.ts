@@ -23,7 +23,11 @@ export class canAccess implements CanActivate{
             return false;
         }
         const newToken = token.split(" ")[1]
+        console.log(roles)
+        console.log("new token ",newToken)
         const user = await this.jwtService.decode(await this.cacheManager.get(`token:${newToken}`));
+
+        console.log("token ",user)
         if(!user){
             return false;
         }

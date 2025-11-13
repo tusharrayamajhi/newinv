@@ -97,7 +97,7 @@ export class baseDto {
     website?: string;
 
     @IsOptional()
-    company_logo?: string;
+    company_logo?: Express.Multer.File;
     
 }
 
@@ -110,7 +110,7 @@ export class baseDto {
       required:false
     })
     @IsOptional()
-    company_logo?: string;
+    company_logo?: Express.Multer.File;
   
     @ApiProperty({
       type: ()=>baseDto,

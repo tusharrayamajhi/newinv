@@ -1,0 +1,1542 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>project-name documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">project-name documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content injectable">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Injectables</li>
+  <li class="breadcrumb-item" >UserService</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/services/User.services.ts</code>
+        </p>
+
+
+
+
+
+            <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#addUser" >addUser</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#deleteUser" >deleteUser</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#getAllUsers" >getAllUsers</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#getUserById" >getUserById</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#getUsersByCompany" >getUsersByCompany</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#getUsersByRole" >getUsersByRole</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#sendVerifyEmail" >sendVerifyEmail</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#updateUser" >updateUser</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#VerifyEmail" >VerifyEmail</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+            <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(sendEmail: Queue, UserRepo: <a href="../entitys/Users.html" target="_self">Repository&lt;Users&gt;</a>, RolesRepo: <a href="../entitys/Roles.html" target="_self">Repository&lt;Roles&gt;</a>, companyRepo: <a href="../entitys/Companies.html" target="_self">Repository&lt;Companies&gt;</a>, PermissionRepo: <a href="../entitys/Permission.html" target="_self">Repository&lt;Permission&gt;</a>, cacheManager: Cache)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/services/User.services.ts:20</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>sendEmail</td>
+                                                  
+                                                        <td>
+                                                                    <code>Queue</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>UserRepo</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../entitys/Users.html" target="_self" >Repository&lt;Users&gt;</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>RolesRepo</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../entitys/Roles.html" target="_self" >Repository&lt;Roles&gt;</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>companyRepo</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../entitys/Companies.html" target="_self" >Repository&lt;Companies&gt;</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>PermissionRepo</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../entitys/Permission.html" target="_self" >Repository&lt;Permission&gt;</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>cacheManager</td>
+                                                  
+                                                        <td>
+                                                                    <code>Cache</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+            <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="addUser"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>addUser</b></span>
+                        <a href="#addUser"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>addUser(req: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, data: <a href="../classes/AddUsersDto.html" target="_self">AddUsersDto</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="32"
+                                    class="link-to-prism">src/services/User.services.ts:32</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>req</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>data</td>
+                                            <td>
+                                                            <code><a href="../classes/AddUsersDto.html" target="_self" >AddUsersDto</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="deleteUser"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>deleteUser</b></span>
+                        <a href="#deleteUser"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>deleteUser(req: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="301"
+                                    class="link-to-prism">src/services/User.services.ts:301</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>req</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getAllUsers"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>getAllUsers</b></span>
+                        <a href="#getAllUsers"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getAllUsers(req: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, page: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="98"
+                                    class="link-to-prism">src/services/User.services.ts:98</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>req</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>page</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getUserById"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>getUserById</b></span>
+                        <a href="#getUserById"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getUserById(req: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="130"
+                                    class="link-to-prism">src/services/User.services.ts:130</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>req</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getUsersByCompany"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>getUsersByCompany</b></span>
+                        <a href="#getUsersByCompany"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getUsersByCompany(req: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, page: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="163"
+                                    class="link-to-prism">src/services/User.services.ts:163</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>req</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>page</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getUsersByRole"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>getUsersByRole</b></span>
+                        <a href="#getUsersByRole"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getUsersByRole(req: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, page: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="199"
+                                    class="link-to-prism">src/services/User.services.ts:199</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>req</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>page</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sendVerifyEmail"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>sendVerifyEmail</b></span>
+                        <a href="#sendVerifyEmail"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>sendVerifyEmail(req: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="344"
+                                    class="link-to-prism">src/services/User.services.ts:344</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>req</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateUser"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>updateUser</b></span>
+                        <a href="#updateUser"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>updateUser(req: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, data: <a href="../classes/baseUpdateUserDto.html" target="_self">baseUpdateUserDto</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="236"
+                                    class="link-to-prism">src/services/User.services.ts:236</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>req</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>data</td>
+                                            <td>
+                                                            <code><a href="../classes/baseUpdateUserDto.html" target="_self" >baseUpdateUserDto</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="VerifyEmail"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>VerifyEmail</b></span>
+                        <a href="#VerifyEmail"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>VerifyEmail(req: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, otp: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="369"
+                                    class="link-to-prism">src/services/User.services.ts:369</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>req</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>otp</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { returnObj } from &#x27;src/utils/returnObj&#x27;;
+import { Roles } from &#x27;./../entities/Roles.entities&#x27;;
+import { HttpException, HttpStatus, Inject, Injectable } from &quot;@nestjs/common&quot;;
+import { InjectRepository } from &quot;@nestjs/typeorm&quot;;
+import { Users } from &quot;../entities/user.entities&quot;;
+import { Equal, Repository } from &quot;typeorm&quot;;
+import { Companies } from &#x27;src/entities/Company.entities&#x27;;
+import { Permission } from &#x27;src/entities/permission.entites&#x27;;
+import * as bcrypt from &#x27;bcrypt&#x27;
+import { roles } from &#x27;src/object/roles.object&#x27;;
+import { AddUsersDto } from &#x27;src/dtos/createDtos/addUser.dtos&#x27;;
+import { baseUpdateUserDto } from &#x27;src/dtos/updateDtos/updateUser.dtos&#x27;;
+import { InjectQueue } from &#x27;@nestjs/bullmq&#x27;;
+import { Queue } from &#x27;bullmq&#x27;;
+import { generateOtp } from &#x27;src/utils/generateOtp&#x27;;
+import { CACHE_MANAGER } from &#x27;@nestjs/cache-manager&#x27;;
+import { Cache } from &#x27;cache-manager&#x27;;
+
+@Injectable()
+export class UserService {
+
+    constructor(
+        @InjectQueue(&quot;opt_email&quot;) private readonly sendEmail:Queue,
+        @InjectRepository(Users) private readonly UserRepo: Repository&lt;Users&gt;,
+        @InjectRepository(Roles) private readonly RolesRepo: Repository&lt;Roles&gt;,
+        @InjectRepository(Companies) private readonly companyRepo: Repository&lt;Companies&gt;,
+        @InjectRepository(Permission) private readonly PermissionRepo: Repository&lt;Permission&gt;,
+        @Inject(CACHE_MANAGER) private cacheManager: Cache
+    ) { }
+
+
+    async addUser(req: any, data: AddUsersDto) {
+        try {
+            if (req.user.role &#x3D;&#x3D; roles.SuperAdmin) {
+                const user &#x3D; await this.UserRepo.findOne({ where: { email: data.email } })
+                if (user) {
+                    throw new HttpException(&quot;email already in used&quot;, HttpStatus.CONFLICT)
+                }
+                let role: Roles | null &#x3D; null;
+                let company: Companies | null &#x3D; null;
+                if (data.company) {
+                    company &#x3D; await this.companyRepo.findOne({ where: { id: data.company } })
+                    if (!company) {
+                        throw new HttpException(&quot;company not found&quot;, HttpStatus.NOT_FOUND)
+                    }
+                    if (data.roles) {
+                        role &#x3D; await this.RolesRepo.findOne({ where: { id: data.roles, company: Equal(data.company) } })
+                        if (!role) {
+                            throw new HttpException(&quot;role not found&quot;, HttpStatus.NOT_FOUND)
+                        }
+                    }
+                }
+                const hashPassword &#x3D; await bcrypt.hash(data.password, 10)
+                data.password &#x3D; hashPassword
+                const createUser &#x3D; this.UserRepo.create({ ...data, roles: role, company: company, createdBy: req.user.id })
+                const result &#x3D; await this.UserRepo.save(createUser)
+                if (!result) {
+                    throw new HttpException(&quot;cannot save user&quot;, HttpStatus.INTERNAL_SERVER_ERROR)
+                }
+                delete result.password
+                return returnObj(HttpStatus.OK, &quot;user created&quot;, result)
+            } else if (req.user.role &#x3D;&#x3D; roles.Admin) {
+                const user &#x3D; await this.UserRepo.findOne({ where: { email: Equal(data.email) } })
+                if (user) {
+                    throw new HttpException(&quot;user email already exists&quot;, HttpStatus.CONFLICT)
+                }
+                let role: Roles | null &#x3D; null;
+                const company &#x3D; (await this.UserRepo.findOne({ where: { id: Equal(req.user.id) }, relations: { company: true } }))?.company
+                if (!company) {
+                    throw new HttpException(&quot;company not found&quot;, HttpStatus.NOT_FOUND)
+                }
+                if (data.roles) {
+                    role &#x3D; await this.RolesRepo.findOne({ where: { id: Equal(data.roles), company: Equal(company.id) } })
+                    if (!role) {
+                        throw new HttpException(&quot;role not found&quot;, HttpStatus.NOT_FOUND)
+                    }
+                }
+                const hashPassword &#x3D; await bcrypt.hash(data.password, 10)
+                data.password &#x3D; hashPassword
+                const createUser &#x3D; this.UserRepo.create({ ...data, roles: role, company: company, createdBy: req.user.id })
+                const result &#x3D; await this.UserRepo.save(createUser)
+                if (!result) {
+                    throw new HttpException(&quot;cannot save user&quot;, HttpStatus.INTERNAL_SERVER_ERROR)
+                }
+                delete result.password
+                return returnObj(HttpStatus.OK, &quot;user created&quot;, result)
+            } else {
+                throw new HttpException(&quot;you have no permission to create user&quot;, HttpStatus.UNAUTHORIZED)
+            }
+        } catch (err) {
+            if (err instanceof HttpException) {
+                throw err
+            }
+            throw new HttpException(&quot;Internal Server Error&quot;, HttpStatus.INTERNAL_SERVER_ERROR)
+        }
+    }
+
+    async getAllUsers(req: any,page:number) {
+        try {
+            if (req.user.role &#x3D;&#x3D; roles.SuperAdmin) {
+                const users &#x3D; await this.UserRepo.find({skip:page * 10,take:10, relations: { company: true } });
+                if (!users || users.length &#x3D;&#x3D; 0) {
+                    throw new HttpException(&quot;no user found&quot;, HttpStatus.NOT_FOUND)
+                }
+                users.forEach(user &#x3D;&gt; delete user.password);
+                return returnObj(HttpStatus.OK, &quot;success&quot;, users)
+            } else if (req.user.role &#x3D;&#x3D; roles.Admin) {
+                const companyId &#x3D; (await this.UserRepo.findOne({ where: { id: Equal(req.user.id) }, relations: { company: true } }))?.company?.id
+                if (!companyId) {
+                    throw new HttpException(&quot;company not found&quot;, HttpStatus.NOT_FOUND)
+                }
+                const users &#x3D; await this.UserRepo.find({skip:page * 10,take:10, where: { company: Equal(companyId) } })
+                if (!users || users.length &#x3D;&#x3D; 0) {
+                    throw new HttpException(&quot;no user found&quot;, HttpStatus.NOT_FOUND)
+                }
+                users.forEach(user &#x3D;&gt; delete user.password);
+                return returnObj(HttpStatus.OK, &quot;success&quot;, users)
+            } else {
+                throw new HttpException(&quot;you are not authorize&quot;, HttpStatus.FORBIDDEN)
+            }
+        } catch (err) {
+            if (err instanceof HttpException) {
+                throw err
+            }
+            throw new HttpException(&quot;Internal Server Error&quot;, HttpStatus.INTERNAL_SERVER_ERROR)
+        }
+    }
+
+
+    async getUserById(req: any, id: string) {
+        try {
+            if (req.user.role &#x3D;&#x3D; roles.SuperAdmin) {
+                const user &#x3D; await this.UserRepo.findOne({ where: { id: Equal(id) },relations:{company:true,roles:true}})
+                if (!user) {
+                    throw new HttpException(&quot;user not found&quot;, HttpStatus.NOT_FOUND)
+                }
+                delete user.password;
+                return returnObj(HttpStatus.OK, &quot;success&quot;, user)
+            } else if (req.user.role &#x3D;&#x3D; roles.Admin) {
+                const companyId &#x3D; (await this.UserRepo.findOne({ where: { id: Equal(req.user.id) }, relations: { company: true } }))?.company?.id;
+                if (!companyId) {
+                    throw new HttpException(&quot;Company id not found&quot;, HttpStatus.NOT_FOUND)
+                }
+                const user &#x3D; await this.UserRepo.findOne({ where: { id: Equal(id), company: Equal(companyId)},relations:{roles:true}})
+                if (!user) {
+                    throw new HttpException(&quot;user not found&quot;, HttpStatus.NOT_FOUND)
+                }
+                delete user.password;
+                
+                return returnObj(HttpStatus.OK, &quot;success&quot;, user)
+            } else {
+                throw new HttpException(&quot;you are not authorize&quot;, HttpStatus.FORBIDDEN)
+            }
+        } catch (err) {
+            if (err instanceof HttpException) {
+                throw err
+            }
+            throw new HttpException(&quot;Internal Server Error&quot;, HttpStatus.INTERNAL_SERVER_ERROR)
+        }
+    }
+
+
+    async getUsersByCompany(req: any, id: string,page:number) {
+        try {
+            if (req.user.role &#x3D;&#x3D; roles.SuperAdmin) {
+                const company &#x3D; await this.companyRepo.findOne({ where: { id: Equal(id) } });
+                if (!company) {
+                    throw new HttpException(&quot;no company found&quot;, HttpStatus.NOT_FOUND)
+                }
+                const users &#x3D; await this.UserRepo.find({skip:page * 10, take:10, where: { company: Equal(company.id) } })
+                if (!users || users.length &#x3D;&#x3D; 0) {
+                    throw new HttpException(&quot;no user found&quot;, HttpStatus.NOT_FOUND)
+                }
+                users.forEach(user&#x3D;&gt;delete user.password)
+                return returnObj(HttpStatus.OK, &quot;success&quot;, users)
+            } else if (req.user.role &#x3D;&#x3D; roles.Admin) {
+                const companyId &#x3D; (await this.UserRepo.findOne({ where: { id: Equal(req.user.id) }, relations: { company: true } }))?.company?.id;
+                if (companyId !&#x3D; id) {
+                    throw new HttpException(&quot;this user doesn&#x27;t belong to the given company&quot;, HttpStatus.FORBIDDEN)
+                }
+                const users &#x3D; await this.UserRepo.find({skip:page * 10,take:10, where: { company: Equal(companyId) } })
+                if (!users || users.length &#x3D;&#x3D; 0) {
+                    throw new HttpException(&quot;no user found&quot;, HttpStatus.NOT_FOUND)
+                }
+                users.forEach(user &#x3D;&gt; delete user.password)
+                return returnObj(HttpStatus.OK, &quot;success&quot;, users)
+            } else {
+                throw new HttpException(&quot;you are not authorize&quot;, HttpStatus.FORBIDDEN)
+            }
+        } catch (err) {
+            if (err instanceof HttpException) {
+                throw err
+            }
+            throw new HttpException(&quot;Internal Server Error&quot;, HttpStatus.INTERNAL_SERVER_ERROR)
+        }
+    }
+
+
+    async getUsersByRole(req: any, id: string,page:number) {
+        try {
+            if (req.user.role &#x3D;&#x3D; roles.SuperAdmin) {
+                const role &#x3D; await this.RolesRepo.findOne({ where: { id: Equal(id) } })
+                if (!role) {
+                    throw new HttpException(&quot;invalid role id&quot;, HttpStatus.NOT_FOUND)
+                }
+                const users &#x3D; await this.UserRepo.find({skip:page*10,take:10, where: { roles: Equal(id) } })
+                if (!users || users.length &#x3D;&#x3D; 0) {
+                    throw new HttpException(&quot;no user found&quot;, HttpStatus.NOT_FOUND)
+                }
+                users.forEach(user &#x3D;&gt; delete user.password)
+                return returnObj(HttpStatus.OK, &quot;success&quot;, users)
+            } else if (req.user.role &#x3D;&#x3D; roles.Admin) {
+                const companyId &#x3D; (await this.UserRepo.findOne({ where: { id: Equal(req.user.id) }, relations: { company: true } }))?.company?.id
+                if (!companyId) {
+                    throw new HttpException(&quot;company not found&quot;, HttpStatus.NOT_FOUND)
+                }
+                const role &#x3D; await this.RolesRepo.findOne({ where: { id: Equal(id), company: Equal(companyId) } })
+                if (!role) {
+                    throw new HttpException(&quot;invalid role id&quot;, HttpStatus.NOT_FOUND)
+                }
+                const users &#x3D; await this.UserRepo.find({skip:page * 10,take:10, where: { roles: Equal(id) } })
+                if (!users || users.length &#x3D;&#x3D; 0) {
+                    throw new HttpException(&quot;no user found&quot;, HttpStatus.NOT_FOUND)
+                }
+                users.forEach(user &#x3D;&gt; delete user.password)
+                return returnObj(HttpStatus.OK, &quot;success&quot;, users)
+            }
+        } catch (err) {
+            if (err instanceof HttpException) {
+                throw err
+            }
+            throw new HttpException(&quot;Internal Server Error&quot;, HttpStatus.INTERNAL_SERVER_ERROR)
+        }
+    }
+
+    async updateUser(req: any, id: string, data: baseUpdateUserDto) {
+        try {
+            if (req.user.role &#x3D;&#x3D; roles.SuperAdmin) {
+                const user &#x3D; await this.UserRepo.findOne({ where: { id: Equal(id) } })
+                if (!user) {
+                    throw new HttpException(&quot;user not found&quot;, HttpStatus.NOT_FOUND)
+                }
+                if (data.company) {
+                    const company &#x3D; await this.companyRepo.findOne({ where: { id: Equal(data.company) } })
+                    if (!company) {
+                        throw new HttpException(&quot;company not found&quot;, HttpStatus.NOT_FOUND)
+                    }
+                    user.company &#x3D; company
+                    if (!data.roles) {
+                        user.roles &#x3D; null
+                    }
+                    if (data.roles) {
+                        const role &#x3D; await this.RolesRepo.findOne({ where: { id: Equal(data.roles), company: Equal(data.company) } })
+                        if (!role) {
+                            throw new HttpException(&quot;role not found&quot;, HttpStatus.NOT_FOUND)
+                        }
+                        user.roles &#x3D; role
+                    }
+                }
+                Object.assign(user, data)
+                const result &#x3D; await this.UserRepo.save(user)
+                if (!result) {
+                    throw new HttpException(&quot;cannot update user&quot;, HttpStatus.INTERNAL_SERVER_ERROR)
+                }
+                delete result.password
+                return returnObj(HttpStatus.OK, &quot;update successfully&quot;, result)
+            } else if (req.user.role &#x3D;&#x3D; roles.Admin) {
+
+                const user &#x3D; await this.UserRepo.findOne({ where: { id: Equal(id) } })
+                if (!user) {
+                    throw new HttpException(&quot;user not found&quot;, HttpStatus.NOT_FOUND)
+                }
+                const company &#x3D; await (await this.UserRepo.findOne({ where: { id: Equal(req.user.id) }, relations: { company: true } }))?.company
+                if (!company) {
+                    throw new HttpException(&quot;company not found&quot;, HttpStatus.NOT_FOUND)
+                }
+                if (data.roles) {
+                    const role &#x3D; await this.RolesRepo.findOne({ where: { id: Equal(data.roles), company: Equal(company.id) } })
+                    if (!role) {
+                        throw new HttpException(&quot;role not found&quot;, HttpStatus.NOT_FOUND)
+                    }
+                    user.roles &#x3D; role
+                }
+                Object.assign(user, data)
+                const result &#x3D; await this.UserRepo.save(user)
+                if (!result) {
+                    throw new HttpException(&quot;cannot update user&quot;, HttpStatus.INTERNAL_SERVER_ERROR)
+                }
+                delete result.password
+                return returnObj(HttpStatus.OK, &quot;update successfully&quot;, result)
+
+            }
+        } catch (err) {
+            if (err instanceof HttpException) {
+                throw err
+            }
+            throw new HttpException(&quot;Internal Server Error&quot;, HttpStatus.INTERNAL_SERVER_ERROR)
+        }
+    }
+
+    async deleteUser(req: any, id: string) {
+        try {
+            if (req.user.role &#x3D;&#x3D; roles.SuperAdmin) {
+                const user &#x3D; await this.UserRepo.findOne({ where: { id: Equal(id) } })
+                if (!user) {
+                    throw new HttpException(&quot;user not found&quot;, HttpStatus.NOT_FOUND)
+                }
+                const result &#x3D; await this.UserRepo.remove(user)
+                if (!result) {
+                    throw new HttpException(&quot;cannot delete user&quot;, HttpStatus.INTERNAL_SERVER_ERROR)
+                }
+                delete result.password
+                return returnObj(HttpStatus.OK, &quot;delete successfully&quot;, result)
+            } else if (req.user.role &#x3D;&#x3D; roles.Admin) {
+                const companyId &#x3D; (await this.UserRepo.findOne({ where: { id: Equal(req.user.id) }, relations: { company: true } }))?.company?.id
+                if (!companyId) {
+                    throw new HttpException(&quot;no company found&quot;, HttpStatus.NOT_FOUND)
+                }
+                const user &#x3D; await this.UserRepo.findOne({ where: { id: Equal(id), company: Equal(companyId) } })
+                if (!user) {
+                    throw new HttpException(&quot;user not found&quot;, HttpStatus.NOT_FOUND)
+                }
+                const result &#x3D; await this.UserRepo.remove(user)
+                if (!result) {
+                    throw new HttpException(&quot;cannot delete user&quot;, HttpStatus.INTERNAL_SERVER_ERROR)
+                }
+                delete result.password
+                return returnObj(HttpStatus.OK, &quot;delete successfully&quot;, result)
+            }
+        } catch (err) {
+            if (err instanceof HttpException) {
+                throw err
+            }
+            if (err.code &#x3D;&#x3D;&#x3D; &#x27;ER_ROW_IS_REFERENCED_2&#x27;) { // MySQL foreign key constraint error code
+                throw new HttpException(
+                    &quot;Cannot delete user because it is linked to other records&quot;,
+                    HttpStatus.CONFLICT
+                );
+            }
+            throw new HttpException(&quot;Internal Server Error&quot;, HttpStatus.INTERNAL_SERVER_ERROR)
+        }
+    }
+
+    async sendVerifyEmail(req:any) {
+        try{
+            const user &#x3D; await this.UserRepo.findOne({where:{id:Equal(req.user.id)}})
+            if(!user){
+                throw new HttpException(&quot;user not found&quot;,HttpStatus.NOT_FOUND)
+            }
+            if(user.is_verify_email){
+                throw new HttpException(&quot;you are already verify&quot;,HttpStatus.OK)
+            }
+            const otp &#x3D; generateOtp()
+            this.cacheManager.set(&#x60;OTP:${user.email}&#x60;,otp,120000)
+            this.sendEmail.add(&quot;send_verify_email_otp&quot;,{
+                email:user.email,
+                otp: otp
+            })
+            return {status:HttpStatus.OK,message:&#x60;OTP is sent to: ${user.email}&#x60;}
+        }catch(err){
+            if(err instanceof HttpException){
+                throw err
+            }
+            throw new HttpException(&quot;internal server error&quot;,HttpStatus.INTERNAL_SERVER_ERROR)
+        }
+    }
+
+
+    async VerifyEmail(req: any, otp: number) {
+        try{
+            const user &#x3D; await this.UserRepo.findOne({where:{id:Equal(req.user.id)}})
+            if(!user){
+                throw new HttpException(&quot;user not found&quot;,HttpStatus.NOT_FOUND)
+            }
+            if(user.is_verify_email){
+                throw new HttpException(&#x27;user already verify&#x27;,HttpStatus.OK)
+            }
+            const OTP &#x3D; await this.cacheManager.get(&#x60;OTP:${user.email}&#x60;)
+            if(!OTP || OTP !&#x3D; otp){
+                throw new HttpException(&quot;invalid otp&quot;,HttpStatus.NOT_FOUND)
+            }
+            user.is_verify_email &#x3D; true
+            const result &#x3D; await this.UserRepo.save(user)
+            await this.cacheManager.del(&#x60;OTP:${user.email}&#x60;);
+            if(!result){
+                throw new HttpException(&quot;something went wrong&quot;,HttpStatus.INTERNAL_SERVER_ERROR)
+            }
+            return {status:HttpStatus.OK,message:&quot;email verified&quot;}
+        }catch(err){   
+            if(err instanceof HttpException){
+                throw err
+            }
+            throw new HttpException(&quot;internal server error&quot;,HttpStatus.INTERNAL_SERVER_ERROR)
+        }
+    }
+
+}</code></pre>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'UserService.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

@@ -30,7 +30,7 @@ export class AddProductDto {
     @ApiProperty({ description: 'is product available for sales', example: false })
     @IsNotEmpty()
     @IsBoolean()
-    can_sales?: boolean;
+    can_sale?: boolean;
 
     @ApiProperty({ description: 'Category ID', example: 1 })
     @IsOptional()

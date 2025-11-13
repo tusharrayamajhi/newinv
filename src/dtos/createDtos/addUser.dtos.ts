@@ -45,14 +45,12 @@ export class AddUsersDto {
     @IsString()
     password: string;
 
-    @ApiProperty({default:0,type:"integer",required:false,description:"select active or not",example:"0 for not active and 1 for active"})
+    @ApiProperty({default:false,type:"boolean",required:false,description:"select active or not",example:"true for not active and false for active"})
     @IsOptional()
-    is_active?: number;
+    is_active?: boolean;
 
-    // @ApiProperty({ type: 'string', format: 'binary', required: false, description: 'Profile picture of the user'}) 
-    // @Transform(({value})=>value?.buffer)
-    // @IsOptional()
-    // user_image?: string;
+    @IsOptional()
+    user_image?: string;
 
     @ApiProperty({description:"enter user company id",required:false})
     @IsOptional()

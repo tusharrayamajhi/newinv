@@ -71,6 +71,7 @@ export class salesService{
             if(!customer){
                 throw new HttpException("Customer not found",HttpStatus.NOT_FOUND);
             }
+            let total_amount = 0
             const salesItems : salesItem[] = [];
             for(const Item of salesDetail.salesItems){
                 const product = await queryRunner.manager.findOne(Product,{where:{id:Item.productId,company:Equal(user.company.id)}});
@@ -86,15 +87,12 @@ export class salesService{
                 if(!Item.discount_rate){
                     Item.discount_rate = 0;
                 }
-                if(!salesDetail.tax_in_total_sales){   
-                    salesDetail.tax_in_total_sales = 0;
-                }
                 const discount = total * Item.discount_rate / 100;
                 const total_after_discount = total - discount;
-                const total_after_tax = total_after_discount + (total_after_discount * salesDetail.tax_in_total_sales / 100);
+                const total_after_tax = total_after_discount + (product.vat * total_after_discount / 100);
                 product.stock = product.stock - Item.quantity;
                 await queryRunner.manager.save(product);
-                
+                total_amount = total_amount + total_after_tax;
                 const item = await queryRunner.manager.save(queryRunner.manager.create(salesItem,{
                     company:user.company,
                     product:product,
@@ -123,21 +121,13 @@ export class salesService{
                 payments.push(pay);
             }
 
-            if(!salesDetail.discount_in_total_sales){
-                salesDetail.discount_in_total_sales = 0;
-            }
-            const total_before_discount = salesItems.map(item=>item.total_after_tax).reduce((a,b)=>a+b);
-            const total_after_discount = total_before_discount - (total_before_discount * salesDetail.discount_in_total_sales / 100);
-            const total_after_tax = total_after_discount + (total_after_discount * salesDetail.tax_in_total_sales / 100);
-            
+           
+            // const total_Amount = salesItems.map(item=>item.total_after_tax).reduce((a,b)=>a+b);
+           
             const code = await this.getSellsCode(user.company.id,user.company.company_code);
             const sales = await queryRunner.manager.save(queryRunner.manager.create(SalesDetails,{
                 sales_code:code,
-                discount:salesDetail.discount_in_total_sales,
-                tax_rate:salesDetail.tax_in_total_sales,
-                total_before_discount:total_before_discount,
-                total_after_dis:total_after_discount,
-                total_after_tax:total_after_tax,
+                total_Amount:total_amount,
                 shipment_status:salesDetail.shipment_status,
                 customer:customer,
                 company:user.company,
@@ -160,7 +150,7 @@ export class salesService{
     }
     
 
-    async getAllSales(req: any,page:number) {
+    async getAllSales(req: any) {
         try {
             if (roles.SuperAdmin == req.user.role) {
                 throw new HttpException("you cannot view sales", HttpStatus.FORBIDDEN);
@@ -170,13 +160,13 @@ export class salesService{
                 throw new HttpException("user and company not found", HttpStatus.NOT_FOUND);
             }
             if (roles.Admin == req.user.role) {
-                const sales = await this.salesDetailsRepo.find({skip:page * 10,take:10, where: { company: Equal(user.company.id) }, relations: { customer:true,sales_item: true, payments: true, salesBy: true } });
+                const sales = await this.salesDetailsRepo.find({where: { company: Equal(user.company.id) }, relations: { customer:true,sales_item: {product:true}, payments: true, salesBy: true } });
                 if (!sales || sales.length == 0) {
                     throw new HttpException("no sales found", HttpStatus.NOT_FOUND);
                 }
                 return returnObj(HttpStatus.OK, "success", sales);
             } else {
-                const sales = await this.salesDetailsRepo.find({skip:page*10,take:10, where: { company: Equal(user.company.id), salesBy: user }, relations: { customer:true,sales_item: true, payments: true, salesBy: true } });
+                const sales = await this.salesDetailsRepo.find({where: { company: Equal(user.company.id), salesBy: user }, relations: { customer:true,sales_item: true, payments: true, salesBy: true } });
                 if (!sales || sales.length == 0) {
                     throw new HttpException("no sales found", HttpStatus.NOT_FOUND);
                 }
@@ -385,20 +375,6 @@ export class salesService{
                 }
             }
 
-            if (updateSalesDto.discount_in_total_sales !== undefined) {
-                sales.discount = updateSalesDto.discount_in_total_sales;
-            }
-
-            if (updateSalesDto.tax_in_total_sales !== undefined) {
-                sales.tax_rate = updateSalesDto.tax_in_total_sales;
-            }
-
-            sales.total_after_dis =
-                sales.total_before_discount -
-                (sales.total_before_discount * sales.discount) / 100;
-            sales.total_after_tax =
-                sales.total_after_dis +
-                (sales.total_after_dis * sales.tax_rate) / 100;
 
             if (updateSalesDto.shipment_status) {
                 sales.shipment_status = updateSalesDto.shipment_status;
